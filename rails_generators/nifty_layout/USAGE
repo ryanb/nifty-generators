@@ -1,12 +1,12 @@
 Description:
-  The app_layout generator creates a basic stylesheet and layout
+  The nifty_layout generator creates a basic stylesheet and layout
 	which will give some structure to a starting Rails app.
 
   The generator takes one argument which will be the name of the
 	layout and stylesheet files.
 
 Usage:
-  ./script/generate app_layout application
+  ./script/generate nifty_layout application
 
     This will create two files:
         Layout:     app/views/layouts/application.html.erb
