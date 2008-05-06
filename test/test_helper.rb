@@ -15,14 +15,11 @@ else
   RAILS_ROOT = app_root
 end
 
-begin
-  require 'rubigen'
-rescue LoadError
-  require 'rubygems'
-  require 'rubigen'
-end
+require 'rubygems'
+require 'rubigen'  # gem install rubigen
 require 'rubigen/helpers/generator_test_helper'
 require 'rails_generator'
+require 'shoulda' # gem install Shoulda
 
 module NiftyGenerators
   module TestHelper
@@ -48,4 +45,22 @@ module NiftyGenerators
       [RubiGen::PathSource.new(:test, File.join(File.dirname(__FILE__), "..", "rails_generators"))]
     end
   end
+  
+  module ShouldaAdditions
+    def rails_generator(*args)
+      setup do
+        run_rails_generator(*args)
+      end
+    end
+    
+    def should_generate_file(file)
+      should "generate file #{file}" do
+        assert_generated_file(file)
+      end
+    end
+  end
+end
+
+class Thoughtbot::Shoulda::Context
+  include NiftyGenerators::ShouldaAdditions
 end
