@@ -5,8 +5,12 @@ rails_generators/nifty_layout/nifty_layout_generator.rb
 rails_generators/nifty_layout/templates/layout.html.erb
 rails_generators/nifty_layout/templates/stylesheet.css
 rails_generators/nifty_layout/USAGE
+rails_generators/nifty_scaffold/nifty_scaffold_generator.rb
+rails_generators/nifty_scaffold/templates/controller.rb
+rails_generators/nifty_scaffold/USAGE
 README
 test/test_generator_helper.rb
 test/test_helper.rb
 test/test_nifty_generator.rb
 test/test_nifty_layout_generator.rb
+test/test_nifty_scaffold_generator.rb

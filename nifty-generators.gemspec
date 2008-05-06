@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = %q{A collection of Ryan's generator scripts for Rails.}
   s.email = %q{ryan@railscasts.com}
   s.extra_rdoc_files = ["lib/nifty_generator.rb", "LICENSE", "README"]
-  s.files = ["lib/nifty_generator.rb", "LICENSE", "Manifest", "rails_generators/nifty_layout/nifty_layout_generator.rb", "rails_generators/nifty_layout/templates/layout.html.erb", "rails_generators/nifty_layout/templates/stylesheet.css", "rails_generators/nifty_layout/USAGE", "README", "test/test_generator_helper.rb", "test/test_helper.rb", "test/test_nifty_generator.rb", "test/test_nifty_layout_generator.rb", "nifty-generators.gemspec"]
+  s.files = ["lib/nifty_generator.rb", "LICENSE", "Manifest", "rails_generators/nifty_layout/nifty_layout_generator.rb", "rails_generators/nifty_layout/templates/layout.html.erb", "rails_generators/nifty_layout/templates/stylesheet.css", "rails_generators/nifty_layout/USAGE", "README", "test/test_generator_helper.rb", "test/test_helper.rb", "test/test_nifty_generator.rb", "test/test_nifty_layout_generator.rb", "nifty-generators.gemspec", "test/test_nifty_scaffold_generator.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/ryanb/nifty-generators}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Nifty-generators", "--main", "README"]
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = %q{nifty-generators}
   s.rubygems_version = %q{1.0.0}
   s.summary = %q{A collection of Ryan's generator scripts for Rails.}
-  s.test_files = ["test/test_generator_helper.rb", "test/test_helper.rb", "test/test_nifty_generator.rb", "test/test_nifty_layout_generator.rb"]
+  s.test_files = ["test/test_generator_helper.rb", "test/test_helper.rb", "test/test_nifty_generator.rb", "test/test_nifty_layout_generator.rb", "test/test_nifty_scaffold_generator.rb"]
 end
 
 
@@ -48,4 +48,5 @@ end
 #   puts "#{boom.to_s.capitalize}."
 # end
 # 
+# desc "Build the manifest and gemspec files."
 # task :build => [:build_manifest, :build_gemspec]
