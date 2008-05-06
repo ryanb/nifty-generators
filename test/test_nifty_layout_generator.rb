@@ -29,7 +29,12 @@ class TestNiftyLayoutGenerator < Test::Unit::TestCase
 
   def test_generator_without_options
     run_generator('nifty_layout', ["foobar"], sources)
-    # assert_generated_file("some_file")
+
+    assert_directory_exists 'app/views/layouts'
+    assert_directory_exists 'public/stylesheets'
+
+    assert_generated_file 'app/views/layouts/foobar.html.erb'
+    assert_generated_file 'public/stylesheets/foobar.css'
   end
 
   private
