@@ -17,8 +17,9 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
   #   bare_setup - place this in setup method to create the APP_ROOT folder for each test
   #   bare_teardown - place this in teardown method to destroy the TMP_ROOT or APP_ROOT folder after each test
 
-  def test_generator_with_name
+  def test_generator_with_name_should_generate_model_and_controller
     run_rails_generator :nifty_scaffold, "foobar"
     assert_generated_file("app/controllers/foobar_controller.rb")
+    assert_generated_file("app/models/foobar.rb")
   end
 end

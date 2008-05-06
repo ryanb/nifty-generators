@@ -7,7 +7,9 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   def manifest
     record do |m|
       m.directory "app/controllers"
+      m.directory "app/models"
       m.template "controller.rb", "app/controllers/#{file_name}_controller.rb"
+      m.template "model.rb", "app/models/#{file_name}.rb"
     end
   end
   
