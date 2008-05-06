@@ -40,11 +40,15 @@ class TestNiftyLayoutGenerator < Test::Unit::TestCase
   def test_generator_with_name
     run_generator('nifty_layout', ["foobar"], sources)
 
-    assert_directory_exists 'app/views/layouts'
-    assert_directory_exists 'public/stylesheets'
-
     assert_generated_file 'app/views/layouts/foobar.html.erb'
     assert_generated_file 'public/stylesheets/foobar.css'
+  end
+  
+  def test_generator_with_camelcase_name
+    run_generator('nifty_layout', ["FooBar"], sources)
+
+    assert_generated_file 'app/views/layouts/foo_bar.html.erb'
+    assert_generated_file 'public/stylesheets/foo_bar.css'
   end
 
   private

@@ -1,9 +1,7 @@
 class NiftyLayoutGenerator < Rails::Generator::Base
-  attr_accessor :file_name
-  
   def initialize(runtime_args, runtime_options = {})
     super
-    @file_name = @args.first || 'application'
+    @name = @args.first || 'application'
   end
   
   def manifest
@@ -14,6 +12,10 @@ class NiftyLayoutGenerator < Rails::Generator::Base
       m.template "layout.html.erb", "app/views/layouts/#{file_name}.html.erb"
       m.file     "stylesheet.css",  "public/stylesheets/#{file_name}.css"
     end
+  end
+  
+  def file_name
+    @name.underscore
   end
 
   protected
