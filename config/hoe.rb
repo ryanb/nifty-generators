@@ -1,12 +1,12 @@
 require 'nifty_generator/version'
 
-AUTHOR = 'FIXME full name'  # can also be an array of Authors
-EMAIL = "FIXME email"
-DESCRIPTION = "description of gem"
+AUTHOR = 'Ryan Bates'  # can also be an array of Authors
+EMAIL = "ryan@railscasts.com"
+DESCRIPTION = "A collection of Ryan's generator scripts for Rails."
 GEM_NAME = 'nifty_generator' # what ppl will type to install your gem
 RUBYFORGE_PROJECT = 'nifty_generator' # The unix name for your project
-HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
-DOWNLOAD_PATH = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
+HOMEPATH = "http://github.com/ryanb/nifty_generator/"
+DOWNLOAD_PATH = "http://github.com/ryanb/nifty_generator/"
 EXTRA_DEPENDENCIES = [
 #  ['activesupport', '>= 1.3.1']
 ]    # An array of rubygem dependencies [name, version]
