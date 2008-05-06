@@ -5,11 +5,12 @@ begin
   require 'echoe'
 
   Echoe.new('nifty_generator', '0.0.2') do |p|
-    p.summary      = "A collection of Ryan's generator scripts for Rails."
-    p.description  = "A collection of Ryan's generator scripts for Rails."
-    p.url          = "http://github.com/ryanb/nifty_generator"
-    p.author       = 'Ryan Bates'
-    p.email        = "ryan@railscasts.com"
+    p.summary        = "A collection of Ryan's generator scripts for Rails."
+    p.description    = "A collection of Ryan's generator scripts for Rails."
+    p.url            = "http://github.com/ryanb/nifty_generator"
+    p.author         = 'Ryan Bates'
+    p.email          = "ryan@railscasts.com"
+    p.ignore_pattern = ["script/*"]
   end
 
 rescue LoadError => boom

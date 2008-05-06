@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = %q{A collection of Ryan's generator scripts for Rails.}
   s.email = %q{ryan@railscasts.com}
   s.extra_rdoc_files = ["lib/nifty_generator.rb", "LICENSE", "README"]
-  s.files = ["lib/nifty_generator.rb", "LICENSE", "Manifest", "nifty_generator.gemspec", "rails_generators/nifty_layout/nifty_layout_generator.rb", "rails_generators/nifty_layout/templates/layout.html.erb", "rails_generators/nifty_layout/templates/stylesheet.css", "rails_generators/nifty_layout/USAGE", "README", "script/console", "script/destroy", "script/generate", "script/txt2html", "test/test_generator_helper.rb", "test/test_helper.rb", "test/test_nifty_generator.rb", "test/test_nifty_layout_generator.rb"]
+  s.files = ["lib/nifty_generator.rb", "LICENSE", "Manifest", "nifty_generator.gemspec", "rails_generators/nifty_layout/nifty_layout_generator.rb", "rails_generators/nifty_layout/templates/layout.html.erb", "rails_generators/nifty_layout/templates/stylesheet.css", "rails_generators/nifty_layout/USAGE", "README", "test/test_generator_helper.rb", "test/test_helper.rb", "test/test_nifty_generator.rb", "test/test_nifty_layout_generator.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/ryanb/nifty_generator}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Nifty_generator", "--main", "README"]
@@ -35,11 +35,12 @@ end
 #   require 'echoe'
 # 
 #   Echoe.new('nifty_generator', '0.0.2') do |p|
-#     p.summary      = "A collection of Ryan's generator scripts for Rails."
-#     p.description  = "A collection of Ryan's generator scripts for Rails."
-#     p.url          = "http://github.com/ryanb/nifty_generator"
-#     p.author       = 'Ryan Bates'
-#     p.email        = "ryan@railscasts.com"
+#     p.summary        = "A collection of Ryan's generator scripts for Rails."
+#     p.description    = "A collection of Ryan's generator scripts for Rails."
+#     p.url            = "http://github.com/ryanb/nifty_generator"
+#     p.author         = 'Ryan Bates'
+#     p.email          = "ryan@railscasts.com"
+#     p.ignore_pattern = ["script/*"]
 #   end
 # 
 # rescue LoadError => boom

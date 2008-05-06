@@ -7,10 +7,6 @@ rails_generators/nifty_layout/templates/layout.html.erb
 rails_generators/nifty_layout/templates/stylesheet.css
 rails_generators/nifty_layout/USAGE
 README
-script/console
-script/destroy
-script/generate
-script/txt2html
 test/test_generator_helper.rb
 test/test_helper.rb
 test/test_nifty_generator.rb
