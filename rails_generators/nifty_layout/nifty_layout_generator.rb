@@ -1,4 +1,4 @@
-class AppLayoutGenerator < Rails::Generator::NamedBase
+class NiftyLayoutGenerator < Rails::Generator::NamedBase
   def manifest
     record do |m|
       m.template "layout.html.erb",   "app/views/layouts/#{file_name}.html.erb"
