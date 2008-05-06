@@ -4,8 +4,7 @@ require 'rake'
 begin
   require 'echoe'
  
-  Echoe.new('github', '0.1.2') do |p|
-    p.rubyforge_name = 'nifty_generator'
+  Echoe.new('nifty_generator', '0.0.2') do |p|
     p.summary      = "A collection of Ryan's generator scripts for Rails."
     p.description  = "A collection of Ryan's generator scripts for Rails."
     p.url          = "http://github.com/ryanb/nifty_generator"
