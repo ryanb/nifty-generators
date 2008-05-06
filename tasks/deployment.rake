@@ -32,3 +32,8 @@ namespace :manifest do
     `rake check_manifest | patch -p0 > Manifest.txt`
   end
 end
+
+
+task :generate_gemspec do
+  `rake debug_gem > nifty_generator.gemspec`
+end
