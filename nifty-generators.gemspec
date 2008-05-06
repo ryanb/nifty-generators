@@ -47,3 +47,5 @@ end
 #   puts "You are missing a dependency required for meta-operations on this gem."
 #   puts "#{boom.to_s.capitalize}."
 # end
+# 
+# task :build => [:build_manifest, :build_gemspec]

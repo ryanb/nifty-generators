@@ -17,3 +17,6 @@ rescue LoadError => boom
   puts "You are missing a dependency required for meta-operations on this gem."
   puts "#{boom.to_s.capitalize}."
 end
+
+desc "Build the manifest and gemspec files."
+task :build => [:build_manifest, :build_gemspec]
