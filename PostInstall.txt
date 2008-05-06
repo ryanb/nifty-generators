@@ -1,7 +1,0 @@
-
-For more information on nifty_generator, see http://github.com/ryanb/nifty_generator/
-
-NOTE: Change this information in PostInstall.txt 
-You can also delete it if you don't want it.
-
-
