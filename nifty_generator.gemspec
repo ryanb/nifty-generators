@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = ["ryan@railscasts.com"]
   s.extra_rdoc_files = ["History.txt", "License.txt", "Manifest.txt", "PostInstall.txt", "README.txt", "website/index.txt"]
   s.files = ["History.txt", "License.txt", "Manifest.txt", "PostInstall.txt", "README.txt", "Rakefile", "config/hoe.rb", "config/requirements.rb", "lib/nifty_generator.rb", "lib/nifty_generator/version.rb", "rails_generators/nifty_layout/USAGE", "rails_generators/nifty_layout/nifty_layout_generator.rb", "rails_generators/nifty_layout/templates/layout.html.erb", "rails_generators/nifty_layout/templates/stylesheet.css", "script/console", "script/destroy", "script/generate", "script/txt2html", "setup.rb", "tasks/deployment.rake", "tasks/environment.rake", "tasks/website.rake", "test/test_generator_helper.rb", "test/test_helper.rb", "test/test_nifty_generator.rb", "test/test_nifty_layout_generator.rb"]
-  s.has_rdoc = true
+  s.has_rdoc = false
   s.homepage = %q{http://github.com/ryanb/nifty_generator/}
   s.post_install_message = %q{
 For more information on nifty_generator, see http://github.com/ryanb/nifty_generator/
