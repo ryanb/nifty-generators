@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = %q{A collection of Ryan's generator scripts for Rails.}
   s.email = %q{ryan@railscasts.com}
   s.extra_rdoc_files = ["lib/nifty_generator.rb", "LICENSE", "README"]
-  s.files = ["lib/nifty_generator.rb", "LICENSE", "Manifest", "rails_generators/nifty_layout/nifty_layout_generator.rb", "rails_generators/nifty_layout/templates/layout.html.erb", "rails_generators/nifty_layout/templates/stylesheet.css", "rails_generators/nifty_layout/USAGE", "README", "test/test_generator_helper.rb", "test/test_helper.rb", "test/test_nifty_generator.rb", "test/test_nifty_layout_generator.rb", "nifty-generators.gemspec", "test/test_nifty_scaffold_generator.rb"]
+  s.files = ["lib/nifty_generator.rb", "LICENSE", "Manifest", "rails_generators/nifty_layout/nifty_layout_generator.rb", "rails_generators/nifty_layout/templates/layout.html.erb", "rails_generators/nifty_layout/templates/stylesheet.css", "rails_generators/nifty_layout/USAGE", "rails_generators/nifty_scaffold/nifty_scaffold_generator.rb", "rails_generators/nifty_scaffold/templates/controller.rb", "rails_generators/nifty_scaffold/USAGE", "README", "test/test_generator_helper.rb", "test/test_helper.rb", "test/test_nifty_generator.rb", "test/test_nifty_layout_generator.rb", "test/test_nifty_scaffold_generator.rb", "nifty-generators.gemspec"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/ryanb/nifty-generators}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Nifty-generators", "--main", "README"]
