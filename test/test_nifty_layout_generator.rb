@@ -1,18 +1,8 @@
 require File.join(File.dirname(__FILE__), "test_generator_helper.rb")
 
-require 'rails_generator'
-
 class TestNiftyLayoutGenerator < Test::Unit::TestCase
-  include RubiGen::GeneratorTestHelper
-
-  def setup
-    bare_setup
-  end
-
-  def teardown
-    bare_teardown
-  end
-
+  include NiftyGenerators::TestHelper
+  
   # Some generator-related assertions:
   #   assert_generated_file(name, &block) # block passed the file contents
   #   assert_directory_exists(name)
@@ -28,7 +18,7 @@ class TestNiftyLayoutGenerator < Test::Unit::TestCase
   #   bare_teardown - place this in teardown method to destroy the TMP_ROOT or APP_ROOT folder after each test
 
   def test_generator_without_name
-    run_generator('nifty_layout', [], sources)
+    run_rails_generator :nifty_layout
 
     assert_directory_exists 'app/views/layouts'
     assert_directory_exists 'public/stylesheets'
@@ -38,26 +28,16 @@ class TestNiftyLayoutGenerator < Test::Unit::TestCase
   end
   
   def test_generator_with_name
-    run_generator('nifty_layout', ["foobar"], sources)
+    run_rails_generator :nifty_layout, ["foobar"]
 
     assert_generated_file 'app/views/layouts/foobar.html.erb'
     assert_generated_file 'public/stylesheets/foobar.css'
   end
   
   def test_generator_with_camelcase_name
-    run_generator('nifty_layout', ["FooBar"], sources)
+    run_rails_generator :nifty_layout, ["FooBar"]
 
     assert_generated_file 'app/views/layouts/foo_bar.html.erb'
     assert_generated_file 'public/stylesheets/foo_bar.css'
-  end
-
-  private
-  def sources
-    [RubiGen::PathSource.new(:test, File.join(File.dirname(__FILE__),"..", generator_path))
-    ]
-  end
-
-  def generator_path
-    "rails_generators"
   end
 end
