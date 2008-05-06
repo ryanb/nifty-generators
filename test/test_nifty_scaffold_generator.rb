@@ -17,10 +17,11 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
   #   bare_setup - place this in setup method to create the APP_ROOT folder for each test
   #   bare_teardown - place this in teardown method to destroy the TMP_ROOT or APP_ROOT folder after each test
   
-  context "generator with name" do
+  context "generator with name and no other options" do
     rails_generator :nifty_scaffold, "foobar"
     should_generate_file "app/controllers/foobar_controller.rb"
     should_generate_file "app/models/foobar.rb"
+    should_not_generate_file "app/views/foobar/index.html.erb"
   end
   
   context "generator without name" do
