@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), "test_generator_helper.rb")
+require File.join(File.dirname(__FILE__), "test_helper.rb")
 
 class TestNiftyScaffoldGenerator < Test::Unit::TestCase
   include NiftyGenerators::TestHelper
