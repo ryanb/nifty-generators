@@ -1,32 +1,33 @@
 = nifty_generator
 
-* FIX (url)
+* http://github.com/ryanb/nifty_generator/tree/master
 
 == DESCRIPTION:
 
-FIX (describe your package)
+A collection of Ryan's Rails generator scripts.
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* Still in very early development
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+  script/generate nifty_layout
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* Rails
+* Similar opinions as me
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* sudo gem install nifty_generator (not working yet)
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2008 FIX
+Copyright (c) 2008 Ryan Bates
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
