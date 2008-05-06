@@ -1,6 +1,6 @@
-= nifty_generator
+= nifty-generator
 
-* http://github.com/ryanb/nifty_generator/
+* http://github.com/ryanb/nifty-generators/
 
 == DESCRIPTION:
 
@@ -21,7 +21,7 @@ A collection of Ryan's generator scripts for Rails.
 
 == INSTALL:
 
-* gem install ryanb-nifty_generator --source=http://gems.github.com
+* gem install ryanb-nifty-generators --source=http://gems.github.com
 
 == LICENSE:
 
