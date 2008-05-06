@@ -27,7 +27,17 @@ class TestNiftyLayoutGenerator < Test::Unit::TestCase
   #   bare_setup - place this in setup method to create the APP_ROOT folder for each test
   #   bare_teardown - place this in teardown method to destroy the TMP_ROOT or APP_ROOT folder after each test
 
-  def test_generator_without_options
+  def test_generator_without_name
+    run_generator('nifty_layout', [], sources)
+
+    assert_directory_exists 'app/views/layouts'
+    assert_directory_exists 'public/stylesheets'
+
+    assert_generated_file 'app/views/layouts/application.html.erb'
+    assert_generated_file 'public/stylesheets/application.css'
+  end
+  
+  def test_generator_with_name
     run_generator('nifty_layout', ["foobar"], sources)
 
     assert_directory_exists 'app/views/layouts'

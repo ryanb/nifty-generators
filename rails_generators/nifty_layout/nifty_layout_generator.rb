@@ -1,4 +1,11 @@
-class NiftyLayoutGenerator < Rails::Generator::NamedBase
+class NiftyLayoutGenerator < Rails::Generator::Base
+  attr_accessor :file_name
+  
+  def initialize(runtime_args, runtime_options = {})
+    super
+    @file_name = @args.first || 'application'
+  end
+  
   def manifest
     record do |m|
       m.directory 'app/views/layouts'
