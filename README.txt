@@ -1,10 +1,10 @@
 = nifty_generator
 
-* http://github.com/ryanb/nifty_generator/tree/master
+* http://github.com/ryanb/nifty_generator/
 
 == DESCRIPTION:
 
-A collection of Ryan's Rails generator scripts.
+A collection of Ryan's generator scripts for Rails.
 
 == FEATURES/PROBLEMS:
 
