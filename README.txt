@@ -21,7 +21,7 @@ A collection of Ryan's generator scripts for Rails.
 
 == INSTALL:
 
-* sudo gem install nifty_generator (not working yet)
+* gem install ryanb-nifty_generator --source=http://gems.github.com
 
 == LICENSE:
 
