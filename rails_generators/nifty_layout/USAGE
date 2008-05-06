@@ -3,11 +3,19 @@ Description:
 	which will give some structure to a starting Rails app.
 
   The generator takes one argument which will be the name of the
-	layout and stylesheet files.
+	layout and stylesheet files. If no argument is passed then it defaults
+	to "application".
 
 Usage:
-  ./script/generate nifty_layout application
+  ./script/generate nifty_layout
 
     This will create two files:
-        Layout:     app/views/layouts/application.html.erb
-        Stylesheet: public/stylesheets/application.css
+      Layout:     app/views/layouts/application.html.erb
+      Stylesheet: public/stylesheets/application.css
+
+
+  ./script/generate nifty_layout admin
+
+    This will create two files:
+      Layout:     app/views/layouts/admin.html.erb
+      Stylesheet: public/stylesheets/admin.css
