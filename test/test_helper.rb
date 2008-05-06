@@ -20,6 +20,7 @@ require 'rubigen'  # gem install rubigen
 require 'rubigen/helpers/generator_test_helper'
 require 'rails_generator'
 require 'shoulda' # gem install Shoulda
+require 'mocha'
 
 module NiftyGenerators
   module TestHelper
@@ -53,9 +54,9 @@ module NiftyGenerators
       end
     end
     
-    def should_generate_file(file)
+    def should_generate_file(file, &block)
       should "generate file #{file}" do
-        assert_generated_file(file)
+        assert_generated_file(file, &block)
       end
     end
   end

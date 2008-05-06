@@ -22,4 +22,12 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     should_generate_file "app/controllers/foobar_controller.rb"
     should_generate_file "app/models/foobar.rb"
   end
+  
+  context "generator without name" do
+    should "raise usage error" do
+      assert_raise Rails::Generator::UsageError do
+        run_rails_generator :nifty_scaffold
+      end
+    end
+  end
 end

@@ -2,6 +2,8 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   def initialize(runtime_args, runtime_options = {})
     super
     @name = @args.first
+    
+    usage if @args.empty?
   end
 
   def manifest
