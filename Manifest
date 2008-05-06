@@ -1,7 +1,6 @@
 lib/nifty_generator.rb
 LICENSE
 Manifest
-nifty_generator.gemspec
 rails_generators/nifty_layout/nifty_layout_generator.rb
 rails_generators/nifty_layout/templates/layout.html.erb
 rails_generators/nifty_layout/templates/stylesheet.css

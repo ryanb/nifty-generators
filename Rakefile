@@ -10,7 +10,7 @@ begin
     p.url            = "http://github.com/ryanb/nifty-generators"
     p.author         = 'Ryan Bates'
     p.email          = "ryan@railscasts.com"
-    p.ignore_pattern = ["script/*"]
+    p.ignore_pattern = ["script/*", "*.gemspec"]
   end
 
 rescue LoadError => boom
