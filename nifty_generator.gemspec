@@ -1,4 +1,3 @@
-(in /Users/rbates/code/nifty_generator)
 Gem::Specification.new do |s|
   s.name = %q{nifty_generator}
   s.version = "0.0.1"
