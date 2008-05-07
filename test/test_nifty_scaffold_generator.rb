@@ -24,10 +24,35 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
   end
   
-  context "generator with name and no other options" do
-    rails_generator :nifty_scaffold, "item"
-    should_generate_file "app/controllers/items_controller.rb"
-    should_generate_file "app/models/item.rb"
-    should_not_generate_file "app/views/items/index.html.erb"
+  context "generator with no options" do
+    rails_generator :nifty_scaffold, "line_item"
+    
+    should "generate model with class as camelcase name" do
+      assert_generated_file "app/models/line_item.rb" do |contents|
+        assert_match "class LineItem < ActiveRecord::Base", contents
+      end
+    end
+    
+    should "generate controller with class as camelcase name pluralized and no actions" do
+      assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
+        assert_match "class LineItemsController < ApplicationController", contents
+        assert_no_match(/\bdef\b/, contents)
+      end
+    end
+    
+    should_not_generate_file "app/views/line_items/index.html.erb"
+  end
+  
+  context "generator with index action" do
+    rails_generator :nifty_scaffold, "line_item", "index"
+    
+    should_generate_file "app/views/line_items/index.html.erb"
+    
+    should "generate controller with index action and view" do
+      assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
+        assert_match "def index", contents
+        assert_match "@line_items = LineItem.find(:all)", contents
+      end
+    end
   end
 end
