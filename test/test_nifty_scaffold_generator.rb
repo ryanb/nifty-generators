@@ -97,11 +97,26 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     should "generate controller with actions" do
       assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
         assert_match "def edit", contents
-        assert_match "@line_item = LineItem.find(params[:id])\n", contents
+        assert_match "@line_item = LineItem.find(params[:id])", contents
         assert_match "def update", contents
         assert_match "if @line_item.update_attributes(params[:line_item])", contents
         assert_match "redirect_to @line_item", contents
         assert_match "render :action => 'edit'", contents
+      end
+    end
+  end
+  
+  context "generator with edit and update actions" do
+    rails_generator :nifty_scaffold, "line_item", "destroy"
+    
+    should_not_generate_file "app/views/line_items/destroy.html.erb"
+    
+    should "generate controller with action" do
+      assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
+        assert_match "def destroy", contents
+        assert_match "@line_item = LineItem.find(params[:id])", contents
+        assert_match "@line_item.destroy", contents
+        assert_match "redirect_to line_items_path", contents
       end
     end
   end
