@@ -1,5 +1,4 @@
 
 Nifty Scaffold Generator
-  - make the redirects smart, so it goes to index if show action isn't present
   - generate tests
   - add model & migration creation

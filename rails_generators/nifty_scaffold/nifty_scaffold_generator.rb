@@ -76,6 +76,14 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     end
   end
   
+  def item_path
+    if controller_actions.include? 'show'
+      "@#{singular_name}"
+    else
+      "#{plural_name}_path"
+    end
+  end
+  
 protected
   
   def read_template(relative_path)

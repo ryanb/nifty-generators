@@ -89,7 +89,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         assert_match "def create", contents
         assert_match "@line_item = LineItem.new(params[:line_item])", contents
         assert_match "if @line_item.save", contents
-        assert_match "redirect_to @line_item", contents
+        assert_match "redirect_to line_items_path", contents
         assert_match "render :action => 'new'", contents
       end
     end
@@ -113,7 +113,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         assert_match "@line_item = LineItem.find(params[:id])", contents
         assert_match "def update", contents
         assert_match "if @line_item.update_attributes(params[:line_item])", contents
-        assert_match "redirect_to @line_item", contents
+        assert_match "redirect_to line_items_path", contents
         assert_match "render :action => 'edit'", contents
       end
     end
@@ -156,6 +156,17 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         assert_match "<%= f.text_field :name %>", contents
         assert_match "<%= f.text_field :price %>", contents
         assert_match "<%= f.check_box :available %>", contents
+      end
+    end
+  end
+  
+  context "generator with show, create, and update actions" do
+    rails_generator :nifty_scaffold, "line_item", "show", "create", "update"
+    
+    should "redirect to line item show page, not index" do
+      assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
+        assert_match "redirect_to @line_item", contents
+        assert_no_match(/redirect_to line_items_path/, contents)
       end
     end
   end
