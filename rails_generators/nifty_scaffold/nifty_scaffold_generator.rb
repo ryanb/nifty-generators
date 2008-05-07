@@ -16,6 +16,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         @controller_actions << arg
       end
     end
+    
+    if @controller_actions.empty?
+      @controller_actions = %w[index show new create edit update destroy]
+    end
   end
 
   def manifest

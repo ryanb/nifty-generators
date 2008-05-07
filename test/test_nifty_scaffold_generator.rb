@@ -33,14 +33,18 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     end
     
-    should "generate controller with class as camelcase name pluralized and no actions" do
+    should "generate controller with class as camelcase name pluralized and all actions" do
       assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
         assert_match "class LineItemsController < ApplicationController", contents
-        assert_no_match(/\bdef\b/, contents)
+        %w[index show new create edit update destroy].each do |action|
+          assert_match "def #{action}", contents
+        end
       end
     end
     
-    should_not_generate_file "app/views/line_items/index.html.erb"
+    %w[index show new edit].each do |action|
+      should_generate_file "app/views/line_items/#{action}.html.erb"
+    end
   end
   
   context "generator with index action" do

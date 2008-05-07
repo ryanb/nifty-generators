@@ -2,3 +2,8 @@
 Nifty Scaffold Generator
   - generate tests
   - add model & migration creation
+  - look up model attributes in schema
+  - if no attributes found, default to "name:string".
+  - support custom actions (?)
+  - add resources route
+  
