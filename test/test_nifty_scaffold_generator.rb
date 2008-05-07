@@ -45,6 +45,12 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     %w[index show new edit].each do |action|
       should_generate_file "app/views/line_items/#{action}.html.erb"
     end
+    
+    should "have name attribute" do
+      assert_generated_file "app/views/line_items/_form.html.erb" do |contents|
+        assert_match "<%= f.text_field :name %>", contents
+      end
+    end
   end
   
   context "generator with index action" do

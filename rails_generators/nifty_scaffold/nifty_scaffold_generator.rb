@@ -20,6 +20,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     if @controller_actions.empty?
       @controller_actions = %w[index show new create edit update destroy]
     end
+    
+    if @attributes.empty?
+      @attributes << Rails::Generator::GeneratedAttribute.new('name', 'string')
+    end
   end
 
   def manifest
