@@ -36,10 +36,12 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   def manifest
     record do |m|
       m.directory "app/controllers"
+      m.directory "app/helpers"
       m.directory "app/models"
       m.directory "db/migrate"
       m.directory "app/views/#{plural_name}"
       m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
+      m.template "helper.rb", "app/helpers/#{plural_name}_helper.rb"
       
       unless model_exists?
         m.template "model.rb", "app/models/#{singular_name}.rb"

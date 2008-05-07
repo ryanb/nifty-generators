@@ -44,6 +44,8 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     end
     
+    should_generate_file "app/helpers/line_items_helper.rb"
+    
     should "generate controller with class as camelcase name pluralized and all actions" do
       assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
         assert_match "class LineItemsController < ApplicationController", contents

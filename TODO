@@ -1,6 +1,5 @@
 
 Nifty Scaffold Generator
-  - generate tests
+  - generate tests/specs
   - add resources route
-  - generate controller helper
   + support custom actions
