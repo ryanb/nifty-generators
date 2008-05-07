@@ -48,10 +48,23 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     
     should_generate_file "app/views/line_items/index.html.erb"
     
-    should "generate controller with index action and view" do
+    should "generate controller with index action" do
       assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
         assert_match "def index", contents
         assert_match "@line_items = LineItem.find(:all)", contents
+      end
+    end
+  end
+  
+  context "generator with show action" do
+    rails_generator :nifty_scaffold, "line_item", "show"
+    
+    should_generate_file "app/views/line_items/show.html.erb"
+    
+    should "generate controller with show action" do
+      assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
+        assert_match "def show", contents
+        assert_match "@line_item = LineItem.find(params[:id])", contents
       end
     end
   end

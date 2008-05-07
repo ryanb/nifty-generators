@@ -16,8 +16,8 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       m.template "controller.rb", "app/controllers/#{controller_file_name}_controller.rb"
       m.template "model.rb", "app/models/#{file_name}.rb"
       
-      if @args.last == "index"
-        m.template "views/index.html.erb", "app/views/#{controller_file_name}/index.html.erb"
+      controller_actions.each do |action|
+        m.template "views/#{action}.html.erb", "app/views/#{controller_file_name}/#{action}.html.erb"
       end
     end
   end
