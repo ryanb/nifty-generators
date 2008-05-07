@@ -68,4 +68,22 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     end
   end
+  
+  context "generator with new and create actions" do
+    rails_generator :nifty_scaffold, "line_item", "new", "create"
+    
+    should_generate_file "app/views/line_items/new.html.erb"
+    
+    should "generate controller with actions" do
+      assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
+        assert_match "def new", contents
+        assert_match "@line_item = LineItem.new\n", contents
+        assert_match "def create", contents
+        assert_match "@line_item = LineItem.new(params[:item])", contents
+        assert_match "if @line_item.save", contents
+        assert_match "redirect_to @line_item", contents
+        assert_match "render :action => 'new'", contents
+      end
+    end
+  end
 end

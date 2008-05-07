@@ -17,7 +17,9 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       m.template "model.rb", "app/models/#{file_name}.rb"
       
       controller_actions.each do |action|
-        m.template "views/#{action}.html.erb", "app/views/#{controller_file_name}/#{action}.html.erb"
+        if File.exist? source_path("views/#{action}.html.erb")
+          m.template "views/#{action}.html.erb", "app/views/#{controller_file_name}/#{action}.html.erb"
+        end
       end
     end
   end
