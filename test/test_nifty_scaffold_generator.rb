@@ -52,6 +52,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
         assert_match "def index", contents
         assert_match "@line_items = LineItem.find(:all)", contents
+        assert_no_match(/    def index/, contents)
       end
     end
   end
