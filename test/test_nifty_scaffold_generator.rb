@@ -121,4 +121,18 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     end
   end
+  
+  context "generator with new and edit actions" do
+    rails_generator :nifty_scaffold, "line_item", "new", "edit"
+    
+    should_generate_file "app/views/line_items/_form.html.erb"
+    
+    should "render the form partial in views" do
+      %w[new edit].each do |action|
+        assert_generated_file "app/views/line_items/#{action}.html.erb" do |contents|
+          assert_match "<%= render :partial => 'form' %>", contents
+        end
+      end
+    end
+  end
 end

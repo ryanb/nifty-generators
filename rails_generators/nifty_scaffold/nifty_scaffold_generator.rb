@@ -21,7 +21,15 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
           m.template "views/#{action}.html.erb", "app/views/#{controller_file_name}/#{action}.html.erb"
         end
       end
+      
+      if form_partial?
+        m.template "views/_form.html.erb", "app/views/#{controller_file_name}/_form.html.erb"
+      end
     end
+  end
+  
+  def form_partial?
+    controller_actions.include?('new') && controller_actions.include?('edit')
   end
   
   def file_name
