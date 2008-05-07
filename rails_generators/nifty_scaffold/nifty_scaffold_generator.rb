@@ -22,18 +22,18 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     record do |m|
       m.directory "app/controllers"
       m.directory "app/models"
-      m.directory "app/views/#{controller_file_name}"
-      m.template "controller.rb", "app/controllers/#{controller_file_name}_controller.rb"
-      m.template "model.rb", "app/models/#{file_name}.rb"
+      m.directory "app/views/#{plural_name}"
+      m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
+      m.template "model.rb", "app/models/#{singular_name}.rb"
       
       controller_actions.each do |action|
         if File.exist? source_path("views/#{action}.html.erb")
-          m.template "views/#{action}.html.erb", "app/views/#{controller_file_name}/#{action}.html.erb"
+          m.template "views/#{action}.html.erb", "app/views/#{plural_name}/#{action}.html.erb"
         end
       end
       
       if form_partial?
-        m.template "views/_form.html.erb", "app/views/#{controller_file_name}/_form.html.erb"
+        m.template "views/_form.html.erb", "app/views/#{plural_name}/_form.html.erb"
       end
     end
   end
@@ -42,20 +42,20 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     controller_actions.include?('new') && controller_actions.include?('edit')
   end
   
-  def file_name
-    @name.underscore
+  def singular_name
+    name.underscore
+  end
+  
+  def plural_name
+    name.pluralize
   end
   
   def class_name
-    @name.camelize
+    name.camelize
   end
   
-  def controller_file_name
-    file_name.pluralize
-  end
-  
-  def controller_class_name
-    class_name.pluralize
+  def plural_class_name
+    plural_name.camelize
   end
   
   def controller_methods

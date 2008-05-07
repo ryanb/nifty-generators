@@ -1,7 +1,7 @@
   def update
-    @<%= file_name %> = <%= class_name %>.find(params[:id])
-    if @<%= file_name %>.update_attributes(params[:<%= file_name %>])
-      redirect_to @<%= file_name %>
+    @<%= singular_name %> = <%= class_name %>.find(params[:id])
+    if @<%= singular_name %>.update_attributes(params[:<%= singular_name %>])
+      redirect_to @<%= singular_name %>
     else
       render :action => 'edit'
     end

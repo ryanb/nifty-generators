@@ -1,4 +1,4 @@
-<%% form_for @<%= file_name %> do |f| %>
+<%% form_for @<%= singular_name %> do |f| %>
 <% for attribute in attributes %>
   <p>
     <%%= f.label :<%= attribute.name %>%><br />
