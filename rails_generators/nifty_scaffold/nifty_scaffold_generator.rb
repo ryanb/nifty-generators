@@ -10,13 +10,17 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     record do |m|
       m.directory "app/controllers"
       m.directory "app/models"
-      m.template "controller.rb", "app/controllers/#{file_name}_controller.rb"
+      m.template "controller.rb", "app/controllers/#{controller_name}_controller.rb"
       m.template "model.rb", "app/models/#{file_name}.rb"
     end
   end
   
   def file_name
     @name.underscore
+  end
+  
+  def controller_name
+    @name.pluralize
   end
 
   protected
