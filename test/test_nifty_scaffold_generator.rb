@@ -73,8 +73,14 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
   context "generator with new and create actions" do
     rails_generator :nifty_scaffold, "line_item", "new", "create"
     
-    should_generate_file "app/views/line_items/new.html.erb"
     should_not_generate_file "app/views/line_items/create.html.erb"
+    should_not_generate_file "app/views/line_items/_form.html.erb"
+    
+    should "render form in 'new' template" do
+      assert_generated_file "app/views/line_items/new.html.erb" do |contents|
+        assert_match "<% form_for @line_item do |f| %>", contents
+      end
+    end
     
     should "generate controller with actions" do
       assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
@@ -92,8 +98,14 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
   context "generator with edit and update actions" do
     rails_generator :nifty_scaffold, "line_item", "edit", "update"
     
-    should_generate_file "app/views/line_items/edit.html.erb"
     should_not_generate_file "app/views/line_items/update.html.erb"
+    should_not_generate_file "app/views/line_items/_form.html.erb"
+    
+    should "render form in 'edit' template" do
+      assert_generated_file "app/views/line_items/edit.html.erb" do |contents|
+        assert_match "<% form_for @line_item do |f| %>", contents
+      end
+    end
     
     should "generate controller with actions" do
       assert_generated_file "app/controllers/line_items_controller.rb" do |contents|

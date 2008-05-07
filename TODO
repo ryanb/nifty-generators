@@ -5,4 +5,3 @@ Nifty Scaffold Generator
   - generate tests
   - fill views
   - add model & migration creation
-  - don't use form partial if new & edit acions don't both exist

@@ -55,10 +55,22 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
   
   def controller_method(name)
-    ERB.new(File.read(source_path("actions/#{name}.rb")), nil, '-').result(binding)
+    read_template("actions/#{name}.rb")
+  end
+  
+  def render_form
+    if form_partial?
+      "<%= render :partial => 'form' %>"
+    else
+      read_template("views/_form.html.erb")
+    end
   end
   
 protected
+  
+  def read_template(relative_path)
+    ERB.new(File.read(source_path(relative_path)), nil, '-').result(binding)
+  end
   
   def banner
     <<-EOS
