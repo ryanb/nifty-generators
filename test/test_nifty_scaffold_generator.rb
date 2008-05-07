@@ -147,4 +147,16 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     end
   end
+  
+  context "generator with attributes and actions" do
+    rails_generator :nifty_scaffold, "line_item", "name:string", "new", "price:float", "index", "available:boolean"
+    
+    should "render a form field for each attribute in 'new' template" do
+      assert_generated_file "app/views/line_items/new.html.erb" do |contents|
+        assert_match "<%= f.text_field :name %>", contents
+        assert_match "<%= f.text_field :price %>", contents
+        assert_match "<%= f.check_box :available %>", contents
+      end
+    end
+  end
 end

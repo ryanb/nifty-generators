@@ -72,3 +72,37 @@ end
 class Thoughtbot::Shoulda::Context
   include NiftyGenerators::ShouldaAdditions
 end
+
+# Mock out what we need from AR::Base.
+module ActiveRecord
+  class Base
+    class << self
+      attr_accessor :pluralize_table_names
+    end
+    self.pluralize_table_names = true
+  end
+
+  module ConnectionAdapters
+    class Column
+      attr_reader :name, :default, :type, :limit, :null, :sql_type, :precision, :scale
+
+      def initialize(name, default, sql_type = nil)
+        @name=name
+        @default=default
+        @type=@sql_type=sql_type
+      end
+
+      def human_name
+        @name.humanize
+      end
+    end
+  end
+end
+
+# And what we need from ActionView
+module ActionView
+  module Helpers
+    module ActiveRecordHelper; end
+    class InstanceTag; end
+  end
+end

@@ -1,11 +1,21 @@
 class NiftyScaffoldGenerator < Rails::Generator::Base
-  attr_accessor :controller_actions
+  attr_accessor :name, :attributes, :controller_actions
   
   def initialize(runtime_args, runtime_options = {})
     super
     usage if @args.empty?
+    
     @name = @args.first
-    @controller_actions = @args[1..-1]
+    @controller_actions = []
+    @attributes = []
+    
+    @args[1..-1].each do |arg|
+      if arg.include? ':'
+        @attributes << Rails::Generator::GeneratedAttribute.new(*arg.split(":"))
+      else
+        @controller_actions << arg
+      end
+    end
   end
 
   def manifest
