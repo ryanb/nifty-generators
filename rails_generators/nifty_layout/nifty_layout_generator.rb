@@ -8,9 +8,11 @@ class NiftyLayoutGenerator < Rails::Generator::Base
     record do |m|
       m.directory 'app/views/layouts'
       m.directory 'public/stylesheets'
+      m.directory 'app/helpers'
 
       m.template "layout.html.erb", "app/views/layouts/#{file_name}.html.erb"
       m.file     "stylesheet.css",  "public/stylesheets/#{file_name}.css"
+      m.file     "helper.rb",       "app/helpers/layout_helper.rb"
     end
   end
   

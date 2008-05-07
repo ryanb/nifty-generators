@@ -26,6 +26,7 @@ class TestNiftyLayoutGenerator < Test::Unit::TestCase
     rails_generator :nifty_layout, "foobar"
     should_generate_file 'app/views/layouts/foobar.html.erb'
     should_generate_file 'public/stylesheets/foobar.css'
+    should_generate_file 'app/helpers/layout_helper.rb'
   end
   
   context "generator with CamelCase name" do
