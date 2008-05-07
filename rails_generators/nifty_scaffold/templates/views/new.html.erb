@@ -1,3 +1,5 @@
-<%% title "New <%= name.titleize %>" %>
+<%% title "New <%= singular_name.titleize %>" %>
 
 <%= render_form %>
+
+<p><%%= link_to "Back to List", <%= plural_name %>_path %></p>

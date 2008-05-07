@@ -1,7 +1,5 @@
 
 Nifty Scaffold Generator
-  - make sure pretend option works without error
   - make the redirects smart, so it goes to index if show action isn't present
   - generate tests
-  - fill views
   - add model & migration creation

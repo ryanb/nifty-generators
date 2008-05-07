@@ -1,3 +1,8 @@
-<%% title "Edit <%= name.titleize %>" %>
+<%% title "Edit <%= singular_name.titleize %>" %>
 
 <%= render_form %>
+
+<p>
+  <%%= link_to "Show", @<%= singular_name %> %> |
+  <%%= link_to "View All", <%= plural_name %>_path %>
+</p>
