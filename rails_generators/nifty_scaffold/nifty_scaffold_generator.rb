@@ -37,11 +37,13 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     record do |m|
       m.directory "app/controllers"
       m.directory "app/models"
+      m.directory "db/migrate"
       m.directory "app/views/#{plural_name}"
       m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
       
       unless model_exists?
         m.template "model.rb", "app/models/#{singular_name}.rb"
+        m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
       end
       
       controller_actions.each do |action|

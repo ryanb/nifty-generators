@@ -33,6 +33,17 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     end
     
+    should "generate migration with default name column" do
+      file = Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").first
+      assert file, "migration file doesn't exist"
+      assert_match(/[0-9]+_create_line_items.rb$/, file)
+      assert_generated_file "db/migrate/#{File.basename(file)}" do |contents|
+        assert_match "class CreateLineItems", contents
+        assert_match "t.string :name", contents
+        assert_match "t.timestamp", contents
+      end
+    end
+    
     should "generate controller with class as camelcase name pluralized and all actions" do
       assert_generated_file "app/controllers/line_items_controller.rb" do |contents|
         assert_match "class LineItemsController < ApplicationController", contents
@@ -186,7 +197,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       Dir.mkdir("#{RAILS_ROOT}/app") unless File.exists?("#{RAILS_ROOT}/app")
       Dir.mkdir("#{RAILS_ROOT}/app/models") unless File.exists?("#{RAILS_ROOT}/app/models")
       File.open("#{RAILS_ROOT}/app/models/recipe.rb", 'w') do |f|
-        f.print "raise 'should not be loaded'"
+        f.puts "raise 'should not be loaded'"
       end
     end
     
@@ -206,11 +217,11 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
     
     context "generator with attribute specified" do
-      rails_generator :nifty_scaffold, "recipe", "name:string"
+      rails_generator :nifty_scaffold, "recipe", "zippo:string"
     
       should "use specified attribute" do
         assert_generated_file "app/views/recipes/_form.html.erb" do |contents|
-          assert_match "<%= f.text_field :name %>", contents
+          assert_match "<%= f.text_field :zippo %>", contents
         end
       end
     end
