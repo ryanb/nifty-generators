@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryan Bates"]
-  s.date = %q{2008-05-06}
+  s.date = %q{2008-05-07}
   s.description = %q{A collection of Ryan's generator scripts for Rails.}
   s.email = %q{ryan@railscasts.com}
   s.extra_rdoc_files = ["lib/nifty_generator.rb", "LICENSE", "README"]
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = %q{nifty-generators}
   s.rubygems_version = %q{1.0.0}
   s.summary = %q{A collection of Ryan's generator scripts for Rails.}
-  s.test_files = ["test/test_generator_helper.rb", "test/test_helper.rb", "test/test_nifty_generator.rb", "test/test_nifty_layout_generator.rb", "test/test_nifty_scaffold_generator.rb"]
+  s.test_files = ["test/test_helper.rb", "test/test_nifty_layout_generator.rb", "test/test_nifty_scaffold_generator.rb"]
 end
 
 
