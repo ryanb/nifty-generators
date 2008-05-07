@@ -180,4 +180,45 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     end
   end
+  
+  context "existing model" do
+    setup do
+      Dir.mkdir("#{RAILS_ROOT}/app") unless File.exists?("#{RAILS_ROOT}/app")
+      Dir.mkdir("#{RAILS_ROOT}/app/models") unless File.exists?("#{RAILS_ROOT}/app/models")
+      File.open("#{RAILS_ROOT}/app/models/recipe.rb", 'w') do |f|
+        f.print "raise 'should not be loaded'"
+      end
+    end
+    
+    teardown do
+      FileUtils.rm_rf "#{RAILS_ROOT}/app"
+    end
+    
+    context "generator with no options" do
+      rails_generator :nifty_scaffold, "recipe"
+    
+      should "use model columns for attributes" do
+        assert_generated_file "app/views/recipes/_form.html.erb" do |contents|
+          assert_match "<%= f.text_field :foo %>", contents
+          assert_match "<%= f.text_field :bar %>", contents
+        end
+      end
+    end
+    
+    context "generator with attribute specified" do
+      rails_generator :nifty_scaffold, "recipe", "name:string"
+    
+      should "use specified attribute" do
+        assert_generated_file "app/views/recipes/_form.html.erb" do |contents|
+          assert_match "<%= f.text_field :name %>", contents
+        end
+      end
+    end
+  end
+end
+
+# just an example model we can use
+class Recipe < ActiveRecord::Base
+  add_column :foo, :string
+  add_column :bar, :string
 end

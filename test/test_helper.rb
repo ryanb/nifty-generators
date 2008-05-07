@@ -77,14 +77,22 @@ end
 module ActiveRecord
   class Base
     class << self
-      attr_accessor :pluralize_table_names
+      attr_accessor :pluralize_table_names, :columns
+
+      def add_column(name, type = :string)
+        returning ActiveRecord::ConnectionAdapters::Column.new(name, nil) do |column|
+          column.type = type
+          @columns ||= []
+          @columns << column
+        end
+      end
     end
     self.pluralize_table_names = true
   end
 
   module ConnectionAdapters
     class Column
-      attr_reader :name, :default, :type, :limit, :null, :sql_type, :precision, :scale
+      attr_accessor :name, :default, :type, :limit, :null, :sql_type, :precision, :scale
 
       def initialize(name, default, sql_type = nil)
         @name=name

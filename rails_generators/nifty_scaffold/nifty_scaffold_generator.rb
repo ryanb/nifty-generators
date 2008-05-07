@@ -5,6 +5,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     super
     usage if @args.empty?
     
+    
     @name = @args.first
     @controller_actions = []
     @attributes = []
@@ -22,7 +23,13 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     end
     
     if @attributes.empty?
-      @attributes << Rails::Generator::GeneratedAttribute.new('name', 'string')
+      if model_exists?
+        class_name.constantize.columns.each do |column|
+          @attributes << Rails::Generator::GeneratedAttribute.new(column.name.to_s, column.type.to_s)
+        end
+      else
+        @attributes << Rails::Generator::GeneratedAttribute.new('name', 'string')
+      end
     end
   end
 
@@ -32,7 +39,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       m.directory "app/models"
       m.directory "app/views/#{plural_name}"
       m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
-      m.template "model.rb", "app/models/#{singular_name}.rb"
+      
+      unless model_exists?
+        m.template "model.rb", "app/models/#{singular_name}.rb"
+      end
       
       controller_actions.each do |action|
         if File.exist? source_path("views/#{action}.html.erb")
@@ -93,6 +103,11 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
   
 protected
+
+  # is there a better way to do this? Perhaps with const_defined?
+  def model_exists?
+    File.exist? destination_path("app/models/#{singular_name}.rb")
+  end
   
   def read_template(relative_path)
     ERB.new(File.read(source_path(relative_path)), nil, '-').result(binding)
