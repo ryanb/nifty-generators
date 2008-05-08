@@ -11,17 +11,15 @@ Description:
   page title and javascript/stylesheet includes.
 
 Examples:
-  script/generate nifty_layout
+    script/generate nifty_layout
 
-    This will create three files:
-      Layout:     app/views/layouts/application.html.erb
-      Stylesheet: public/stylesheets/application.css
-      Helper:     app/helpers/layout_helper.rb
+        Layout:     app/views/layouts/application.html.erb
+        Stylesheet: public/stylesheets/application.css
+        Helper:     app/helpers/layout_helper.rb
 
 
-  script/generate nifty_layout admin
+    script/generate nifty_layout admin
 
-    This will create three files:
-      Layout:     app/views/layouts/admin.html.erb
-      Stylesheet: public/stylesheets/admin.css
-      Helper:     app/helpers/layout_helper.rb
+        Layout:     app/views/layouts/admin.html.erb
+        Stylesheet: public/stylesheets/admin.css
+        Helper:     app/helpers/layout_helper.rb

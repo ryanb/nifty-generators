@@ -25,7 +25,8 @@ Usage:
     declaration in config/routes.rb.
     
     Adding an "!" in the mix of arguments will invert the passed controller
-    actions including all but those mentioned.
+    actions. This will include all 7 controller actitons except the ones
+    mentioned. This option doesn't effect model attributes.
 
 Examples:
     script/generate scaffold post
@@ -43,5 +44,5 @@ Examples:
     
     script/generate scaffold post ! show new
         
-        Creates a post controller (no model) with index, edit, update, and
+        Creates a posts controller (no model) with index, edit, update, and
         destroy actions.
