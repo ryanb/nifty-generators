@@ -23,6 +23,9 @@ Usage:
     the create/show/update/destroy, forms to create and edit your posts, and
     an index that lists them all, as well as a map.resources :posts
     declaration in config/routes.rb.
+    
+    Adding an "!" in the mix of arguments will invert the passed controller
+    actions including all but those mentioned.
 
 Examples:
     script/generate scaffold post
@@ -37,3 +40,8 @@ Examples:
         attributes. It will also create a controller with index, new, create,
         edit, and update actions. Notice the create and update actions are
         added automatically with new and edit.
+    
+    script/generate scaffold post ! show new
+        
+        Creates a post controller (no model) with index, edit, update, and
+        destroy actions.

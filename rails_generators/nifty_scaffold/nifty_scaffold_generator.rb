@@ -11,7 +11,9 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     @attributes = []
     
     @args[1..-1].each do |arg|
-      if arg.include? ':'
+      if arg == '!'
+        options[:invert] = true
+      elsif arg.include? ':'
         @attributes << Rails::Generator::GeneratedAttribute.new(*arg.split(":"))
       else
         @controller_actions << arg
@@ -20,8 +22,11 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       end
     end
     
-    if @controller_actions.empty?
-      @controller_actions = %w[index show new create edit update destroy]
+    @controller_actions.uniq!
+    @attributes.uniq!
+    
+    if options[:invert] || @controller_actions.empty?
+      @controller_actions = all_actions - @controller_actions
     end
     
     if @attributes.empty?
@@ -34,9 +39,6 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         @attributes << Rails::Generator::GeneratedAttribute.new('name', 'string')
       end
     end
-    
-    @controller_actions.uniq!
-    @attributes.uniq!
   end
   
   def manifest
@@ -70,6 +72,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   
   def form_partial?
     actions? :new, :edit
+  end
+  
+  def all_actions
+    %w[index show new create edit update destroy]
   end
   
   def action?(name)
@@ -128,6 +134,7 @@ protected
     opt.separator ''
     opt.separator 'Options:'
     opt.on("--skip-model", "Don't generate a model or migration file") { |v| options[:skip_model] = v }
+    opt.on("--invert", "Don't generate a model or migration file") { |v| options[:invert] = v }
   end
 
   # is there a better way to do this? Perhaps with const_defined?

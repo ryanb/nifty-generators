@@ -1,5 +1,4 @@
 
 Nifty Scaffold Generator
   - generate tests/specs
-  - make "-" at beginning of action subtract from primary actions
   - add some validation for attributes/action names

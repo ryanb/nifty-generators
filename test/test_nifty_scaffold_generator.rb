@@ -255,10 +255,21 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           assert_match "def update", body
         end
       end
-      
-      should_not_generate_file "app/models/line_item.rb"
     end
-  
+    
+    context "generator with exclemation mark and show, new, and edit actions" do
+      rails_generator :nifty_scaffold, "line_item", "!", "show", "new", "edit"
+      
+      should "only include index and destroy actions" do
+        assert_generated_file "app/controllers/line_items_controller.rb" do |body|
+          %w[index destroy].each { |a| assert_match "def #{a}", body }
+          %w[show new create edit update].each do |a|
+            assert_no_match(/def #{a}/, body)
+          end
+        end
+      end
+    end
+    
     context "existing model" do
       setup do
         Dir.mkdir("#{RAILS_ROOT}/app") unless File.exists?("#{RAILS_ROOT}/app")
