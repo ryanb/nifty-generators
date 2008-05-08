@@ -134,7 +134,7 @@ protected
     opt.separator ''
     opt.separator 'Options:'
     opt.on("--skip-model", "Don't generate a model or migration file") { |v| options[:skip_model] = v }
-    opt.on("--invert", "Don't generate a model or migration file") { |v| options[:invert] = v }
+    opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
   end
 
   # is there a better way to do this? Perhaps with const_defined?
