@@ -3,10 +3,9 @@
 <table>
   <tr>
   <%- for attribute in attributes -%>
-    <th><%= attribute.column.human_name %></th>
+    <th><%= attribute.column.human_name.titleize %></th>
   <%- end -%>
   </tr>
-
   <%% for <%= singular_name %> in @<%= plural_name %> %>
     <tr>
     <%- for attribute in attributes -%>
@@ -26,5 +25,5 @@
 </table>
 
 <%- if action? :new -%>
-<p><%%= link_to "New <%= singular_name %>", new_<%= singular_name %>_path %></p>
+<p><%%= link_to "New <%= singular_name.titleize %>", new_<%= singular_name %>_path %></p>
 <%- end -%>

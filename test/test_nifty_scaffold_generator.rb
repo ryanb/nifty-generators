@@ -293,10 +293,10 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           assert_generated_file "app/views/recipes/_form.html.erb" do |body|
             assert_match "<%= f.text_field :foo %>", body
             assert_match "<%= f.text_field :bar %>", body
-            assert_no_match(/text_field :id/, body)
-            assert_no_match(/text_field :book_id/, body)
-            assert_no_match(/text_field :created_at/, body)
-            assert_no_match(/text_field :updated_at/, body)
+            assert_match "<%= f.text_field :book_id %>", body
+            assert_no_match(/:id/, body)
+            assert_no_match(/:created_at/, body)
+            assert_no_match(/:updated_at/, body)
           end
         end
         

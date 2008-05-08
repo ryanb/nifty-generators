@@ -105,7 +105,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   def controller_methods
     controller_actions.map do |action|
       controller_method(action)
-    end.join
+    end.join("\n")
   end
   
   def controller_method(name)
@@ -130,7 +130,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   
   def model_columns_for_attributes
     class_name.constantize.columns.reject do |column|
-      column.name.to_s =~ /^(id|created_at|updated_at|.+_id)$/
+      column.name.to_s =~ /^(id|created_at|updated_at)$/
     end
   end
   

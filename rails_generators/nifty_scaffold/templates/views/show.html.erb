@@ -2,7 +2,7 @@
 
 <%- for attribute in attributes -%>
 <p>
-  <strong><%= attribute.column.human_name %>:</strong>
+  <strong><%= attribute.column.human_name.titleize %>:</strong>
   <%%=h @<%= singular_name %>.<%= attribute.name %> %>
 </p>
 <%- end -%>

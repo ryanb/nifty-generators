@@ -1,9 +1,9 @@
 <%% form_for @<%= singular_name %> do |f| %>
-<% for attribute in attributes %>
+<%- for attribute in attributes -%>
   <p>
     <%%= f.label :<%= attribute.name %> %><br />
     <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
   </p>
-<% end %>
+<%- end -%>
   <p><%%= f.submit "Submit" %></p>
 <%% end %>
