@@ -29,20 +29,20 @@ Usage:
     mentioned. This option doesn't effect model attributes.
 
 Examples:
-    script/generate scaffold post
+    script/generate nifty_scaffold post
         
         Will create a controller called "posts" it will contain all seven
         CRUD actions along with the views. A model will NOT be created,
         instead it will look for an existing model and use those attributes.
     
-    script/generate scaffold post name:string content:text index new edit
+    script/generate nifty_scaffold post name:string content:text index new edit
         
         Will create a Post model and migration file with the name and content
         attributes. It will also create a controller with index, new, create,
         edit, and update actions. Notice the create and update actions are
         added automatically with new and edit.
     
-    script/generate scaffold post ! show new
+    script/generate nifty_scaffold post ! show new
         
         Creates a posts controller (no model) with index, edit, update, and
         destroy actions.
