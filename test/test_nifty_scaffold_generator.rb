@@ -138,6 +138,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           assert_match "def create", body
           assert_match "@line_item = LineItem.new(params[:line_item])", body
           assert_match "if @line_item.save", body
+          assert_match "flash[:notice] = \"Successfully created line item.\"", body
           assert_match "redirect_to line_items_path", body
           assert_match "render :action => 'new'", body
         end
@@ -162,6 +163,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           assert_match "@line_item = LineItem.find(params[:id])", body
           assert_match "def update", body
           assert_match "if @line_item.update_attributes(params[:line_item])", body
+          assert_match "flash[:notice] = \"Successfully updated line item.\"", body
           assert_match "redirect_to line_items_path", body
           assert_match "render :action => 'edit'", body
         end
@@ -178,6 +180,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           assert_match "def destroy", body
           assert_match "@line_item = LineItem.find(params[:id])", body
           assert_match "@line_item.destroy", body
+          assert_match "flash[:notice] = \"Successfully destroyed line item.\"", body
           assert_match "redirect_to line_items_path", body
         end
       end
