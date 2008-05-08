@@ -40,23 +40,6 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     context "generator with no options" do
       rails_generator :nifty_scaffold, "LineItem"
     
-      should "generate model with class as camelcase name" do
-        assert_generated_file "app/models/line_item.rb" do |body|
-          assert_match "class LineItem < ActiveRecord::Base", body
-        end
-      end
-    
-      should "generate migration with default name column" do
-        file = Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").first
-        assert file, "migration file doesn't exist"
-        assert_match(/[0-9]+_create_line_items.rb$/, file)
-        assert_generated_file "db/migrate/#{File.basename(file)}" do |body|
-          assert_match "class CreateLineItems", body
-          assert_match "t.string :name", body
-          assert_match "t.timestamp", body
-        end
-      end
-    
       should_generate_file "app/helpers/line_items_helper.rb"
     
       should "generate controller with class as camelcase name pluralized and all actions" do
@@ -81,6 +64,28 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       should "add map.resources line to routes" do
         assert_generated_file "config/routes.rb" do |body|
           assert_match "map.resources :line_items", body
+        end
+      end
+    end
+    
+    context "generator with some attributes" do
+      rails_generator :nifty_scaffold, "line_item", "name:string", "description:text"
+      
+      should "generate migration with attribute columns" do
+        file = Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").first
+        assert file, "migration file doesn't exist"
+        assert_match(/[0-9]+_create_line_items.rb$/, file)
+        assert_generated_file "db/migrate/#{File.basename(file)}" do |body|
+          assert_match "class CreateLineItems", body
+          assert_match "t.string :name", body
+          assert_match "t.text :description", body
+          assert_match "t.timestamp", body
+        end
+      end
+    
+      should "generate model with class as camelcase name" do
+        assert_generated_file "app/models/line_item.rb" do |body|
+          assert_match "class LineItem < ActiveRecord::Base", body
         end
       end
     end
@@ -221,6 +226,16 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           assert_match "<%= f.text_field :foo %>", body
         end
       end
+      
+      should "not generate migration file" do
+        assert Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").empty?
+      end
+      
+      should_not_generate_file "app/models/line_item.rb"
+    end
+    
+    context "generator with no attributes" do
+      rails_generator :nifty_scaffold, "line_item"
       
       should "not generate migration file" do
         assert Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").empty?

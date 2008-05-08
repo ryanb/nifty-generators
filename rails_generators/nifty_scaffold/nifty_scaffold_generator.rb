@@ -23,6 +23,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     end
     
     if @attributes.empty?
+      options[:skip_model] = true # default to skipping model if no attributes passed
       if model_exists?
         class_name.constantize.columns.each do |column|
           @attributes << Rails::Generator::GeneratedAttribute.new(column.name.to_s, column.type.to_s)
