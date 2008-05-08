@@ -71,7 +71,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
   
   def plural_name
-    name.pluralize
+    name.underscore.pluralize
   end
   
   def class_name

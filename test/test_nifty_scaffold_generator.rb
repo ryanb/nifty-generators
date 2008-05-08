@@ -38,7 +38,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
   
     context "generator with no options" do
-      rails_generator :nifty_scaffold, "line_item"
+      rails_generator :nifty_scaffold, "LineItem"
     
       should "generate model with class as camelcase name" do
         assert_generated_file "app/models/line_item.rb" do |body|
