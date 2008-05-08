@@ -245,6 +245,19 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       
       should_not_generate_file "app/models/line_item.rb"
     end
+    
+    context "generator with only new and edit actions" do
+      rails_generator :nifty_scaffold, "line_item", "new", "edit"
+      
+      should "included create and update actions in controller" do
+        assert_generated_file "app/controllers/line_items_controller.rb" do |body|
+          assert_match "def create", body
+          assert_match "def update", body
+        end
+      end
+      
+      should_not_generate_file "app/models/line_item.rb"
+    end
   
     context "existing model" do
       setup do

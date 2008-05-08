@@ -15,6 +15,8 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         @attributes << Rails::Generator::GeneratedAttribute.new(*arg.split(":"))
       else
         @controller_actions << arg
+        @controller_actions << 'create' if arg == 'new'
+        @controller_actions << 'update' if arg == 'edit'
       end
     end
     
@@ -32,6 +34,9 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         @attributes << Rails::Generator::GeneratedAttribute.new('name', 'string')
       end
     end
+    
+    @controller_actions.uniq!
+    @attributes.uniq!
   end
   
   def manifest
