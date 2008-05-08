@@ -280,6 +280,14 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       should_not_generate_file "app/views/line_items/index.html.erb"
     end
     
+    context "generator with --skip-migration" do
+      rails_generator :nifty_scaffold, "line_item", "name:string", :skip_migration => true
+      
+      should "not generate migration file" do
+        assert Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").empty?
+      end
+    end
+    
     context "existing model" do
       setup do
         Dir.mkdir("#{RAILS_ROOT}/app") unless File.exists?("#{RAILS_ROOT}/app")
