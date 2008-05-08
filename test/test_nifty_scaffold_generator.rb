@@ -273,6 +273,13 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     end
     
+    context "generator with --skip-controller" do
+      rails_generator :nifty_scaffold, "line_item", :skip_controller => true
+      should_not_generate_file "app/controllers/line_items_controller.rb"
+      should_not_generate_file "app/helpers/line_items_helper.rb"
+      should_not_generate_file "app/views/line_items/index.html.erb"
+    end
+    
     context "existing model" do
       setup do
         Dir.mkdir("#{RAILS_ROOT}/app") unless File.exists?("#{RAILS_ROOT}/app")

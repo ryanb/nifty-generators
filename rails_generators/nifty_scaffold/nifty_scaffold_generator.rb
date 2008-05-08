@@ -43,30 +43,32 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   
   def manifest
     record do |m|
-      m.directory "app/controllers"
-      m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
-      
-      m.directory "app/helpers"
-      m.template "helper.rb", "app/helpers/#{plural_name}_helper.rb"
-      
       unless options[:skip_model]
         m.directory "app/models"
         m.template "model.rb", "app/models/#{singular_name}.rb"
         m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
       end
       
-      m.directory "app/views/#{plural_name}"
-      controller_actions.each do |action|
-        if File.exist? source_path("views/#{action}.html.erb")
-          m.template "views/#{action}.html.erb", "app/views/#{plural_name}/#{action}.html.erb"
+      unless options[:skip_controller]
+        m.directory "app/controllers"
+        m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
+      
+        m.directory "app/helpers"
+        m.template "helper.rb", "app/helpers/#{plural_name}_helper.rb"
+      
+        m.directory "app/views/#{plural_name}"
+        controller_actions.each do |action|
+          if File.exist? source_path("views/#{action}.html.erb")
+            m.template "views/#{action}.html.erb", "app/views/#{plural_name}/#{action}.html.erb"
+          end
         end
-      end
       
-      if form_partial?
-        m.template "views/_form.html.erb", "app/views/#{plural_name}/_form.html.erb"
-      end
+        if form_partial?
+          m.template "views/_form.html.erb", "app/views/#{plural_name}/_form.html.erb"
+        end
       
-      m.route_resources plural_name
+        m.route_resources plural_name
+      end
     end
   end
   
@@ -140,6 +142,7 @@ protected
     opt.separator ''
     opt.separator 'Options:'
     opt.on("--skip-model", "Don't generate a model or migration file") { |v| options[:skip_model] = v }
+    opt.on("--skip-controller", "Don't generate controller, helper, or views") { |v| options[:skip_controller] = v }
     opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
   end
 
