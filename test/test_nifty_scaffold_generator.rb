@@ -212,6 +212,22 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         end
       end
     end
+    
+    context "generator with attributes and skip model option" do
+      rails_generator :nifty_scaffold, "line_item", "foo:string", :skip_model => true
+      
+      should "use passed attribute" do
+        assert_generated_file "app/views/line_items/_form.html.erb" do |body|
+          assert_match "<%= f.text_field :foo %>", body
+        end
+      end
+      
+      should "not generate migration file" do
+        assert Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").empty?
+      end
+      
+      should_not_generate_file "app/models/line_item.rb"
+    end
   
     context "existing model" do
       setup do
@@ -226,14 +242,18 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         FileUtils.rm_rf "#{RAILS_ROOT}/app"
       end
     
-      context "generator with no options" do
-        rails_generator :nifty_scaffold, "recipe"
+      context "generator with skip model option" do
+        rails_generator :nifty_scaffold, "recipe", :skip_model => true
     
         should "use model columns for attributes" do
           assert_generated_file "app/views/recipes/_form.html.erb" do |body|
             assert_match "<%= f.text_field :foo %>", body
             assert_match "<%= f.text_field :bar %>", body
           end
+        end
+        
+        should "not generate migration file" do
+          assert Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").empty?
         end
       end
     

@@ -37,7 +37,7 @@ module NiftyGenerators
     protected
   
     def run_rails_generator(generator, *args)
-      options = args.shift! if args.last.kind_of? Hash
+      options = args.pop if args.last.kind_of? Hash
       options ||= {}
       run_generator(generator.to_s, args, generator_sources, options.reverse_merge(:quiet => true))
     end

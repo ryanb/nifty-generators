@@ -41,8 +41,8 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       m.directory "app/helpers"
       m.template "helper.rb", "app/helpers/#{plural_name}_helper.rb"
       
-      m.directory "app/models"
-      unless model_exists?
+      unless options[:skip_model]
+        m.directory "app/models"
         m.template "model.rb", "app/models/#{singular_name}.rb"
         m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
       end
@@ -117,6 +117,12 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
   
 protected
+
+  def add_options!(opt)
+    opt.separator ''
+    opt.separator 'Options:'
+    opt.on("--skip-model", "Don't generate a model or migration file") { |v| options[:skip_model] = v }
+  end
 
   # is there a better way to do this? Perhaps with const_defined?
   def model_exists?
