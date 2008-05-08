@@ -37,7 +37,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     end
   
-    context "generator with no options" do
+    context "generator with no options and no existing model" do
       rails_generator :nifty_scaffold, "LineItem"
     
       should_generate_file "app/helpers/line_items_helper.rb"
@@ -66,6 +66,8 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           assert_match "map.resources :line_items", body
         end
       end
+      
+      should_not_generate_file "app/models/line_item.rb"
     end
     
     context "generator with some attributes" do

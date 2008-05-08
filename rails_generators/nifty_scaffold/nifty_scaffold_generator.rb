@@ -33,7 +33,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       end
     end
   end
-
+  
   def manifest
     record do |m|
       m.directory "app/controllers"
