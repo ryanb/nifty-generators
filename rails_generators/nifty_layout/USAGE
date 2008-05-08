@@ -1,21 +1,27 @@
 Description:
-  The nifty_layout generator creates a basic stylesheet and layout
-	which will give some structure to a starting Rails app.
-
+  The nifty_layout generator creates a basic layout, stylesheet and
+  helper which will give some structure to a starting Rails app.
+  
   The generator takes one argument which will be the name of the
 	layout and stylesheet files. If no argument is passed then it defaults
 	to "application".
+  
+  The helper module includes some methods which can be called in any
+  template or partial to set variables to be used in the layout, such as
+  page title and javascript/stylesheet includes.
 
-Usage:
-  ./script/generate nifty_layout
+Examples:
+  script/generate nifty_layout
 
-    This will create two files:
+    This will create three files:
       Layout:     app/views/layouts/application.html.erb
       Stylesheet: public/stylesheets/application.css
+      Helper:     app/helpers/layout_helper.rb
 
 
-  ./script/generate nifty_layout admin
+  script/generate nifty_layout admin
 
-    This will create two files:
+    This will create three files:
       Layout:     app/views/layouts/admin.html.erb
       Stylesheet: public/stylesheets/admin.css
+      Helper:     app/helpers/layout_helper.rb

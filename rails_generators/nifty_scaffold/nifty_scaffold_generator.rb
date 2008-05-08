@@ -136,9 +136,9 @@ protected
   
   def banner
     <<-EOS
-Creates a controller and model given the name and attributes.
+Creates a controller and optional model given the name, actions, and attributes.
 
-USAGE: #{$0} #{spec.name} name
+USAGE: #{$0} #{spec.name} ModelName [controller_actions and model:attributes] [options]
 EOS
   end
 end

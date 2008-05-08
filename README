@@ -1,49 +1,36 @@
 = nifty-generator
 
-* http://github.com/ryanb/nifty-generators/
+A collection of useful Rails generator scripts by Ryan Bates.
 
-== DESCRIPTION:
+== Install
 
-A collection of Ryan's generator scripts for Rails.
+  gem install ryanb-nifty-generators --source=http://gems.github.com
+  
+== Usage
 
-== FEATURES/PROBLEMS:
+Once you install the gem, the generators will be available to all Rails
+applications on your system. If you run script/generate without any
+additional arguments you should see the available generators listed.
 
-* Still in very early development
+To run the generator, go to your rails project directory and call it
+using the script/generate or script/destroy command.
 
-== SYNOPSIS:
+  script/generate nifty_scaffold Recipe name:string index new
+  
+== Included Generators
 
-  script/generate nifty_layout
+* nifty_layout: generates generic layout, stylesheet, and helper files.
+* nifty_scaffold: generates a controller and optional model/migration.
 
-== REQUIREMENTS:
+Run the command with the --help option to learn more.
 
-* Rails
-* Similar opinions as me
+  script/generate nifty_layout --help
 
-== INSTALL:
+== Development
 
-* gem install ryanb-nifty-generators --source=http://gems.github.com
+This project can be found on github at the following URL.
 
-== LICENSE:
+http://github.com/ryanb/nifty-generators/
 
-(The MIT License)
-
-Copyright (c) 2008 Ryan Bates
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+If you wish the generators behaved differently, please consider
+forking the project and modifying to your heart's content.

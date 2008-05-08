@@ -23,9 +23,9 @@ class NiftyLayoutGenerator < Rails::Generator::Base
   protected
     def banner
       <<-EOS
-Creates layout and stylesheet files.
+Creates generic layout, stylesheet, and helper files.
 
-USAGE: #{$0} #{spec.name} application
+USAGE: #{$0} #{spec.name} [layout_name]
 EOS
     end
 end

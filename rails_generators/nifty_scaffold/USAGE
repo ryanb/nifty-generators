@@ -1,5 +1,39 @@
 Description:
-  
-  
+    Scaffolds an entire resource, from model and migration to controller and
+    views. The resource is ready to use as a starting point for your restful,
+    resource-oriented application. Tests are not generated yet, but expect
+    them in future releases.
+
 Usage:
-  
+    Pass the name of the model, either CamelCased or under_scored, as the first
+    argument, and an optional list of attribute pairs and controller actions.
+    
+    If no controller actions are specified, they will default to index, show,
+    new, create, edit, update, and destroy.
+    
+    IMPORTANT: If no attribute pairs are specified, no model will be generated.
+    It will try to determine the attributes from an existing model.
+
+    Attribute pairs are column_name:sql_type arguments specifying the
+    model's attributes. Timestamps are added by default, so you don't have to
+    specify them by hand as 'created_at:datetime updated_at:datetime'.
+
+    For example, `nifty_scaffold post name:string content:text hidden:boolean`
+    gives you a model with those three attributes, a controller that handles
+    the create/show/update/destroy, forms to create and edit your posts, and
+    an index that lists them all, as well as a map.resources :posts
+    declaration in config/routes.rb.
+
+Examples:
+    script/generate scaffold post
+        
+        Will create a controller called "posts" it will contain all seven
+        CRUD actions along with the views. A model will NOT be created,
+        instead it will look for an existing model and use those attributes.
+    
+    script/generate scaffold post name:string content:text index new edit
+        
+        Will create a Post model and migration file with the name and content
+        attributes. It will also create a controller with index, new, create,
+        edit, and update actions. Notice the create and update actions are
+        added automatically with new and edit.
