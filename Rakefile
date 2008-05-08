@@ -9,7 +9,7 @@ begin
     p.description    = "A collection of Ryan's generator scripts for Rails."
     p.url            = "http://github.com/ryanb/nifty-generators"
     p.author         = 'Ryan Bates'
-    p.email          = "ryan@railscasts.com"
+    p.email          = "ryan (at) railscasts (dot) com"
     p.ignore_pattern = ["script/*", "*.gemspec"]
   end
 
@@ -18,5 +18,4 @@ rescue LoadError => boom
   puts "#{boom.to_s.capitalize}."
 end
 
-desc "Build the manifest and gemspec files."
-task :build => [:build_manifest, :build_gemspec]
+Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }

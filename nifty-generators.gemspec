@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.authors = ["Ryan Bates"]
   s.date = %q{2008-05-08}
   s.description = %q{A collection of Ryan's generator scripts for Rails.}
-  s.email = %q{ryan@railscasts.com}
+  s.email = %q{ryan (at) railscasts (dot) com}
   s.extra_rdoc_files = ["LICENSE", "README", "TODO"]
   s.files = ["LICENSE", "Manifest", "rails_generators/nifty_layout/nifty_layout_generator.rb", "rails_generators/nifty_layout/templates/helper.rb", "rails_generators/nifty_layout/templates/layout.html.erb", "rails_generators/nifty_layout/templates/stylesheet.css", "rails_generators/nifty_layout/USAGE", "rails_generators/nifty_scaffold/nifty_scaffold_generator.rb", "rails_generators/nifty_scaffold/templates/actions/create.rb", "rails_generators/nifty_scaffold/templates/actions/destroy.rb", "rails_generators/nifty_scaffold/templates/actions/edit.rb", "rails_generators/nifty_scaffold/templates/actions/index.rb", "rails_generators/nifty_scaffold/templates/actions/new.rb", "rails_generators/nifty_scaffold/templates/actions/show.rb", "rails_generators/nifty_scaffold/templates/actions/update.rb", "rails_generators/nifty_scaffold/templates/controller.rb", "rails_generators/nifty_scaffold/templates/helper.rb", "rails_generators/nifty_scaffold/templates/migration.rb", "rails_generators/nifty_scaffold/templates/model.rb", "rails_generators/nifty_scaffold/templates/views/_form.html.erb", "rails_generators/nifty_scaffold/templates/views/edit.html.erb", "rails_generators/nifty_scaffold/templates/views/index.html.erb", "rails_generators/nifty_scaffold/templates/views/new.html.erb", "rails_generators/nifty_scaffold/templates/views/show.html.erb", "rails_generators/nifty_scaffold/USAGE", "README", "test/test_helper.rb", "test/test_nifty_layout_generator.rb", "test/test_nifty_scaffold_generator.rb", "TODO", "nifty-generators.gemspec"]
   s.has_rdoc = true
@@ -39,7 +39,7 @@ end
 #     p.description    = "A collection of Ryan's generator scripts for Rails."
 #     p.url            = "http://github.com/ryanb/nifty-generators"
 #     p.author         = 'Ryan Bates'
-#     p.email          = "ryan@railscasts.com"
+#     p.email          = "ryan (at) railscasts (dot) com"
 #     p.ignore_pattern = ["script/*", "*.gemspec"]
 #   end
 # 
@@ -48,5 +48,4 @@ end
 #   puts "#{boom.to_s.capitalize}."
 # end
 # 
-# desc "Build the manifest and gemspec files."
-# task :build => [:build_manifest, :build_gemspec]
+# Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }

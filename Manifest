@@ -24,6 +24,7 @@ rails_generators/nifty_scaffold/templates/views/new.html.erb
 rails_generators/nifty_scaffold/templates/views/show.html.erb
 rails_generators/nifty_scaffold/USAGE
 README
+tasks/deployment.rake
 test/test_helper.rb
 test/test_nifty_layout_generator.rb
 test/test_nifty_scaffold_generator.rb
