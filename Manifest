@@ -14,6 +14,7 @@ rails_generators/nifty_scaffold/templates/actions/new.rb
 rails_generators/nifty_scaffold/templates/actions/show.rb
 rails_generators/nifty_scaffold/templates/actions/update.rb
 rails_generators/nifty_scaffold/templates/controller.rb
+rails_generators/nifty_scaffold/templates/helper.rb
 rails_generators/nifty_scaffold/templates/migration.rb
 rails_generators/nifty_scaffold/templates/model.rb
 rails_generators/nifty_scaffold/templates/views/_form.html.erb
