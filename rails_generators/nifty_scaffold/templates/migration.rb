@@ -4,7 +4,9 @@ class Create<%= plural_class_name %> < ActiveRecord::Migration
     <%- for attribute in attributes -%>
       t.<%= attribute.type %> :<%= attribute.name %>
     <%- end -%>
+    <%- unless options[:skip_timestamps] -%>
       t.timestamps
+    <%- end -%>
     end
   end
   

@@ -81,7 +81,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           assert_match "class CreateLineItems", body
           assert_match "t.string :name", body
           assert_match "t.text :description", body
-          assert_match "t.timestamp", body
+          assert_match "t.timestamps", body
         end
       end
     
@@ -285,6 +285,18 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       
       should "not generate migration file" do
         assert Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").empty?
+      end
+    end
+    
+    context "generator with --skip-timestamps" do
+      rails_generator :nifty_scaffold, "line_item", "name:string", :skip_timestamps => true
+      
+      should "generate migration with no timestamps" do
+        file = Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").first
+        assert file, "migration file doesn't exist"
+        assert_generated_file "db/migrate/#{File.basename(file)}" do |body|
+          assert_no_match(/t.timestamps/, body)
+        end
       end
     end
     

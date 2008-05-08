@@ -145,6 +145,7 @@ protected
     opt.separator 'Options:'
     opt.on("--skip-model", "Don't generate a model or migration file.") { |v| options[:skip_model] = v }
     opt.on("--skip-migration", "Don't generate migration file for model.") { |v| options[:skip_migration] = v }
+    opt.on("--skip-timestamps", "Don't add timestamps to migration file.") { |v| options[:skip_timestamps] = v }
     opt.on("--skip-controller", "Don't generate controller, helper, or views.") { |v| options[:skip_controller] = v }
     opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
   end
