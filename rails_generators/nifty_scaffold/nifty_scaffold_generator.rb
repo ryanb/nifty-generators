@@ -36,17 +36,18 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   def manifest
     record do |m|
       m.directory "app/controllers"
-      m.directory "app/helpers"
-      m.directory "app/models"
-      m.directory "app/views/#{plural_name}"
       m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
+      
+      m.directory "app/helpers"
       m.template "helper.rb", "app/helpers/#{plural_name}_helper.rb"
       
+      m.directory "app/models"
       unless model_exists?
         m.template "model.rb", "app/models/#{singular_name}.rb"
         m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
       end
       
+      m.directory "app/views/#{plural_name}"
       controller_actions.each do |action|
         if File.exist? source_path("views/#{action}.html.erb")
           m.template "views/#{action}.html.erb", "app/views/#{plural_name}/#{action}.html.erb"
@@ -62,7 +63,15 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
   
   def form_partial?
-    controller_actions.include?('new') && controller_actions.include?('edit')
+    actions? :new, :edit
+  end
+  
+  def action?(name)
+    controller_actions.include? name.to_s
+  end
+  
+  def actions?(*names)
+    names.all? { |n| action? n.to_s }
   end
   
   def singular_name
@@ -100,7 +109,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
   
   def item_path
-    if controller_actions.include? 'show'
+    if action? :show
       "@#{singular_name}"
     else
       "#{plural_name}_path"

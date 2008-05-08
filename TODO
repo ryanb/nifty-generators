@@ -2,10 +2,8 @@
 Nifty Scaffold Generator
   - generate tests/specs
   - make new & edit actions automatically include created & update
-  - hide show/edit/destroy/new links depending on if pages are available
   - don't skip model if running destroy command
-  - add some validation to column name types
-  - don't bother creation migration directory, done automatically
+  + add some validation to column name types
   + make "-" at beginning of action subtract from primary actions
   + make "-" at beginning of attributes subtract from existing attributes
   + support custom actions

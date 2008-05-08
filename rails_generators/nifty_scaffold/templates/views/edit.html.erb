@@ -2,7 +2,13 @@
 
 <%= render_form %>
 
+<%- if actions? :show, :index -%>
 <p>
+<%- if action? :show -%>
   <%%= link_to "Show", @<%= singular_name %> %> |
+<%- end -%>
+<%- if action? :index -%>
   <%%= link_to "View All", <%= plural_name %>_path %>
+<%- end -%>
 </p>
+<%- end -%>
