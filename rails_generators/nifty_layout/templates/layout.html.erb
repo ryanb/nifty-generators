@@ -4,7 +4,6 @@
   <head>
     <title><%%= h(yield(:title) || "Untitled") %></title>
     <%%= stylesheet_link_tag '<%= file_name %>' %>
-    <%%= javascript_include_tag :defaults %>
     <%%= yield(:head) %>
   </head>
   <body>
