@@ -2,9 +2,11 @@
 
 A collection of useful Rails generator scripts by Ryan Bates.
 
+
 == Install
 
   gem install ryanb-nifty-generators --source=http://gems.github.com
+
   
 == Usage
 
@@ -16,6 +18,7 @@ To run the generator, go to your rails project directory and call it
 using the script/generate or script/destroy command.
 
   script/generate nifty_scaffold Recipe name:string index new
+
   
 == Included Generators
 
@@ -25,6 +28,21 @@ using the script/generate or script/destroy command.
 Run the command with the --help option to learn more.
 
   script/generate nifty_layout --help
+
+== Troubleshooting
+
+*I get "undefined method 'title'" error for nifty_scaffold.*
+
+Try running nifty_layout too, that will generate this helper method. Or
+you can just change the templates to whatever approach you prefer for
+setting the title.
+
+
+*Forms don't work for nifty_scaffold.*
+
+Try restarting your development server. Sometimes it doesn't detect the
+change in the routing.
+
 
 == Development
 
