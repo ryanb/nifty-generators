@@ -1,4 +1,4 @@
-= nifty-generator
+= Nifty Generators
 
 A collection of useful Rails generator scripts by Ryan Bates.
 
@@ -28,6 +28,7 @@ using the script/generate or script/destroy command.
 Run the command with the --help option to learn more.
 
   script/generate nifty_layout --help
+
 
 == Troubleshooting
 
