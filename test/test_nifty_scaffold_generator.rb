@@ -377,18 +377,34 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         end
       end
       
-      context "generator with new and show actions" do
-        rails_generator :nifty_scaffold, "line_item", "new", "show"
+      context "generator with new and index actions" do
+        rails_generator :nifty_scaffold, "line_item", "new", "index"
         
         should "have controller spec with only mentioned actions" do
           assert_generated_file "spec/controllers/line_items_controller_spec.rb" do |body|
-            assert_match "get :show", body
+            assert_match "get :index", body
             assert_match "get :new", body
             assert_match "post :create", body
-            assert_no_match(/get :index/, body)
+            assert_no_match(/get :show/, body)
             assert_no_match(/get :edit/, body)
             assert_no_match(/put :update/, body)
             assert_no_match(/delete :destroy/, body)
+          end
+        end
+        
+        should "should redirect to index action on successful create" do
+          assert_generated_file "spec/controllers/line_items_controller_spec.rb" do |body|
+            assert_match "redirect_to(line_items_path)", body
+          end
+        end
+      end
+      
+      context "generator with edit and index actions" do
+        rails_generator :nifty_scaffold, "line_item", "edit", "index"
+        
+        should "should redirect to index action on successful update" do
+          assert_generated_file "spec/controllers/line_items_controller_spec.rb" do |body|
+            assert_match "redirect_to(line_items_path)", body
           end
         end
       end

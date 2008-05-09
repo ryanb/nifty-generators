@@ -135,6 +135,14 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     end
   end
   
+  def item_path_for_spec
+    if action? :show
+      "#{singular_name}_path(assigns[:#{singular_name}])"
+    else
+      "#{plural_name}_path"
+    end
+  end
+  
   def model_columns_for_attributes
     class_name.constantize.columns.reject do |column|
       column.name.to_s =~ /^(id|created_at|updated_at)$/
