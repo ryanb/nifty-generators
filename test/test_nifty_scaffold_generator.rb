@@ -409,6 +409,73 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         end
       end
     end
+    
+    context "with test dir" do
+      setup do
+        Dir.mkdir("#{RAILS_ROOT}/test") unless File.exists?("#{RAILS_ROOT}/test")
+      end
+    
+      teardown do
+        FileUtils.rm_rf "#{RAILS_ROOT}/test"
+      end
+      
+      context "generator with some attributes" do
+        rails_generator :nifty_scaffold, "line_item", "name:string", "description:text"
+        
+        should_generate_file "test/unit/line_item_test.rb"
+        
+        should "have controller tests for each action" do
+          assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
+            assert_match "get :index", body
+            assert_match "get :show", body
+            assert_match "get :new", body
+            assert_match "get :edit", body
+            assert_match "post :create", body
+            assert_match "put :update", body
+            assert_match "delete :destroy", body
+          end
+        end
+        
+        should "have fixture with attributes" do
+          assert_generated_file "test/fixtures/line_items.yml" do |body|
+            assert_match "name: MyString", body
+            assert_match "description: MyText", body
+          end
+        end
+      end
+      
+      context "generator with new and index actions" do
+        rails_generator :nifty_scaffold, "line_item", "new", "index"
+        
+        should "have controller test with only mentioned actions" do
+          assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
+            assert_match "get :index", body
+            assert_match "get :new", body
+            assert_match "post :create", body
+            assert_no_match(/get :show/, body)
+            assert_no_match(/get :edit/, body)
+            assert_no_match(/put :update/, body)
+            assert_no_match(/delete :destroy/, body)
+          end
+        end
+        
+        should "should redirect to index action on successful create" do
+          assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
+            assert_match "redirect_to(line_items_path)", body
+          end
+        end
+      end
+      
+      context "generator with edit and index actions" do
+        rails_generator :nifty_scaffold, "line_item", "edit", "index"
+        
+        should "should redirect to index action on successful update" do
+          assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
+            assert_match "redirect_to(line_items_path)", body
+          end
+        end
+      end
+    end
   end
 end
 

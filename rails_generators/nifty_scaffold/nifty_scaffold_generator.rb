@@ -49,10 +49,18 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         unless options[:skip_migration]
           m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
         end
-        m.directory "spec/models"
-        m.template "model_spec.rb", "spec/models/#{singular_name}_spec.rb"
-        m.directory "spec/fixtures"
-        m.template "fixtures.yml", "spec/fixtures/#{plural_name}.yml"
+        
+        if spec_dir?
+          m.directory "spec/models"
+          m.template "model_spec.rb", "spec/models/#{singular_name}_spec.rb"
+          m.directory "spec/fixtures"
+          m.template "fixtures.yml", "spec/fixtures/#{plural_name}.yml"
+        else
+          m.directory "test/unit"
+          m.template "model_test.rb", "test/unit/#{singular_name}_test.rb"
+          m.directory "test/fixtures"
+          m.template "fixtures.yml", "test/fixtures/#{plural_name}.yml"
+        end
       end
       
       unless options[:skip_controller]
@@ -75,8 +83,13 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       
         m.route_resources plural_name
         
-        m.directory "spec/controllers"
-        m.template "controller_spec.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
+        if spec_dir?
+          m.directory "spec/controllers"
+          m.template "controller_spec.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
+        else
+          m.directory "test/functional"
+          m.template "controller_test.rb", "test/functional/#{plural_name}_controller_test.rb"
+        end
       end
     end
   end
@@ -142,11 +155,16 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       "#{plural_name}_path"
     end
   end
+  alias_method :item_path_for_test, :item_path_for_spec
   
   def model_columns_for_attributes
     class_name.constantize.columns.reject do |column|
       column.name.to_s =~ /^(id|created_at|updated_at)$/
     end
+  end
+  
+  def spec_dir?
+    File.exist? destination_path("spec")
   end
   
 protected
