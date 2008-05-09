@@ -1,7 +1,7 @@
   def test_update_invalid
     <%= class_name %>.any_instance.stubs(:valid?).returns(false)
     put :update, :id => <%= class_name %>.first
-    assert_template :edit
+    assert_template 'edit'
   end
   
   def test_update_valid

@@ -56,6 +56,8 @@ Make sure you have mocha installed and require it in your spec/test helper.
   # in test_helper.rb
   require 'mocha'
 
+Also, make sure you're using edge rails (or 2.1 when released) as some methods require that.
+
 
 == Development
 

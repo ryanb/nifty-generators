@@ -155,7 +155,14 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       "#{plural_name}_path"
     end
   end
-  alias_method :item_path_for_test, :item_path_for_spec
+  
+  def item_path_for_test
+    if action? :show
+      "#{singular_name}_path(assigns(:#{singular_name}))"
+    else
+      "#{plural_name}_path"
+    end
+  end
   
   def model_columns_for_attributes
     class_name.constantize.columns.reject do |column|

@@ -1,7 +1,7 @@
   def test_create_invalid
     <%= class_name %>.any_instance.stubs(:valid?).returns(false)
     post :create
-    assert_template :new
+    assert_template 'new'
   end
   
   def test_create_valid
