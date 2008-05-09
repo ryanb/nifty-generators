@@ -376,6 +376,22 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           end
         end
       end
+      
+      context "generator with new and show actions" do
+        rails_generator :nifty_scaffold, "line_item", "new", "show"
+        
+        should "have controller spec with only mentioned actions" do
+          assert_generated_file "spec/controllers/line_items_controller_spec.rb" do |body|
+            assert_match "get :show", body
+            assert_match "get :new", body
+            assert_match "post :create", body
+            assert_no_match(/get :index/, body)
+            assert_no_match(/get :edit/, body)
+            assert_no_match(/put :update/, body)
+            assert_no_match(/delete :destroy/, body)
+          end
+        end
+      end
     end
   end
 end

@@ -113,14 +113,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     plural_name.camelize
   end
   
-  def controller_methods
+  def controller_methods(dir_name)
     controller_actions.map do |action|
-      controller_method(action)
-    end.join("\n")
-  end
-  
-  def controller_method(name)
-    read_template("actions/#{name}.rb")
+      read_template("#{dir_name}/#{action}.rb")
+    end.join("  \n").strip
   end
   
   def render_form
