@@ -461,7 +461,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         
         should "should redirect to index action on successful create" do
           assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
-            assert_match "redirect_to(line_items_path)", body
+            assert_match "assert_redirected_to line_items_path", body
           end
         end
       end
@@ -471,7 +471,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         
         should "should redirect to index action on successful update" do
           assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
-            assert_match "redirect_to(line_items_path)", body
+            assert_match "assert_redirected_to line_items_path", body
           end
         end
       end

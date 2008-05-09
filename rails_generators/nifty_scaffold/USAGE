@@ -1,8 +1,8 @@
 Description:
     Scaffolds an entire resource, from model and migration to controller and
     views. The resource is ready to use as a starting point for your restful,
-    resource-oriented application. Tests are not generated yet, but expect
-    them in future releases.
+    resource-oriented application. Tests or specs are also generated depending
+    on if you have a "spec" directory or not.
 
 Usage:
     Pass the name of the model, either CamelCased or under_scored, as the first
