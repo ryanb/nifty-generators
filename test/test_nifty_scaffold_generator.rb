@@ -342,6 +342,41 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         end
       end
     end
+    
+    context "with spec dir" do
+      setup do
+        Dir.mkdir("#{RAILS_ROOT}/spec") unless File.exists?("#{RAILS_ROOT}/spec")
+      end
+    
+      teardown do
+        FileUtils.rm_rf "#{RAILS_ROOT}/spec"
+      end
+      
+      context "generator with some attributes" do
+        rails_generator :nifty_scaffold, "line_item", "name:string", "description:text"
+        
+        should_generate_file "spec/models/line_item_spec.rb"
+        
+        should "have controller specs for each action" do
+          assert_generated_file "spec/controllers/line_items_controller_spec.rb" do |body|
+            assert_match "get :index", body
+            assert_match "get :show", body
+            assert_match "get :new", body
+            assert_match "get :edit", body
+            assert_match "post :create", body
+            assert_match "put :update", body
+            assert_match "delete :destroy", body
+          end
+        end
+        
+        should "have fixture with attributes" do
+          assert_generated_file "spec/fixtures/line_items.yml" do |body|
+            assert_match "name: MyString", body
+            assert_match "description: MyText", body
+          end
+        end
+      end
+    end
   end
 end
 

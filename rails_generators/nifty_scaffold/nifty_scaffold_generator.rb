@@ -49,6 +49,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         unless options[:skip_migration]
           m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
         end
+        m.directory "spec/models"
+        m.template "model_spec.rb", "spec/models/#{singular_name}_spec.rb"
+        m.directory "spec/fixtures"
+        m.template "fixtures.yml", "spec/fixtures/#{plural_name}.yml"
       end
       
       unless options[:skip_controller]
@@ -70,6 +74,9 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         end
       
         m.route_resources plural_name
+        
+        m.directory "spec/controllers"
+        m.template "controller_spec.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
       end
     end
   end
