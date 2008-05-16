@@ -2,6 +2,10 @@ CHANGELOG
 lib/nifty_generators.rb
 LICENSE
 Manifest
+rails_generators/nifty_config/nifty_config_generator.rb
+rails_generators/nifty_config/templates/config.yml
+rails_generators/nifty_config/templates/load_config.rb
+rails_generators/nifty_config/USAGE
 rails_generators/nifty_layout/nifty_layout_generator.rb
 rails_generators/nifty_layout/templates/helper.rb
 rails_generators/nifty_layout/templates/layout.html.erb
@@ -47,6 +51,7 @@ rails_generators/nifty_scaffold/USAGE
 README
 tasks/deployment.rake
 test/test_helper.rb
+test/test_nifty_config_generator.rb
 test/test_nifty_layout_generator.rb
 test/test_nifty_scaffold_generator.rb
 TODO

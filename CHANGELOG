@@ -1,3 +1,9 @@
+*0.1.2* (May 16th, 2008)
+
+* mentioning nifty_layout in nifty_scaffold generator
+
+* adding nifty_config generator
+
 *0.1.1* (May 9th, 2008)
 
 * adding tests and specs to scaffold generator
