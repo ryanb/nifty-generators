@@ -1,0 +1,8 @@
+development:
+  something: "foo"
+
+test:
+  something: "foo"
+
+production:
+  something: "foo"
