@@ -24,6 +24,7 @@ using the script/generate or script/destroy command.
 
 * nifty_layout: generates generic layout, stylesheet, and helper files.
 * nifty_scaffold: generates a controller and optional model/migration.
+* nifty_config: generates a config YAML file and loader.
 
 Run the command with the --help option to learn more.
 
