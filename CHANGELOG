@@ -1,3 +1,5 @@
+* improving the nifty_config default example YAML file
+
 *0.1.2* (May 16th, 2008)
 
 * mentioning nifty_layout in nifty_scaffold generator

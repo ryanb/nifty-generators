@@ -1,8 +1,8 @@
 development:
-  something: "foo"
+  domain: localhost:3000
 
 test:
-  something: "foo"
+  domain: test.host
 
 production:
-  something: "foo"
+  domain: example.com
