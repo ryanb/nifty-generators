@@ -1,3 +1,5 @@
+* using _url in controllers instead of _path
+
 * improving the nifty_config default example YAML file
 
 *0.1.2* (May 16th, 2008)

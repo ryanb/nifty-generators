@@ -7,5 +7,5 @@
   it "update action should redirect to show action when model is valid" do
     <%= class_name %>.any_instance.stubs(:valid?).returns(true)
     put :update, :id => <%= class_name %>.first
-    response.should redirect_to(<%= item_path_for_spec %>)
+    response.should redirect_to(<%= item_path_for_spec('url') %>)
   end

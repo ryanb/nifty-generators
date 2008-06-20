@@ -7,5 +7,5 @@
   it "create action should redirect to index action when model is valid" do
     <%= class_name %>.any_instance.stubs(:valid?).returns(true)
     post :create
-    response.should redirect_to(<%= item_path_for_spec %>)
+    response.should redirect_to(<%= item_path_for_spec('url') %>)
   end

@@ -140,27 +140,27 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     end
   end
   
-  def item_path
+  def item_path(suffix = 'path')
     if action? :show
       "@#{singular_name}"
     else
-      "#{plural_name}_path"
+      "#{plural_name}_#{suffix}"
     end
   end
   
-  def item_path_for_spec
+  def item_path_for_spec(suffix = 'path')
     if action? :show
-      "#{singular_name}_path(assigns[:#{singular_name}])"
+      "#{singular_name}_#{suffix}(assigns[:#{singular_name}])"
     else
-      "#{plural_name}_path"
+      "#{plural_name}_#{suffix}"
     end
   end
   
-  def item_path_for_test
+  def item_path_for_test(suffix = 'path')
     if action? :show
-      "#{singular_name}_path(assigns(:#{singular_name}))"
+      "#{singular_name}_#{suffix}(assigns(:#{singular_name}))"
     else
-      "#{plural_name}_path"
+      "#{plural_name}_#{suffix}"
     end
   end
   

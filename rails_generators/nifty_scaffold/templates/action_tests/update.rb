@@ -7,5 +7,5 @@
   def test_update_valid
     <%= class_name %>.any_instance.stubs(:valid?).returns(true)
     put :update, :id => <%= class_name %>.first
-    assert_redirected_to <%= item_path_for_test %>
+    assert_redirected_to <%= item_path_for_test('url') %>
   end
