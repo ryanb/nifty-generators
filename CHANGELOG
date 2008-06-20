@@ -1,3 +1,5 @@
+*0.1.3* (June 20th, 2008)
+
 * using _url in controllers instead of _path
 
 * improving the nifty_config default example YAML file
