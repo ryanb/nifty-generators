@@ -16,6 +16,7 @@ else
 end
 
 require 'rubygems'
+gem 'rails', '2.0.2' # getting a Rails.configuration error with 2.1
 require 'rubigen'  # gem install rubigen
 require 'rubigen/helpers/generator_test_helper'
 require 'rails_generator'
