@@ -1,4 +1,6 @@
 
 Nifty Scaffold Generator
-  - generate tests/specs
   - add some validation for attributes/action names
+
+Nifty Config Generator
+  - make it easier to specify non environment specific configs

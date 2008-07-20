@@ -1,0 +1,23 @@
+Description:
+    The nifty_config generator creates YAML file in your config
+    directory and an initializer to load this config. The config has a
+    separate section for each environment. This is a great place to put
+    any config settings you don't want in your app.
+  
+    The config is loaded into a constant called APP_CONFIG by default,
+    this changes depending on the name you choose to pass the generator.
+    Use this constant to access the config settings like this.
+  
+    APP_CONFIG[:some_setting]
+
+
+Examples:
+    script/generate nifty_config
+
+        Config:      config/app_config.yml
+        Initializer: config/initializers/load_app_config.rb
+
+    script/generate nifty_config passwords
+
+        Config:      config/passwords_config.yml
+        Initializer: config/initializers/load_passwords_config.rb

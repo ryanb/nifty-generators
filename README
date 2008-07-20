@@ -1,10 +1,12 @@
-= nifty-generator
+= Nifty Generators
 
 A collection of useful Rails generator scripts by Ryan Bates.
+
 
 == Install
 
   gem install ryanb-nifty-generators --source=http://gems.github.com
+
   
 == Usage
 
@@ -16,15 +18,48 @@ To run the generator, go to your rails project directory and call it
 using the script/generate or script/destroy command.
 
   script/generate nifty_scaffold Recipe name:string index new
+
   
 == Included Generators
 
 * nifty_layout: generates generic layout, stylesheet, and helper files.
 * nifty_scaffold: generates a controller and optional model/migration.
+* nifty_config: generates a config YAML file and loader.
 
 Run the command with the --help option to learn more.
 
   script/generate nifty_layout --help
+
+
+== Troubleshooting
+
+*I get "undefined method 'title'" error for nifty_scaffold.*
+
+Try running nifty_layout too, that will generate this helper method. Or
+you can just change the templates to whatever approach you prefer for
+setting the title.
+
+
+*Forms don't work for nifty_scaffold.*
+
+Try restarting your development server. Sometimes it doesn't detect the
+change in the routing.
+
+
+*The tests/specs don't work for nifty_scaffold.*
+
+Make sure you have mocha installed and require it in your spec/test helper.
+
+  gem install mocha
+  
+  # in spec_helper.rb
+  config.mock_with :mocha
+  
+  # in test_helper.rb
+  require 'mocha'
+
+Also, make sure you're using edge rails (or 2.1 when released) as some methods require that.
+
 
 == Development
 

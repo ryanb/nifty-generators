@@ -49,6 +49,18 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         unless options[:skip_migration]
           m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
         end
+        
+        if spec_dir?
+          m.directory "spec/models"
+          m.template "model_spec.rb", "spec/models/#{singular_name}_spec.rb"
+          m.directory "spec/fixtures"
+          m.template "fixtures.yml", "spec/fixtures/#{plural_name}.yml"
+        else
+          m.directory "test/unit"
+          m.template "model_test.rb", "test/unit/#{singular_name}_test.rb"
+          m.directory "test/fixtures"
+          m.template "fixtures.yml", "test/fixtures/#{plural_name}.yml"
+        end
       end
       
       unless options[:skip_controller]
@@ -70,6 +82,14 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         end
       
         m.route_resources plural_name
+        
+        if spec_dir?
+          m.directory "spec/controllers"
+          m.template "controller_spec.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
+        else
+          m.directory "test/functional"
+          m.template "controller_test.rb", "test/functional/#{plural_name}_controller_test.rb"
+        end
       end
     end
   end
@@ -106,14 +126,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     plural_name.camelize
   end
   
-  def controller_methods
+  def controller_methods(dir_name)
     controller_actions.map do |action|
-      controller_method(action)
-    end.join("\n")
-  end
-  
-  def controller_method(name)
-    read_template("actions/#{name}.rb")
+      read_template("#{dir_name}/#{action}.rb")
+    end.join("  \n").strip
   end
   
   def render_form
@@ -124,11 +140,27 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     end
   end
   
-  def item_path
+  def item_path(suffix = 'path')
     if action? :show
       "@#{singular_name}"
     else
-      "#{plural_name}_path"
+      "#{plural_name}_#{suffix}"
+    end
+  end
+  
+  def item_path_for_spec(suffix = 'path')
+    if action? :show
+      "#{singular_name}_#{suffix}(assigns[:#{singular_name}])"
+    else
+      "#{plural_name}_#{suffix}"
+    end
+  end
+  
+  def item_path_for_test(suffix = 'path')
+    if action? :show
+      "#{singular_name}_#{suffix}(assigns(:#{singular_name}))"
+    else
+      "#{plural_name}_#{suffix}"
     end
   end
   
@@ -136,6 +168,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     class_name.constantize.columns.reject do |column|
       column.name.to_s =~ /^(id|created_at|updated_at)$/
     end
+  end
+  
+  def spec_dir?
+    File.exist? destination_path("spec")
   end
   
 protected
