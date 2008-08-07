@@ -12,7 +12,7 @@
       <%- end -%>
       <%- if action? :show -%>
       %td= link_to 'Show', <%= singular_name %>
-      <%- end ->
+      <%- end -%>
       <%- if action? :edit -%>
       %td= link_to 'Edit', edit_<%= singular_name %>_path(<%= singular_name %>)
       <%- end -%>
