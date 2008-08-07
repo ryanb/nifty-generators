@@ -476,6 +476,22 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         end
       end
     end
+    
+    context "generator with haml option" do
+      rails_generator :nifty_scaffold, "LineItem", :haml => true
+      
+      %w[index show new edit _form].each do |action|
+        should_generate_file "app/views/line_items/#{action}.html.haml"
+      end
+    
+      should "render the form partial in views" do
+        %w[new edit].each do |action|
+          assert_generated_file "app/views/line_items/#{action}.html.haml" do |body|
+            assert_match /^= render :partial => 'form'$/, body
+          end
+        end
+      end
+    end
   end
 end
 

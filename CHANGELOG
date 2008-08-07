@@ -1,3 +1,5 @@
+* adding option to nifty scaffold to generate HAML views
+
 *0.1.4* (July 21st, 2008)
 
 * using same logic as model spec in model test for scaffold

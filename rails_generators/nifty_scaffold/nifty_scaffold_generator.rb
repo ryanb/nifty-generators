@@ -71,13 +71,13 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       
         m.directory "app/views/#{plural_name}"
         controller_actions.each do |action|
-          if File.exist? source_path("views/erb/#{action}.html.erb")
-            m.template "views/erb/#{action}.html.erb", "app/views/#{plural_name}/#{action}.html.erb"
+          if File.exist? source_path("views/#{view_language}/#{action}.html.#{view_language}")
+            m.template "views/#{view_language}/#{action}.html.#{view_language}", "app/views/#{plural_name}/#{action}.html.#{view_language}"
           end
         end
       
         if form_partial?
-          m.template "views/erb/_form.html.erb", "app/views/#{plural_name}/_form.html.erb"
+          m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
         end
       
         m.route_resources plural_name
@@ -133,9 +133,13 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   
   def render_form
     if form_partial?
-      "<%= render :partial => 'form' %>"
+      if options[:haml]
+        "= render :partial => 'form'"
+      else
+        "<%= render :partial => 'form' %>"
+      end
     else
-      read_template("views/erb/_form.html.erb")
+      read_template("views/#{view_language}/_form.html.#{view_language}")
     end
   end
   
@@ -175,6 +179,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   
 protected
 
+  def view_language
+    options[:haml] ? 'haml' : 'erb'
+  end
+
   def add_options!(opt)
     opt.separator ''
     opt.separator 'Options:'
@@ -183,6 +191,7 @@ protected
     opt.on("--skip-timestamps", "Don't add timestamps to migration file.") { |v| options[:skip_timestamps] = v }
     opt.on("--skip-controller", "Don't generate controller, helper, or views.") { |v| options[:skip_controller] = v }
     opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
+    opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = v }
   end
 
   # is there a better way to do this? Perhaps with const_defined?
