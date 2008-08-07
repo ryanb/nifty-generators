@@ -51,12 +51,12 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         
         if spec_dir?
           m.directory "spec/models"
-          m.template "tests/rspec/model_spec.rb", "spec/models/#{singular_name}_spec.rb"
+          m.template "tests/rspec/model.rb", "spec/models/#{singular_name}_spec.rb"
           m.directory "spec/fixtures"
           m.template "fixtures.yml", "spec/fixtures/#{plural_name}.yml"
         else
           m.directory "test/unit"
-          m.template "tests/testunit/model_test.rb", "test/unit/#{singular_name}_test.rb"
+          m.template "tests/testunit/model.rb", "test/unit/#{singular_name}_test.rb"
           m.directory "test/fixtures"
           m.template "fixtures.yml", "test/fixtures/#{plural_name}.yml"
         end
@@ -84,10 +84,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         
         if spec_dir?
           m.directory "spec/controllers"
-          m.template "tests/rspec/controller_spec.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
+          m.template "tests/rspec/controller.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
         else
           m.directory "test/functional"
-          m.template "tests/testunit/controller_test.rb", "test/functional/#{plural_name}_controller_test.rb"
+          m.template "tests/testunit/controller.rb", "test/functional/#{plural_name}_controller_test.rb"
         end
       end
     end
