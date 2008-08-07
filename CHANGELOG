@@ -1,6 +1,8 @@
+*0.1.6* (August 7th, 2008)
+
 * adding option to specify Shoulda as testing framework in nifty_scaffold generator
 
-* adding options to manually specify testing framework in nifty_scaffold generator
+* adding options to manually specify rspec or testunit framework in nifty_scaffold generator
 
 *0.1.5* (August 7th, 2008)
 

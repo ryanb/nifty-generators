@@ -1,7 +1,6 @@
 
 Nifty Scaffold Generator
   - add some validation for attributes/action names
-  - add shoulda support
   - refactor out long methods in scaffold generator
 
 Nifty Config Generator

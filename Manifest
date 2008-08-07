@@ -35,6 +35,15 @@ rails_generators/nifty_scaffold/templates/tests/rspec/actions/show.rb
 rails_generators/nifty_scaffold/templates/tests/rspec/actions/update.rb
 rails_generators/nifty_scaffold/templates/tests/rspec/controller.rb
 rails_generators/nifty_scaffold/templates/tests/rspec/model.rb
+rails_generators/nifty_scaffold/templates/tests/shoulda/actions/create.rb
+rails_generators/nifty_scaffold/templates/tests/shoulda/actions/destroy.rb
+rails_generators/nifty_scaffold/templates/tests/shoulda/actions/edit.rb
+rails_generators/nifty_scaffold/templates/tests/shoulda/actions/index.rb
+rails_generators/nifty_scaffold/templates/tests/shoulda/actions/new.rb
+rails_generators/nifty_scaffold/templates/tests/shoulda/actions/show.rb
+rails_generators/nifty_scaffold/templates/tests/shoulda/actions/update.rb
+rails_generators/nifty_scaffold/templates/tests/shoulda/controller.rb
+rails_generators/nifty_scaffold/templates/tests/shoulda/model.rb
 rails_generators/nifty_scaffold/templates/tests/testunit/actions/create.rb
 rails_generators/nifty_scaffold/templates/tests/testunit/actions/destroy.rb
 rails_generators/nifty_scaffold/templates/tests/testunit/actions/edit.rb
