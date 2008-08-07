@@ -487,6 +487,20 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         
         should_generate_file "spec/models/line_item_spec.rb"
       end
+      
+      context "generator with shoulda specified" do
+        rails_generator :nifty_scaffold, "line_item", "name:string", :test_framework => :shoulda
+        
+        should "have controller and model tests using shoulda syntax" do
+          assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
+            assert_match " should ", body
+          end
+          
+          assert_generated_file "test/unit/line_item_test.rb" do |body|
+            assert_match " should ", body
+          end
+        end
+      end
     end
     
     context "generator with haml option" do

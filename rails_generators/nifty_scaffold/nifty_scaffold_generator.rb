@@ -51,12 +51,12 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         
         if rspec?
           m.directory "spec/models"
-          m.template "tests/rspec/model.rb", "spec/models/#{singular_name}_spec.rb"
+          m.template "tests/#{test_framework}/model.rb", "spec/models/#{singular_name}_spec.rb"
           m.directory "spec/fixtures"
           m.template "fixtures.yml", "spec/fixtures/#{plural_name}.yml"
         else
           m.directory "test/unit"
-          m.template "tests/testunit/model.rb", "test/unit/#{singular_name}_test.rb"
+          m.template "tests/#{test_framework}/model.rb", "test/unit/#{singular_name}_test.rb"
           m.directory "test/fixtures"
           m.template "fixtures.yml", "test/fixtures/#{plural_name}.yml"
         end
@@ -65,10 +65,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       unless options[:skip_controller]
         m.directory "app/controllers"
         m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
-      
+        
         m.directory "app/helpers"
         m.template "helper.rb", "app/helpers/#{plural_name}_helper.rb"
-      
+        
         m.directory "app/views/#{plural_name}"
         controller_actions.each do |action|
           if File.exist? source_path("views/#{view_language}/#{action}.html.#{view_language}")
@@ -84,10 +84,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         
         if rspec?
           m.directory "spec/controllers"
-          m.template "tests/rspec/controller.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
+          m.template "tests/#{test_framework}/controller.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
         else
           m.directory "test/functional"
-          m.template "tests/testunit/controller.rb", "test/functional/#{plural_name}_controller_test.rb"
+          m.template "tests/#{test_framework}/controller.rb", "test/functional/#{plural_name}_controller_test.rb"
         end
       end
     end
@@ -174,13 +174,21 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
   
   def rspec?
-    options[:test_framework] != :testunit && (File.exist?(destination_path("spec")) || options[:test_framework] == :rspec)
+    test_framework == :rspec
   end
   
 protected
   
   def view_language
     options[:haml] ? 'haml' : 'erb'
+  end
+  
+  def test_framework
+    options[:test_framework] ||= default_test_framework
+  end
+  
+  def default_test_framework
+    File.exist?(destination_path("spec")) ? :rspec : :testunit
   end
   
   def add_options!(opt)
