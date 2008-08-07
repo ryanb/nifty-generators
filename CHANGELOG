@@ -1,3 +1,5 @@
+* adding options to manually specify testing framework
+
 *0.1.5* (August 7th, 2008)
 
 * adding option to nifty layout to generate HAML views and SASS stylesheets

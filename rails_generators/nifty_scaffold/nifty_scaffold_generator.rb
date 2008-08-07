@@ -49,7 +49,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
           m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
         end
         
-        if spec_dir?
+        if rspec?
           m.directory "spec/models"
           m.template "tests/rspec/model.rb", "spec/models/#{singular_name}_spec.rb"
           m.directory "spec/fixtures"
@@ -82,7 +82,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       
         m.route_resources plural_name
         
-        if spec_dir?
+        if rspec?
           m.directory "spec/controllers"
           m.template "tests/rspec/controller.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
         else
@@ -173,16 +173,16 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     end
   end
   
-  def spec_dir?
-    File.exist? destination_path("spec")
+  def rspec?
+    options[:test_framework] != :testunit && (File.exist?(destination_path("spec")) || options[:test_framework] == :rspec)
   end
   
 protected
-
+  
   def view_language
     options[:haml] ? 'haml' : 'erb'
   end
-
+  
   def add_options!(opt)
     opt.separator ''
     opt.separator 'Options:'
@@ -192,8 +192,10 @@ protected
     opt.on("--skip-controller", "Don't generate controller, helper, or views.") { |v| options[:skip_controller] = v }
     opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
     opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = v }
+    opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
+    opt.on("--rspec", "Use RSpec for test files.") { options[:test_framework] = :rspec }
   end
-
+  
   # is there a better way to do this? Perhaps with const_defined?
   def model_exists?
     File.exist? destination_path("app/models/#{singular_name}.rb")
