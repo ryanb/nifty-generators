@@ -1,3 +1,5 @@
+* adding option to nifty layout to generate HAML views and SASS stylesheets
+
 * adding option to nifty scaffold to generate HAML views
 
 *0.1.4* (July 21st, 2008)

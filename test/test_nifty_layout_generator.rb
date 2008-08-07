@@ -33,4 +33,10 @@ class TestNiftyLayoutGenerator < Test::Unit::TestCase
     rails_generator :nifty_layout, "FooBar"
     should_generate_file 'app/views/layouts/foo_bar.html.erb'
   end
+  
+  context "generator with haml option" do
+    rails_generator :nifty_layout, "foobar", :haml => true
+    should_generate_file 'app/views/layouts/foobar.html.haml'
+    should_generate_file 'public/stylesheets/foobar.sass'
+  end
 end
