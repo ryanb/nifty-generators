@@ -392,7 +392,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           end
         end
         
-        should "should redirect to index action on successful create" do
+        should "redirect to index action on successful create" do
           assert_generated_file "spec/controllers/line_items_controller_spec.rb" do |body|
             assert_match "redirect_to(line_items_url)", body
           end
@@ -402,11 +402,17 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       context "generator with edit and index actions" do
         rails_generator :nifty_scaffold, "line_item", "edit", "index"
         
-        should "should redirect to index action on successful update" do
+        should "redirect to index action on successful update" do
           assert_generated_file "spec/controllers/line_items_controller_spec.rb" do |body|
             assert_match "redirect_to(line_items_url)", body
           end
         end
+      end
+      
+      context "generator with testunit specified" do
+        rails_generator :nifty_scaffold, "line_item", "name:string", :test_framework => :testunit
+        
+        should_generate_file "test/unit/line_item_test.rb"
       end
     end
     
@@ -459,7 +465,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           end
         end
         
-        should "should redirect to index action on successful create" do
+        should "redirect to index action on successful create" do
           assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
             assert_match "assert_redirected_to line_items_url", body
           end
@@ -469,9 +475,45 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       context "generator with edit and index actions" do
         rails_generator :nifty_scaffold, "line_item", "edit", "index"
         
-        should "should redirect to index action on successful update" do
+        should "redirect to index action on successful update" do
           assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
             assert_match "assert_redirected_to line_items_url", body
+          end
+        end
+      end
+      
+      context "generator with rspec specified" do
+        rails_generator :nifty_scaffold, "line_item", "name:string", :test_framework => :rspec
+        
+        should_generate_file "spec/models/line_item_spec.rb"
+      end
+      
+      context "generator with shoulda specified" do
+        rails_generator :nifty_scaffold, "line_item", "name:string", :test_framework => :shoulda
+        
+        should "have controller and model tests using shoulda syntax" do
+          assert_generated_file "test/functional/line_items_controller_test.rb" do |body|
+            assert_match " should ", body
+          end
+          
+          assert_generated_file "test/unit/line_item_test.rb" do |body|
+            assert_match " should ", body
+          end
+        end
+      end
+    end
+    
+    context "generator with haml option" do
+      rails_generator :nifty_scaffold, "LineItem", :haml => true
+      
+      %w[index show new edit _form].each do |action|
+        should_generate_file "app/views/line_items/#{action}.html.haml"
+      end
+    
+      should "render the form partial in views" do
+        %w[new edit].each do |action|
+          assert_generated_file "app/views/line_items/#{action}.html.haml" do |body|
+            assert_match /^= render :partial => 'form'$/, body
           end
         end
       end

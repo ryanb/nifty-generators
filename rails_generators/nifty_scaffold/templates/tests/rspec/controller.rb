@@ -4,5 +4,5 @@ describe <%= plural_class_name %>Controller do
   fixtures :all
   integrate_views
   
-  <%= controller_methods :action_specs %>
+  <%= controller_methods 'tests/rspec/actions' %>
 end

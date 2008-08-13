@@ -5,7 +5,6 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     super
     usage if @args.empty?
     
-    
     @name = @args.first
     @controller_actions = []
     @attributes = []
@@ -50,14 +49,14 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
           m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
         end
         
-        if spec_dir?
+        if rspec?
           m.directory "spec/models"
-          m.template "model_spec.rb", "spec/models/#{singular_name}_spec.rb"
+          m.template "tests/#{test_framework}/model.rb", "spec/models/#{singular_name}_spec.rb"
           m.directory "spec/fixtures"
           m.template "fixtures.yml", "spec/fixtures/#{plural_name}.yml"
         else
           m.directory "test/unit"
-          m.template "model_test.rb", "test/unit/#{singular_name}_test.rb"
+          m.template "tests/#{test_framework}/model.rb", "test/unit/#{singular_name}_test.rb"
           m.directory "test/fixtures"
           m.template "fixtures.yml", "test/fixtures/#{plural_name}.yml"
         end
@@ -66,29 +65,29 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       unless options[:skip_controller]
         m.directory "app/controllers"
         m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
-      
+        
         m.directory "app/helpers"
         m.template "helper.rb", "app/helpers/#{plural_name}_helper.rb"
-      
+        
         m.directory "app/views/#{plural_name}"
         controller_actions.each do |action|
-          if File.exist? source_path("views/#{action}.html.erb")
-            m.template "views/#{action}.html.erb", "app/views/#{plural_name}/#{action}.html.erb"
+          if File.exist? source_path("views/#{view_language}/#{action}.html.#{view_language}")
+            m.template "views/#{view_language}/#{action}.html.#{view_language}", "app/views/#{plural_name}/#{action}.html.#{view_language}"
           end
         end
       
         if form_partial?
-          m.template "views/_form.html.erb", "app/views/#{plural_name}/_form.html.erb"
+          m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
         end
       
         m.route_resources plural_name
         
-        if spec_dir?
+        if rspec?
           m.directory "spec/controllers"
-          m.template "controller_spec.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
+          m.template "tests/#{test_framework}/controller.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
         else
           m.directory "test/functional"
-          m.template "controller_test.rb", "test/functional/#{plural_name}_controller_test.rb"
+          m.template "tests/#{test_framework}/controller.rb", "test/functional/#{plural_name}_controller_test.rb"
         end
       end
     end
@@ -134,9 +133,13 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   
   def render_form
     if form_partial?
-      "<%= render :partial => 'form' %>"
+      if options[:haml]
+        "= render :partial => 'form'"
+      else
+        "<%= render :partial => 'form' %>"
+      end
     else
-      read_template("views/_form.html.erb")
+      read_template("views/#{view_language}/_form.html.#{view_language}")
     end
   end
   
@@ -170,12 +173,24 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     end
   end
   
-  def spec_dir?
-    File.exist? destination_path("spec")
+  def rspec?
+    test_framework == :rspec
   end
   
 protected
-
+  
+  def view_language
+    options[:haml] ? 'haml' : 'erb'
+  end
+  
+  def test_framework
+    options[:test_framework] ||= default_test_framework
+  end
+  
+  def default_test_framework
+    File.exist?(destination_path("spec")) ? :rspec : :testunit
+  end
+  
   def add_options!(opt)
     opt.separator ''
     opt.separator 'Options:'
@@ -184,8 +199,12 @@ protected
     opt.on("--skip-timestamps", "Don't add timestamps to migration file.") { |v| options[:skip_timestamps] = v }
     opt.on("--skip-controller", "Don't generate controller, helper, or views.") { |v| options[:skip_controller] = v }
     opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
+    opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = v }
+    opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
+    opt.on("--rspec", "Use RSpec for test files.") { options[:test_framework] = :rspec }
+    opt.on("--shoulda", "Use Shoulda for test files.") { options[:test_framework] = :shoulda }
   end
-
+  
   # is there a better way to do this? Perhaps with const_defined?
   def model_exists?
     File.exist? destination_path("app/models/#{singular_name}.rb")

@@ -1,5 +1,5 @@
 body {
-  background-color: #FFF;
+  background-color: #4B7399;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
 }
@@ -12,8 +12,10 @@ a {
   color: #0000FF;
 }
 
-body {
-  background-color: #4B7399;
+.clear {
+  clear: both;
+  height: 0px;
+  overflow: hidden;
 }
 
 #container {
@@ -38,10 +40,6 @@ body {
 #flash_error {
   background-color: #FCC;
   border: solid 1px #C66;
-}
-
-.clear {
-  clear: both;
 }
 
 
