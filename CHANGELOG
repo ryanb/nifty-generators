@@ -1,3 +1,7 @@
+*0.1.6* (August 15th, 2008)
+
+* fixing shoulda tests
+
 *0.1.6* (August 7th, 2008)
 
 * adding option to specify Shoulda as testing framework in nifty_scaffold generator

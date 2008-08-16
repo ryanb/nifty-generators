@@ -1,5 +1,5 @@
-  context "index action"
-    should "render index template"
+  context "index action" do
+    should "render index template" do
       get :index
       assert_template 'index'
     end
