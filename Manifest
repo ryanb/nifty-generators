@@ -64,6 +64,7 @@ rails_generators/nifty_scaffold/templates/views/haml/index.html.haml
 rails_generators/nifty_scaffold/templates/views/haml/new.html.haml
 rails_generators/nifty_scaffold/templates/views/haml/show.html.haml
 rails_generators/nifty_scaffold/USAGE
+Rakefile
 README
 tasks/deployment.rake
 test/test_helper.rb

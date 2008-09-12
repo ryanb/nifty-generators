@@ -5,7 +5,7 @@ A collection of useful Rails generator scripts.
 
 == Install
 
-  gem install niftygenerators
+  gem install nifty-generators
 
 You may need to uninstall the older version if it's installed.
 
