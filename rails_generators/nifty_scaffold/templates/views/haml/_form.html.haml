@@ -1,9 +1,9 @@
-= error_messages_for :<%= singular_name %>
-
 - form_for @<%= singular_name %> do |f|
+  = f.error_messages
+
   <%- for attribute in attributes -%>
   %p
-    =f.label :<%=attribute.name %>
+    = f.label :<%= attribute.name %>
     %br
     = f.<%= attribute.field_type %> :<%= attribute.name %>
   <%- end -%>
