@@ -18,6 +18,8 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.directory "lib"
       m.directory "test"
       m.directory "test/fixtures"
+      m.directory "test/functional"
+      m.directory "test/unit"
       
       m.directory "app/views/#{user_plural_name}"
       m.template "user.rb", "app/models/#{user_singular_name}.rb"
@@ -42,6 +44,9 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.insert_into 'app/controllers/application.rb', 'include Authentication'
       
       m.template "fixtures.yml", "test/fixtures/#{user_plural_name}.yml"
+      m.template "tests/testunit/user.rb", "test/unit/#{user_singular_name}_test.rb"
+      m.template "tests/testunit/users_controller.rb", "test/functional/#{user_plural_name}_controller_test.rb"
+      m.template "tests/testunit/sessions_controller.rb", "test/functional/#{sessions_underscore_name}_controller_test.rb"
     end
   end
   
