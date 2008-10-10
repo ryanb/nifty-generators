@@ -25,3 +25,22 @@ Examples:
     script/generate nifty_authentication Account CurrentSession
     
         Creates account model, accounts_controller, and current_sessions_controller.
+
+Methods:
+    There are several methods generated which you can use in your application.
+    Here's a common example of what you might add to your layout.
+    
+      <% if logged_in? %>
+        Welcome <%= current_user.username %>! Not you?
+        <%= link_to "Log out", logout_path %>
+      <% else %>
+        <%= link_to "Sign up", signup_path %> or
+        <%= link_to "log in", login_path %>.
+      <% end %>
+    
+    You can also restrict unregistered users from accessing a controller using
+    a before filter. For example.
+    
+      before_filter :login_required, :except => [:index, :show]
+    
+    See the generated file lib/authentication.rb for details.
