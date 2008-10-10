@@ -65,5 +65,26 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
         end
       end
     end
+
+    context "generator with user and session names" do
+      rails_generator :nifty_authentication, "Account", "CurrentSessions"
+      should_generate_file 'app/models/account.rb'
+      should_generate_file 'app/controllers/accounts_controller.rb'
+      should_generate_file 'app/helpers/accounts_helper.rb'
+      should_generate_file 'app/views/accounts/new.html.erb'
+      should_generate_file 'app/controllers/current_sessions_controller.rb'
+      should_generate_file 'app/helpers/current_sessions_helper.rb'
+      should_generate_file 'app/views/current_sessions/new.html.erb'
+      
+      should "generate routes" do
+        assert_generated_file "config/routes.rb" do |body|
+          assert_match "map.resources :current_sessions", body
+          assert_match "map.resources :accounts", body
+          assert_match "map.login 'login', :controller => 'current_sessions', :action => 'new'", body
+          assert_match "map.logout 'logout', :controller => 'current_sessions', :action => 'destroy'", body
+          assert_match "map.signup 'signup', :controller => 'accounts', :action => 'new'", body
+        end
+      end
+    end
   end
 end

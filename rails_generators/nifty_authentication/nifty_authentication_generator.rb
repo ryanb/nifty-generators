@@ -4,6 +4,7 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
   
   def initialize(runtime_args, runtime_options = {})
     super
+    
     @user_name = @args[0] || 'user'
     @sessions_name = @args[1] || 'sessions'
   end
@@ -16,13 +17,13 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.directory "app/views"
       m.directory "lib"
       
-      m.directory "app/views/users"
+      m.directory "app/views/#{user_plural_name}"
       m.template "user.rb", "app/models/#{user_singular_name}.rb"
       m.template "users_controller.rb", "app/controllers/#{user_plural_name}_controller.rb"
       m.template "users_helper.rb", "app/helpers/#{user_plural_name}_helper.rb"
       m.template "views/erb/signup.html.erb", "app/views/#{user_plural_name}/new.html.erb"
       
-      m.directory "app/views/sessions"
+      m.directory "app/views/#{sessions_underscore_name}"
       m.template "sessions_controller.rb", "app/controllers/#{sessions_underscore_name}_controller.rb"
       m.template "sessions_helper.rb", "app/helpers/#{sessions_underscore_name}_helper.rb"
       m.template "views/erb/login.html.erb", "app/views/#{sessions_underscore_name}/new.html.erb"
