@@ -28,6 +28,6 @@ class <%= user_class_name %> < ActiveRecord::Base
   end
   
   def encrypt_password(pass)
-    Digest::SHA1.hexdigest(pass + password_salt)
+    Digest::SHA1.hexdigest([pass, password_salt].join)
   end
 end
