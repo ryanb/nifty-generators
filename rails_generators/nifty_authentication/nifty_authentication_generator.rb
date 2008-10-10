@@ -14,11 +14,11 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.directory "app/controllers"
       m.directory "app/helpers"
       m.directory "app/views"
-      m.directory "app/lib"
-      m.directory "app/config"
-      m.directory "app/config/initializers"
+      m.directory "lib"
+      m.directory "config"
+      m.directory "config/initializers"
       
-      m.template "initializer.rb", "app/config/initializers/include_authentication.rb"
+      m.template "initializer.rb", "config/initializers/include_authentication.rb"
       
       m.directory "app/views/users"
       m.template "user.rb", "app/models/#{user_singular_name}.rb"
@@ -31,7 +31,7 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.template "sessions_helper.rb", "app/helpers/#{sessions_underscore_name}_helper.rb"
       m.template "views/erb/login.html.erb", "app/views/#{sessions_underscore_name}/new.html.erb"
       
-      m.template "authentication.rb", "app/lib/authentication.rb"
+      m.template "authentication.rb", "lib/authentication.rb"
       m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{user_plural_name}"
       
       m.route_resources user_plural_name
