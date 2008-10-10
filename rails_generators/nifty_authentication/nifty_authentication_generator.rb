@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + "/lib/insert_routes.rb")
+require File.expand_path(File.dirname(__FILE__) + "/lib/insert_commands.rb")
 class NiftyAuthenticationGenerator < Rails::Generator::Base
   attr_accessor :user_name, :sessions_name
   
@@ -15,10 +15,6 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.directory "app/helpers"
       m.directory "app/views"
       m.directory "lib"
-      m.directory "config"
-      m.directory "config/initializers"
-      
-      m.template "initializer.rb", "config/initializers/include_authentication.rb"
       
       m.directory "app/views/users"
       m.template "user.rb", "app/models/#{user_singular_name}.rb"
@@ -39,6 +35,8 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.route_name :login, 'login', :controller => sessions_underscore_name, :action => 'new'
       m.route_name :logout, 'logout', :controller => sessions_underscore_name, :action => 'destroy'
       m.route_name :signup, 'signup', :controller => user_plural_name, :action => 'new'
+      
+      m.insert_into 'app/controllers/application.rb', 'include Authentication'
     end
   end
   
