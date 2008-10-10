@@ -27,7 +27,7 @@ class <%= user_class_name %> < ActiveRecord::Base
     self.password_hash = encrypt_password(password)
   end
   
-  def encrypt(pass)
+  def encrypt_password(pass)
     Digest::SHA1.hexdigest(pass + password_salt)
   end
 end

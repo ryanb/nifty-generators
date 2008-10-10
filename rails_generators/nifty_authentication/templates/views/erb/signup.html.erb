@@ -1,6 +1,6 @@
 <%% title "Sign up" %>
 
-<%% form_for :<%= user_singular_name %> do |f| %>
+<%% form_for @<%= user_singular_name %> do |f| %>
   <%%= f.error_messages %>
   <p>
     <%%= f.label :username %><br />
