@@ -29,29 +29,47 @@ using the script/generate or script/destroy command.
 * nifty_layout: generates generic layout, stylesheet, and helper files.
 * nifty_scaffold: generates a controller and optional model/migration.
 * nifty_config: generates a config YAML file and loader.
-* nifty_authentication: simpler variation of restful_authentication.
+* nifty_authentication: generates user model with sign up and log in.
 
-Run the command with the --help option to learn more.
+Run the command with the <tt>--help</tt> option to learn more.
 
   script/generate nifty_layout --help
 
 
 == Troubleshooting
 
-*I get "undefined method 'title'" error for nifty_scaffold.*
+<b>I get "undefined method 'title'" error.</b>
 
-Try running nifty_layout too, that will generate this helper method. Or
+Try running nifty_layout, that will generate this helper method. Or
 you can just change the templates to whatever approach you prefer for
 setting the title.
 
 
-*Forms don't work for nifty_scaffold.*
+<b>I get "undefined method 'root_url'" error.</b>
+
+Some generators default redirecting to the root_url. Set this in your
+routes.rb file like this (substituting your controller name).
+
+  map.root :controller => 'foo'
+
+
+<b>I get a missing database error.</b>
+
+Run <tt>rake db:migrate</tt>.
+
+
+<b>Forms don't work.</b>
 
 Try restarting your development server. Sometimes it doesn't detect the
 change in the routing.
 
 
-*The tests/specs don't work for nifty_scaffold.*
+<b>I can't set new attributes in my User model.</b>
+
+Add the attribute to the attr_accessible line in the model.
+
+
+<b>The tests/specs don't work.</b>
 
 Make sure you have mocha installed and require it in your spec/test helper.
 
@@ -63,7 +81,7 @@ Make sure you have mocha installed and require it in your spec/test helper.
   # in test_helper.rb
   require 'mocha'
 
-Also, make sure you're using edge rails (or 2.1 when released) as some methods require that.
+Also, make sure you're using Rails 2.1 or greater.
 
 
 == Development
