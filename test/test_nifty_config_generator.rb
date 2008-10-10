@@ -1,6 +1,6 @@
 require File.join(File.dirname(__FILE__), "test_helper.rb")
 
-class TestNiftyLayoutGenerator < Test::Unit::TestCase
+class TestNiftyConfigGenerator < Test::Unit::TestCase
   include NiftyGenerators::TestHelper
   
   # Some generator-related assertions:

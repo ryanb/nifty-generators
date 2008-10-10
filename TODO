@@ -1,7 +1,11 @@
 
-Nifty Scaffold Generator
+Nifty Scaffold
   - add some validation for attributes/action names
   - refactor out long methods in scaffold generator
 
-Nifty Config Generator
+Nifty Config
   - make it easier to specify non environment specific configs
+
+Nifty Authentication
+  - add HAML support
+  - generate tests for should, rspec, and testunit

@@ -1,0 +1,27 @@
+Description:
+    Generates a user model, users controller, and sessions controller. The 
+    users controller handles the registration and the sessions controller 
+    handles authentication. This is similar to restful_authentication, but 
+    simpler.
+    
+    IMPORTANT: This generator uses the "title" helper method which is generated
+    by the nifty_layout generator. You may want to run that generator first.
+
+Usage:
+    If you do not pass any arguments, the model name will default to "user", and
+    the authentication controller will default to "sessions". You can override
+    each of these respectively by passing one or two arguments. Either name can
+    be CamelCased or under_scored.
+
+Examples:
+    script/generate nifty_authentication
+        
+        Creates user model, users_controller, and sessions_controller.
+    
+    script/generate nifty_authentication account
+    
+        Creates account model, accounts_controller, and sessions_controller.
+    
+    script/generate nifty_authentication Account CurrentSession
+    
+        Creates account model, accounts_controller, and current_sessions_controller.
