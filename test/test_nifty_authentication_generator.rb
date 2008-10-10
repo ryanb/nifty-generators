@@ -44,6 +44,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
       should_generate_file 'app/helpers/sessions_helper.rb'
       should_generate_file 'app/views/sessions/new.html.erb'
       should_generate_file 'lib/authentication.rb'
+      should_generate_file 'test/fixtures/users.yml'
     
       should "generate migration file" do
         assert !Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").empty?
@@ -75,6 +76,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
       should_generate_file 'app/controllers/current_sessions_controller.rb'
       should_generate_file 'app/helpers/current_sessions_helper.rb'
       should_generate_file 'app/views/current_sessions/new.html.erb'
+      should_generate_file 'test/fixtures/accounts.yml'
       
       should "generate routes" do
         assert_generated_file "config/routes.rb" do |body|

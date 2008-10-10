@@ -16,6 +16,8 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.directory "app/helpers"
       m.directory "app/views"
       m.directory "lib"
+      m.directory "test"
+      m.directory "test/fixtures"
       
       m.directory "app/views/#{user_plural_name}"
       m.template "user.rb", "app/models/#{user_singular_name}.rb"
@@ -38,6 +40,8 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.route_name :signup, 'signup', :controller => user_plural_name, :action => 'new'
       
       m.insert_into 'app/controllers/application.rb', 'include Authentication'
+      
+      m.template "fixtures.yml", "test/fixtures/#{user_plural_name}.yml"
     end
   end
   
