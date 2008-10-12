@@ -9,7 +9,7 @@ class <%= sessions_class_name %>Controller < ApplicationController
       flash[:notice] = "Logged in successfully."
       redirect_to root_url
     else
-      flash[:error] = "Invalid login or password."
+      flash.now[:error] = "Invalid login or password."
       render :action => 'new'
     end
   end
