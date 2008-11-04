@@ -40,6 +40,7 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.insert_into 'app/controllers/application.rb', 'include Authentication'
       
       if test_framework == :rspec
+        m.directory "spec"
         m.directory "spec/fixtures"
         m.directory "spec/controllers"
         m.directory "spec/models"
