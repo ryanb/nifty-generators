@@ -16,10 +16,6 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.directory "app/helpers"
       m.directory "app/views"
       m.directory "lib"
-      m.directory "test"
-      m.directory "test/fixtures"
-      m.directory "test/functional"
-      m.directory "test/unit"
       
       m.directory "app/views/#{user_plural_name}"
       m.template "user.rb", "app/models/#{user_singular_name}.rb"
@@ -43,10 +39,24 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       
       m.insert_into 'app/controllers/application.rb', 'include Authentication'
       
-      m.template "fixtures.yml", "test/fixtures/#{user_plural_name}.yml"
-      m.template "tests/testunit/user.rb", "test/unit/#{user_singular_name}_test.rb"
-      m.template "tests/testunit/users_controller.rb", "test/functional/#{user_plural_name}_controller_test.rb"
-      m.template "tests/testunit/sessions_controller.rb", "test/functional/#{sessions_underscore_name}_controller_test.rb"
+      if test_framework == :rspec
+        m.directory "spec/fixtures"
+        m.directory "spec/controllers"
+        m.directory "spec/models"
+        m.template "fixtures.yml", "spec/fixtures/#{user_plural_name}.yml"
+        m.template "tests/rspec/user.rb", "spec/models/#{user_singular_name}_spec.rb"
+        m.template "tests/rspec/users_controller.rb", "spec/controllers/#{user_plural_name}_controller_spec.rb"
+        m.template "tests/rspec/sessions_controller.rb", "spec/controllers/#{sessions_underscore_name}_controller_spec.rb"
+      else
+        m.directory "test"
+        m.directory "test/fixtures"
+        m.directory "test/functional"
+        m.directory "test/unit"
+        m.template "fixtures.yml", "test/fixtures/#{user_plural_name}.yml"
+        m.template "tests/testunit/user.rb", "test/unit/#{user_singular_name}_test.rb"
+        m.template "tests/testunit/users_controller.rb", "test/functional/#{user_plural_name}_controller_test.rb"
+        m.template "tests/testunit/sessions_controller.rb", "test/functional/#{sessions_underscore_name}_controller_test.rb"
+      end
     end
   end
   
@@ -74,13 +84,24 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
     sessions_name.camelize
   end
 
-  protected
+protected
 
-    def banner
-      <<-EOS
+  def test_framework
+    options[:test_framework] ||= File.exist?(destination_path("spec")) ? :rspec : :testunit
+  end
+  
+  def add_options!(opt)
+    opt.separator ''
+    opt.separator 'Options:'
+    opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
+    opt.on("--rspec", "Use RSpec for test files.") { options[:test_framework] = :rspec }
+  end
+  
+  def banner
+    <<-EOS
 Creates user model and controllers to handle registration and authentication.
 
 USAGE: #{$0} #{spec.name} [user_name] [sessions_controller_name]
 EOS
-    end
+  end
 end
