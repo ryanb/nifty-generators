@@ -147,5 +147,12 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
         should_generate_file 'test/fixtures/users.yml'
       end
     end
+    
+    context "generator with haml option" do
+      rails_generator :nifty_authentication, :haml => true
+      
+      should_generate_file "app/views/users/new.html.haml"
+      should_generate_file "app/views/sessions/new.html.haml"
+    end
   end
 end
