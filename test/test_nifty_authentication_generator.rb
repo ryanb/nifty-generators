@@ -94,7 +94,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
         end
       end
     end
-      
+    
     context "generator with shoulda option" do
       rails_generator :nifty_authentication, :test_framework => :shoulda
       
@@ -109,6 +109,42 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
         assert_generated_file "test/unit/user_test.rb" do |body|
           assert_match " should ", body
         end
+      end
+    end
+    
+    context "generator with rspec option" do
+      rails_generator :nifty_authentication, :test_framework => :rspec
+      should_generate_file 'spec/fixtures/users.yml'
+    end
+    
+    context "with spec dir" do
+      setup do
+        Dir.mkdir("#{RAILS_ROOT}/spec") unless File.exists?("#{RAILS_ROOT}/spec")
+      end
+    
+      teardown do
+        FileUtils.rm_rf "#{RAILS_ROOT}/spec"
+      end
+      
+      context "generator without arguments" do
+        rails_generator :nifty_authentication
+        should_generate_file 'spec/fixtures/users.yml'
+        should_generate_file 'spec/models/user_spec.rb'
+        should_generate_file 'spec/controllers/users_controller_spec.rb'
+        should_generate_file 'spec/controllers/sessions_controller_spec.rb'
+      end
+      
+      context "generator with user and session names" do
+        rails_generator :nifty_authentication, "Account", "CurrentSessions"
+        should_generate_file 'spec/fixtures/accounts.yml'
+        should_generate_file 'spec/models/account_spec.rb'
+        should_generate_file 'spec/controllers/accounts_controller_spec.rb'
+        should_generate_file 'spec/controllers/current_sessions_controller_spec.rb'
+      end
+      
+      context "generator with testunit option" do
+        rails_generator :nifty_authentication, :test_framework => :testunit
+        should_generate_file 'test/fixtures/users.yml'
       end
     end
   end
