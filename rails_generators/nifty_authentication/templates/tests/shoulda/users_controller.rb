@@ -2,14 +2,14 @@ require 'test_helper'
 
 class <%= user_plural_class_name %>ControllerTest < ActionController::TestCase
   context "new action" do
-    should "render new template"
+    should "render new template" do
       get :new
       assert_template 'new'
     end
   end
   
   context "create action" do
-    should "render new template when model is invalid"
+    should "render new template when model is invalid" do
       <%= user_class_name %>.any_instance.stubs(:valid?).returns(false)
       post :create
       assert_template 'new'
