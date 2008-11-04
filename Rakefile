@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('nifty-generators', '0.1.8') do |p|
+Echoe.new('nifty-generators', '0.2.0') do |p|
   p.project        = "niftygenerators"
   p.summary        = "A collection of useful generator scripts for Rails."
   p.description    = "A collection of useful generator scripts for Rails."
