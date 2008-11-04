@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class <%= user_class_name %>sControllerTest < ActionController::TestCase
+class <%= user_plural_class_name %>ControllerTest < ActionController::TestCase
   def test_new
     get :new
     assert_template 'new'

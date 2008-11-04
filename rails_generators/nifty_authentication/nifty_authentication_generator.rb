@@ -53,9 +53,9 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
         m.directory "test/functional"
         m.directory "test/unit"
         m.template "fixtures.yml", "test/fixtures/#{user_plural_name}.yml"
-        m.template "tests/testunit/user.rb", "test/unit/#{user_singular_name}_test.rb"
-        m.template "tests/testunit/users_controller.rb", "test/functional/#{user_plural_name}_controller_test.rb"
-        m.template "tests/testunit/sessions_controller.rb", "test/functional/#{sessions_underscore_name}_controller_test.rb"
+        m.template "tests/#{test_framework}/user.rb", "test/unit/#{user_singular_name}_test.rb"
+        m.template "tests/#{test_framework}/users_controller.rb", "test/functional/#{user_plural_name}_controller_test.rb"
+        m.template "tests/#{test_framework}/sessions_controller.rb", "test/functional/#{sessions_underscore_name}_controller_test.rb"
       end
     end
   end

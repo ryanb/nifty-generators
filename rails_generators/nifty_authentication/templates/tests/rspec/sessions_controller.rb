@@ -9,7 +9,7 @@ describe <%= sessions_class_name %>Controller do
     response.should render_template(:new)
   end
   
-  it "create action should render new when authentication is invalid" do
+  it "create action should render new template when authentication is invalid" do
     <%= user_class_name %>.stubs(:authenticate).returns(nil)
     post :create
     response.should render_template(:new)
