@@ -96,6 +96,7 @@ protected
     opt.separator 'Options:'
     opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
     opt.on("--rspec", "Use RSpec for test files.") { options[:test_framework] = :rspec }
+    opt.on("--shoulda", "Use RSpec for test files.") { options[:test_framework] = :shoulda }
   end
   
   def banner

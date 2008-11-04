@@ -8,4 +8,3 @@ Nifty Config
 
 Nifty Authentication
   - add HAML support
-  - generate tests for should, rspec, and testunit
