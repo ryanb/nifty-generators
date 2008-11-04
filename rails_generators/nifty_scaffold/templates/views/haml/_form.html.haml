@@ -1,6 +1,5 @@
 - form_for @<%= singular_name %> do |f|
   = f.error_messages
-
   <%- for attribute in attributes -%>
   %p
     = f.label :<%= attribute.name %>

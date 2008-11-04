@@ -5,6 +5,3 @@ Nifty Scaffold
 
 Nifty Config
   - make it easier to specify non environment specific configs
-
-Nifty Authentication
-  - add HAML support
