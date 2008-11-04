@@ -18,7 +18,6 @@ describe <%= sessions_class_name %>Controller do
   
   it "create action should redirect when authentication is valid" do
     <%= user_class_name %>.stubs(:authenticate).returns(<%= user_class_name %>.first)
-    Project.any_instance.stubs(:valid?).returns(true)
     post :create
     response.should redirect_to(root_url)
     session['<%= user_singular_name %>_id'].should == <%= user_class_name %>.first.id
