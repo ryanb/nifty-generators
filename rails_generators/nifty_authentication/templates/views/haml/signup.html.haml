@@ -1,7 +1,6 @@
 - title "Sign up"
 
-%p
-  Already have an account? #{link_to "Log in", login_path}.
+%p== Already have an account? #{link_to "Log in", login_path}.
 
 - form_for @<%= user_singular_name %> do |f|
   = f.error_messages
