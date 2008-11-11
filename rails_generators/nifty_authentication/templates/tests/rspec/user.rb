@@ -9,6 +9,10 @@ describe <%= user_class_name %> do
     <%= user_class_name %>.new(attributes)
   end
   
+  before(:each) do
+    <%= user_class_name %>.delete_all
+  end
+  
   it "should be valid" do
     new_<%= user_singular_name %>.should be_valid
   end
@@ -25,6 +29,24 @@ describe <%= user_class_name %> do
     new_<%= user_singular_name %>(:email => 'foo@bar@example.com').should have(1).error_on(:email)
   end
   
+  it "should validate uniqueness of email" do
+    new_<%= user_singular_name %>(:email => 'bar@example.com').save!
+    new_<%= user_singular_name %>(:email => 'bar@example.com').should have(1).error_on(:email)
+  end
+  
+  it "should validate uniqueness of username" do
+    new_<%= user_singular_name %>(:username => 'uniquename').save!
+    new_<%= user_singular_name %>(:username => 'uniquename').should have(1).error_on(:username)
+  end
+  
+  it "should not allow odd characters in username" do
+    new_<%= user_singular_name %>(:username => 'odd ^&(@)').should have(1).error_on(:username)
+  end
+  
+  it "should validate password is longer than 3 characters" do
+    new_<%= user_singular_name %>(:password => 'bad').should have(1).error_on(:password)
+  end
+  
   it "should require matching password confirmation" do
     new_<%= user_singular_name %>(:password_confirmation => 'nonmatching').should have(1).error_on(:password)
   end
@@ -37,14 +59,12 @@ describe <%= user_class_name %> do
   end
   
   it "should authenticate by username" do
-    <%= user_class_name %>.delete_all
     <%= user_singular_name %> = new_<%= user_singular_name %>(:username => 'foobar', :password => 'secret')
     <%= user_singular_name %>.save!
     <%= user_class_name %>.authenticate('foobar', 'secret').should == <%= user_singular_name %>
   end
   
   it "should authenticate by email" do
-    <%= user_class_name %>.delete_all
     <%= user_singular_name %> = new_<%= user_singular_name %>(:email => 'foo@bar.com', :password => 'secret')
     <%= user_singular_name %>.save!
     <%= user_class_name %>.authenticate('foo@bar.com', 'secret').should == <%= user_singular_name %>
@@ -55,7 +75,6 @@ describe <%= user_class_name %> do
   end
   
   it "should not authenticate bad password" do
-    <%= user_class_name %>.delete_all
     new_<%= user_singular_name %>(:username => 'foobar', :password => 'secret').save!
     <%= user_class_name %>.authenticate('foobar', 'badpassword').should be_nil
   end

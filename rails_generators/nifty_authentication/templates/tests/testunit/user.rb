@@ -11,6 +11,10 @@ class <%= user_class_name %>Test < ActiveSupport::TestCase
     <%= user_singular_name %>
   end
   
+  def setup
+    <%= user_class_name %>.delete_all
+  end
+  
   def test_valid
     assert new_<%= user_singular_name %>.valid?
   end
@@ -25,6 +29,24 @@ class <%= user_class_name %>Test < ActiveSupport::TestCase
   
   def test_require_well_formed_email
     assert new_<%= user_singular_name %>(:email => 'foo@bar@example.com').errors.on(:email)
+  end
+  
+  def test_validate_uniqueness_of_email
+    new_<%= user_singular_name %>(:email => 'bar@example.com').save!
+    assert new_<%= user_singular_name %>(:email => 'bar@example.com').errors.on(:email)
+  end
+  
+  def test_validate_uniqueness_of_username
+    new_<%= user_singular_name %>(:username => 'uniquename').save!
+    assert new_<%= user_singular_name %>(:username => 'uniquename').errors.on(:username)
+  end
+  
+  def test_validate_odd_characters_in_username
+    assert new_<%= user_singular_name %>(:username => 'odd ^&(@)').errors.on(:username)
+  end
+  
+  def test_validate_password_length
+    assert new_<%= user_singular_name %>(:password => 'bad').errors.on(:password)
   end
   
   def test_require_matching_password_confirmation
