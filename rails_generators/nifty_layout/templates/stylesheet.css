@@ -14,7 +14,7 @@ a {
 
 .clear {
   clear: both;
-  height: 0px;
+  height: 0;
   overflow: hidden;
 }
 
@@ -42,8 +42,6 @@ a {
   border: solid 1px #C66;
 }
 
-
-
 .fieldWithErrors {
   display: inline;
 }
@@ -62,18 +60,21 @@ a {
   font-weight: bold;
   padding: 5px 5px 5px 15px;
   font-size: 12px;
-  margin: 0px;
+  margin: 0;
   background-color: #c00;
   color: #fff;
 }
+
 #errorExplanation p {
   color: #333;
   margin-bottom: 0;
   padding: 8px;
 }
+
 #errorExplanation ul {
   margin: 2px 24px;
 }
+
 #errorExplanation ul li {
   font-size: 12px;
   list-style: disc;

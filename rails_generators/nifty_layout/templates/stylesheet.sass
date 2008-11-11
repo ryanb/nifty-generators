@@ -6,9 +6,6 @@ body
     :family Verdana, Helvetica, Arial
     :size 14px
 
-ul li
-  :list-style none
-
 a
   :color #0000FF
   img
@@ -16,7 +13,7 @@ a
 
 .clear
   :clear both
-  :height 0px
+  :height 0
   :overflow hidden
 
 #container
@@ -40,19 +37,23 @@ a
   :background-color #FCC
   :border solid 1px #C66
 
+.fieldWithErrors
+  :display inline
+
 #errorExplanation
   :width 400px
   :border 2px solid #CF0000
-  :padding 0px
+  :padding 0
   :padding-bottom 12px
   :margin-bottom 20px
   :background-color #f0f0f0
   h2
     :text-align left
-    :font-weight bold
     :padding 5px 5px 5px 15px
-    :font-size 12px
-    :margin 0px
+    :margin 0
+    :font
+      :weight bold
+      :size 12px
     :background-color #c00
     :color #fff
   p
