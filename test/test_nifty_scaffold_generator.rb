@@ -100,7 +100,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       should "generate controller with index action" do
         assert_generated_file "app/controllers/line_items_controller.rb" do |body|
           assert_match "def index", body
-          assert_match "@line_items = LineItem.find(:all)", body
+          assert_match "@line_items = LineItem.all", body
           assert_no_match(/    def index/, body)
         end
       end

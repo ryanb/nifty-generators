@@ -96,9 +96,9 @@ module ActiveRecord
       attr_accessor :name, :default, :type, :limit, :null, :sql_type, :precision, :scale
 
       def initialize(name, default, sql_type = nil)
-        @name=name
-        @default=default
-        @type=@sql_type=sql_type
+        @name = name
+        @default = default
+        @type = @sql_type = sql_type
       end
 
       def human_name
