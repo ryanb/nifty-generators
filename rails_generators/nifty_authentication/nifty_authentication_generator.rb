@@ -100,7 +100,7 @@ protected
     opt.separator 'Options:'
     opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
     opt.on("--rspec", "Use RSpec for test files.") { options[:test_framework] = :rspec }
-    opt.on("--shoulda", "Use RSpec for test files.") { options[:test_framework] = :shoulda }
+    opt.on("--shoulda", "Use Shoulda for test files.") { options[:test_framework] = :shoulda }
     opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = true }
   end
   
