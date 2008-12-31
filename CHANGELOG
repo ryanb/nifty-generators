@@ -1,3 +1,5 @@
+* fixing password field in HAML signup page in nifty_authentication
+
 0.2.2 (November 11th, 2008)
 
 * fixing sessions_path reference in nifty_authentication
