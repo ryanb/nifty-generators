@@ -64,7 +64,8 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
       end
     
       should "include Authentication" do
-        assert_generated_file "app/controllers/application_controller.rb" do |body|
+        application_controller_name = Rails.version >= '2.3.0' ? 'application_controller' : 'application'
+        assert_generated_file "app/controllers/#{application_controller_name}.rb" do |body|
           assert_match "include Authentication", body
         end
       end
