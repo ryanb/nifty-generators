@@ -37,7 +37,7 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.route_name :logout, 'logout', :controller => sessions_underscore_name, :action => 'destroy'
       m.route_name :signup, 'signup', :controller => user_plural_name, :action => 'new'
       
-      m.insert_into 'app/controllers/application.rb', 'include Authentication'
+      m.insert_into 'app/controllers/application_controller.rb', 'include Authentication'
       
       if test_framework == :rspec
         m.directory "spec"
