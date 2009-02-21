@@ -1,3 +1,7 @@
+0.2.3 (February 20th, 2009)
+
+* fixing nifty_authentication to work with Rails 2.3 application_controller.rb
+
 * fixing password field in HAML signup page in nifty_authentication
 
 0.2.2 (November 11th, 2008)
