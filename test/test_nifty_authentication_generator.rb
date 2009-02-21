@@ -18,6 +18,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
   #   bare_teardown - place this in teardown method to destroy the TMP_ROOT or APP_ROOT folder after each test
   context "" do # empty context so we can use setup block
     setup do
+      Rails.stubs(:version).returns("2.0.2")
       Dir.mkdir("#{RAILS_ROOT}/config") unless File.exists?("#{RAILS_ROOT}/config")
       File.open("#{RAILS_ROOT}/config/routes.rb", 'w') do |f|
         f.puts "ActionController::Routing::Routes.draw do |map|\n\nend"
