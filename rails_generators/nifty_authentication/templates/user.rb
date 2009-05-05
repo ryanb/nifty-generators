@@ -3,7 +3,7 @@ class <%= user_class_name %> < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation
   
   attr_accessor :password
-  before_create :prepare_password
+  before_save :prepare_password
   
   validates_presence_of :username
   validates_uniqueness_of :username, :email, :allow_blank => true
@@ -26,8 +26,10 @@ class <%= user_class_name %> < ActiveRecord::Base
   private
   
   def prepare_password
-    self.password_salt = Digest::SHA1.hexdigest([Time.now, rand].join)
-    self.password_hash = encrypt_password(password)
+    unless password.blank?
+      self.password_salt = Digest::SHA1.hexdigest([Time.now, rand].join)
+      self.password_hash = encrypt_password(password)
+    end
   end
   
   def encrypt_password(pass)
