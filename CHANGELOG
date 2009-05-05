@@ -1,3 +1,11 @@
+0.2.4 (May 5th, 2009)
+
+* using root_url when no index action in nifty_scaffold
+
+* making password editable in user model in nifty_authentication
+
+* adding filter_parameter_logging :password in nifty_authentication
+
 0.2.3 (February 20th, 2009)
 
 * fixing nifty_authentication to work with Rails 2.3 application_controller.rb
