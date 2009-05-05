@@ -17,6 +17,7 @@
 module Authentication
   def self.included(controller)
     controller.send :helper_method, :current_<%= user_singular_name %>, :logged_in?
+    controller.filter_parameter_logging :password
   end
   
   def current_<%= user_singular_name %>
