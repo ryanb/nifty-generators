@@ -7,7 +7,7 @@ class <%= sessions_class_name %>Controller < ApplicationController
     if <%= user_singular_name %>
       session[:<%= user_singular_name %>_id] = <%= user_singular_name %>.id
       flash[:notice] = "Logged in successfully."
-      redirect_to root_url
+      redirect_to_target_or_default(root_url)
     else
       flash.now[:error] = "Invalid login or password."
       render :action => 'new'
