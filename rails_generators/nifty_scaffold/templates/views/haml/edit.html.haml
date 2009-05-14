@@ -5,7 +5,7 @@
 <%- if actions? :show, :index -%>
 %p
   <%- if action? :show -%>
-  = link_to "Edit", edit_<%= singular_name %>_path(@<%= singular_name %>)
+  = link_to "Show", <%= singular_name %>_path(@<%= singular_name %>)
   |
   <%- end -%>
   <%- if action? :index -%>
