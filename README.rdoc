@@ -31,12 +31,24 @@ using the script/generate or script/destroy command.
 * nifty_config: generates a config YAML file and loader.
 * nifty_authentication: generates user model with sign up and log in.
 
-Run the command with the <tt>--help</tt> option to learn more.
+To view the README for each generator, run it with the +--help+ option.
 
   script/generate nifty_layout --help
 
 
-== Troubleshooting
+== Troubleshooting and FAQs
+
+<b>What is the difference between nifty_scaffold and built-in scaffold?</b>
+
+One of the primary differences is that nifty_scaffold allows you to choose which
+controller actions to generate.
+
+  script/generate nifty_scaffold post name:string index new edit
+
+There are a few changes to the generated code as well, such as no XML format by default.
+
+It also offers support for HAML, Shoulda, and RSpec.
+
 
 <b>I get "undefined method 'title'" error.</b>
 
@@ -58,7 +70,7 @@ routes.rb file like this (substituting your controller name).
 Run <tt>rake db:migrate</tt>.
 
 
-<b>Forms don't work.</b>
+<b>I get a routing error when I try to submit a form.</b>
 
 Try restarting your development server. Sometimes it doesn't detect the
 change in the routing.
