@@ -120,7 +120,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
     end
   
     context "generator with new and create actions" do
-      rails_generator :nifty_scaffold, "line_item", "new", "create"
+      rails_generator :nifty_scaffold, "LineItem", "new", "create"
     
       should_not_generate_file "app/views/line_items/create.html.erb"
       should_not_generate_file "app/views/line_items/_form.html.erb"
