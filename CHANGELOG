@@ -1,3 +1,16 @@
+0.3.0 (August 15th, 2009)
+
+* adding attr_accessible to models in nifty_scaffold
+
+* adding authlogic support with --authlogic option in nifty_authentication
+
+* pluralize second argument for controller in nifty_authentication
+
+* don't convert javascript/stylesheet arguments to strings in nifty_layout
+
+* store request location and redirect to it when logging in under nifty_authentication
+
+
 0.2.4 (May 5th, 2009)
 
 * using root_url when no index action in nifty_scaffold
@@ -6,11 +19,13 @@
 
 * adding filter_parameter_logging :password in nifty_authentication
 
+
 0.2.3 (February 20th, 2009)
 
 * fixing nifty_authentication to work with Rails 2.3 application_controller.rb
 
 * fixing password field in HAML signup page in nifty_authentication
+
 
 0.2.2 (November 11th, 2008)
 
@@ -20,13 +35,16 @@
 
 * cleaning up nifty_layout stylesheet
 
+
 0.2.1 (November 10th, 2008)
 
 * adding missing nifty_authentication files
 
+
 0.2.0 (November 4th, 2008)
 
 * adding nifty_authentication
+
 
 0.1.8 (October 3rd, 2008)
 
@@ -34,9 +52,11 @@
 
 * using f.error_messages instead of error_messages_for (thanks Zach Langley)
 
+
 0.1.7 (August 15th, 2008)
 
 * fixing shoulda tests
+
 
 0.1.6 (August 7th, 2008)
 
@@ -44,11 +64,13 @@
 
 * adding options to manually specify rspec or testunit framework in nifty_scaffold generator
 
+
 0.1.5 (August 7th, 2008)
 
 * adding option to nifty layout to generate HAML views and SASS stylesheets
 
 * adding option to nifty scaffold to generate HAML views
+
 
 0.1.4 (July 21st, 2008)
 
@@ -58,11 +80,13 @@
 
 * adding error_messages_for to form partial
 
+
 0.1.3 (June 20th, 2008)
 
 * using _url in controllers instead of _path
 
 * improving the nifty_config default example YAML file
+
 
 0.1.2 (May 16th, 2008)
 
@@ -70,9 +94,11 @@
 
 * adding nifty_config generator
 
+
 0.1.1 (May 9th, 2008)
 
 * adding tests and specs to scaffold generator
+
 
 0.1.0 (May 8th, 2008)
 
