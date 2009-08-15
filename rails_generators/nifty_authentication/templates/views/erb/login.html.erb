@@ -2,7 +2,21 @@
 
 <p>Don't have an account? <%%= link_to "Sign up!", signup_path %></p>
 
-<%% form_tag <%= sessions_underscore_name %>_path do %>
+<%- if options[:authlogic] -%>
+<%% form_for @<%= session_singular_name %> do |f| %>
+  <%%= f.error_messages %>
+  <p>
+    <%%= f.label :username %><br />
+    <%%= f.text_field :username %>
+  </p>
+  <p>
+    <%%= f.label :password %><br />
+    <%%= f.password_field :password %>
+  </p>
+  <p><%%= f.submit "Log in" %></p>
+<%% end %>
+<%- else -%>
+<%% form_tag <%= session_plural_name %>_path do %>
   <p>
     <%%= label_tag :login, "Username or Email Address" %><br />
     <%%= text_field_tag :login, params[:login] %>
@@ -13,3 +27,4 @@
   </p>
   <p><%%= submit_tag "Log in" %></p>
 <%% end %>
+<%- end -%>

@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe <%= user_class_name %> do
+<%- unless options[:authlogic] -%>
   def new_<%= user_singular_name %>(attributes = {})
     attributes[:username] ||= 'foo'
     attributes[:email] ||= 'foo@example.com'
@@ -78,4 +79,5 @@ describe <%= user_class_name %> do
     new_<%= user_singular_name %>(:username => 'foobar', :password => 'secret').save!
     <%= user_class_name %>.authenticate('foobar', 'badpassword').should be_nil
   end
+<%- end -%>
 end

@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class <%= user_class_name %>Test < ActiveSupport::TestCase
+<%- unless options[:authlogic] -%>
   def new_<%= user_singular_name %>(attributes = {})
     attributes[:username] ||= 'foo'
     attributes[:email] ||= 'foo@example.com'
@@ -80,4 +81,5 @@ class <%= user_class_name %>Test < ActiveSupport::TestCase
     new_<%= user_singular_name %>(:username => 'foobar', :password => 'secret').save!
     assert_nil <%= user_class_name %>.authenticate('foobar', 'badpassword')
   end
+<%- end -%>
 end

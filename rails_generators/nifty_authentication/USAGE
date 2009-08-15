@@ -9,9 +9,13 @@ Description:
 
 Usage:
     If you do not pass any arguments, the model name will default to "user", and
-    the authentication controller will default to "sessions". You can override
+    the authentication controller will default to "session". You can override
     each of these respectively by passing one or two arguments. Either name can
     be CamelCased or under_scored.
+    
+    Make sure to setup the authlogic gem if you are using that option.
+    
+      config.gem "authlogic"
 
 Examples:
     script/generate nifty_authentication
@@ -22,9 +26,9 @@ Examples:
     
         Creates account model, accounts_controller, and sessions_controller.
     
-    script/generate nifty_authentication Account CurrentSession
+    script/generate nifty_authentication Account UserSession
     
-        Creates account model, accounts_controller, and current_sessions_controller.
+        Creates account model, accounts_controller, and user_sessions_controller.
 
 Methods:
     There are several methods generated which you can use in your application.

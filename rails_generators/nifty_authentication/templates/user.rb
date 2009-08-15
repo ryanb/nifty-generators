@@ -1,4 +1,7 @@
 class <%= user_class_name %> < ActiveRecord::Base
+<%- if options[:authlogic] -%>
+  acts_as_authentic
+<%- else -%>
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation
   
@@ -35,4 +38,5 @@ class <%= user_class_name %> < ActiveRecord::Base
   def encrypt_password(pass)
     Digest::SHA1.hexdigest([pass, password_salt].join)
   end
+<%- end -%>
 end

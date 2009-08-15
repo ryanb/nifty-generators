@@ -19,6 +19,8 @@ describe <%= user_plural_class_name %>Controller do
     <%= user_class_name %>.any_instance.stubs(:valid?).returns(true)
     post :create
     response.should redirect_to(root_url)
+  <%- unless options[:authlogic] -%>
     session['<%= user_singular_name %>_id'].should == assigns['<%= user_singular_name %>'].id
+  <%- end -%>
   end
 end

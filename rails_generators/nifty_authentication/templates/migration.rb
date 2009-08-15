@@ -1,10 +1,15 @@
 class Create<%= user_plural_class_name %> < ActiveRecord::Migration
   def self.up
     create_table :<%= user_plural_name %> do |t|
-      t.column :username,      :string
-      t.column :email,         :string
-      t.column :password_hash, :string
-      t.column :password_salt, :string
+      t.string :username
+      t.string :email
+    <%- if options[:authlogic] -%>
+      t.string :persistence_token
+      t.string :crypted_password
+    <%- else -%>
+      t.string :password_hash
+    <%- end -%>
+      t.string :password_salt
       t.timestamps
     end
   end

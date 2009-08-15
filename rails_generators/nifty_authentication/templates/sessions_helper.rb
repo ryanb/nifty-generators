@@ -1,2 +1,2 @@
-module <%= sessions_class_name %>Helper
+module <%= session_plural_class_name %>Helper
 end

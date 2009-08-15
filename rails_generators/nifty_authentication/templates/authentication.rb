@@ -3,7 +3,7 @@
 # common example you might add to your application layout file.
 # 
 #   <%% if logged_in? %>
-#     Welcome <%%= current_user.username %>! Not you?
+#     Welcome <%%=h current_<%= user_singular_name %>.username %>! Not you?
 #     <%%= link_to "Log out", logout_path %>
 #   <%% else %>
 #     <%%= link_to "Sign up", signup_path %> or
@@ -20,9 +20,21 @@ module Authentication
     controller.filter_parameter_logging :password
   end
   
+<%- if options[:authlogic] -%>
+  def current_<%= session_singular_name %>
+    return @current_<%= session_singular_name %> if defined?(@current_<%= session_singular_name %>)
+    @current_<%= session_singular_name %> = <%= session_class_name %>.find
+  end
+
+  def current_<%= user_singular_name %>
+    return @current_<%= user_singular_name %> if defined?(@current_<%= user_singular_name %>)
+    @current_<%= user_singular_name %> = current_<%= session_singular_name %> && current_<%= session_singular_name %>.record
+  end
+<%- else -%>
   def current_<%= user_singular_name %>
     @current_<%= user_singular_name %> ||= <%= user_class_name %>.find(session[:<%= user_singular_name %>_id]) if session[:<%= user_singular_name %>_id]
   end
+<%- end -%>
   
   def logged_in?
     current_<%= user_singular_name %>

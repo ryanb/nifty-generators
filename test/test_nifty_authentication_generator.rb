@@ -73,7 +73,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
     end
 
     context "generator with user and session names" do
-      rails_generator :nifty_authentication, "Account", "CurrentSessions"
+      rails_generator :nifty_authentication, "Account", "CurrentSession"
       should_generate_file 'app/models/account.rb'
       should_generate_file 'app/controllers/accounts_controller.rb'
       should_generate_file 'app/helpers/accounts_helper.rb'
@@ -155,6 +155,82 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
       
       should_generate_file "app/views/users/new.html.haml"
       should_generate_file "app/views/sessions/new.html.haml"
+    end
+
+    context "generator with authlogic option and custom names" do
+      rails_generator :nifty_authentication, "Account", :authlogic => true
+      should_generate_file 'app/models/account.rb'
+      should_generate_file 'app/controllers/accounts_controller.rb'
+      should_generate_file 'app/helpers/accounts_helper.rb'
+      should_generate_file 'app/views/accounts/new.html.erb'
+      should_generate_file 'app/controllers/account_sessions_controller.rb'
+      should_generate_file 'app/helpers/account_sessions_helper.rb'
+      should_generate_file 'app/views/account_sessions/new.html.erb'
+      should_generate_file 'test/fixtures/accounts.yml'
+      should_generate_file 'test/unit/account_test.rb'
+      should_generate_file 'test/functional/accounts_controller_test.rb'
+      should_generate_file 'test/functional/account_sessions_controller_test.rb'
+      should_generate_file 'lib/authentication.rb'
+      
+      should "only include acts_as_authentic in account model" do
+        assert_generated_file "app/models/account.rb" do |body|
+          assert_match "acts_as_authentic", body
+          assert_no_match(/validates/, body)
+          assert_no_match(/def/, body)
+        end
+      end
+      
+      should "should generate authentication module with current_account_session method" do
+        assert_generated_file "lib/authentication.rb" do |body|
+          assert_match "def current_account_session", body
+        end
+      end
+      
+      should "should generate AccountSession model" do
+        assert_generated_file "app/models/account_session.rb" do |body|
+          assert_match "class AccountSession < Authlogic::Session::Base", body
+        end
+      end
+      
+      should "should generate restful style actions in sessions controller" do
+        assert_generated_file "app/controllers/account_sessions_controller.rb" do |body|
+          assert_match "AccountSession.new", body
+        end
+      end
+      
+      should "should generate form for account session" do
+        assert_generated_file "app/views/account_sessions/new.html.erb" do |body|
+          assert_match "form_for @account_session", body
+        end
+      end
+      
+      should "should not include tests in account since authlogic is already tested" do
+        assert_generated_file "test/unit/account_test.rb" do |body|
+          assert_no_match(/def test/, body)
+        end
+      end
+      
+      should "should handle session controller tests differently" do
+        assert_generated_file "test/functional/account_sessions_controller_test.rb" do |body|
+          assert_match "AccountSession.find", body
+        end
+      end
+      
+      should "generate migration with authlogic columns" do
+        file = Dir.glob("#{RAILS_ROOT}/db/migrate/*.rb").first
+        assert file, "migration file doesn't exist"
+        assert_match(/[0-9]+_create_accounts.rb$/, file)
+        assert_generated_file "db/migrate/#{File.basename(file)}" do |body|
+          assert_match "class CreateAccounts", body
+          assert_match "t.string :username", body
+          assert_match "t.string :email", body
+          assert_match "t.string :crypted_password", body
+          assert_match "t.string :password_salt", body
+          assert_match "t.string :persistence_token", body
+          assert_match "t.timestamps", body
+          assert_no_match(/password_hash/, body)
+        end
+      end
     end
   end
 end
