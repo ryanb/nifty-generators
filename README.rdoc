@@ -57,6 +57,11 @@ you can just change the templates to whatever approach you prefer for
 setting the title.
 
 
+<b>I can't set new attributes in my model.</b>
+
+Add the attribute to the attr_accessible line in the model.
+
+
 <b>I get "undefined method 'root_url'" error.</b>
 
 Some generators default redirecting to the root_url. Set this in your
@@ -74,11 +79,6 @@ Run <tt>rake db:migrate</tt>.
 
 Try restarting your development server. Sometimes it doesn't detect the
 change in the routing.
-
-
-<b>I can't set new attributes in my User model.</b>
-
-Add the attribute to the attr_accessible line in the model.
 
 
 <b>The tests/specs don't work.</b>

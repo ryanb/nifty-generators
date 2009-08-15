@@ -85,9 +85,10 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         end
       end
     
-      should "generate model with class as camelcase name" do
+      should "generate model with class as camelcase name and add attr_accessible for attributes" do
         assert_generated_file "app/models/line_item.rb" do |body|
           assert_match "class LineItem < ActiveRecord::Base", body
+          assert_match "attr_accessible :name, :description", body
         end
       end
     end
