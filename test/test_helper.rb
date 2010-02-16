@@ -17,10 +17,12 @@ end
 
 require 'rubygems'
 gem 'rails', '2.0.2' # getting a Rails.configuration error with 2.1
-require 'rubigen'  # gem install rubigen
+gem 'rubigen', '1.4'
+gem 'shoulda', '2.0.6'
+require 'rubigen' # gem install rubigen --version=1.4
 require 'rubigen/helpers/generator_test_helper'
 require 'rails_generator'
-require 'shoulda' # gem install Shoulda
+require 'shoulda' # gem install shoulda --version=2.0.6
 require 'mocha'
 
 module NiftyGenerators
