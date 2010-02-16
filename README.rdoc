@@ -1,25 +1,18 @@
 = Nifty Generators
 
-A collection of useful Rails generator scripts.
+A collection of useful Rails generator scripts for scaffolding, layout files, authentication, and more.
 
 
 == Install
 
   gem install nifty-generators
 
-You may need to uninstall the older version if it's installed.
-
-  gem uninstall ryanb-nifty-generators
-
 
 == Usage
 
-Once you install the gem, the generators will be available to all Rails
-applications on your system. If you run script/generate without any
-additional arguments you should see the available generators listed.
+Once you install the gem, the generators will be available to all Rails applications on your system. If you run script/generate without any additional arguments you should see the available generators listed.
 
-To run the generator, go to your rails project directory and call it
-using the script/generate or script/destroy command.
+To run the generator, go to your rails project directory and call it using the script/generate or script/destroy command.
 
   script/generate nifty_scaffold Recipe name:string index new
 
@@ -40,8 +33,7 @@ To view the README for each generator, run it with the +--help+ option.
 
 <b>What is the difference between nifty_scaffold and built-in scaffold?</b>
 
-One of the primary differences is that nifty_scaffold allows you to choose which
-controller actions to generate.
+One of the primary differences is that nifty_scaffold allows you to choose which controller actions to generate.
 
   script/generate nifty_scaffold post name:string index new edit
 
@@ -52,9 +44,7 @@ It also offers support for HAML, Shoulda, and RSpec.
 
 <b>I get "undefined method 'title'" error.</b>
 
-Try running nifty_layout, that will generate this helper method. Or
-you can just change the templates to whatever approach you prefer for
-setting the title.
+Try running nifty_layout, that will generate this helper method. Or you can just change the templates to whatever approach you prefer for setting the title.
 
 
 <b>I can't set new attributes in my model.</b>
@@ -64,8 +54,7 @@ Add the attribute to the attr_accessible line in the model.
 
 <b>I get "undefined method 'root_url'" error.</b>
 
-Some generators default redirecting to the root_url. Set this in your
-routes.rb file like this (substituting your controller name).
+Some generators default redirecting to the root_url. Set this in your routes.rb file like this (substituting your controller name).
 
   map.root :controller => 'foo'
 
@@ -77,8 +66,7 @@ Run <tt>rake db:migrate</tt>.
 
 <b>I get a routing error when I try to submit a form.</b>
 
-Try restarting your development server. Sometimes it doesn't detect the
-change in the routing.
+Try restarting your development server. Sometimes it doesn't detect the change in the routing.
 
 
 <b>The tests/specs don't work.</b>
@@ -96,11 +84,15 @@ Make sure you have mocha installed and require it in your spec/test helper.
 Also, make sure you're using Rails 2.1 or greater.
 
 
-== Development
+== Found a bug?
 
-This project can be found on github at the following URL.
+If you are having a problem with Nifty Generators, first look at the FAQs above. If you still cannot resolve it, please submit an issue here.
 
-http://github.com/ryanb/nifty-generators/
+http://github.com/ryanb/nifty-generators/issues
 
-If you wish the generators behaved differently, please consider
-forking the project and modifying to your heart's content.
+
+== Rails 3
+
+Nifty Generators does not yet officially work with Rails 3, but a fork is available here.
+
+http://github.com/dvyjones/nifty-generators

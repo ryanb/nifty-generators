@@ -9,7 +9,7 @@ Description:
 
 Usage:
     Pass the name of the model, either CamelCased or under_scored, as the first
-    argument, and an optional list of attribute pairs and controller actions.
+    argument along with an optional list of attribute pairs and controller actions.
     
     If no controller actions are specified, they will default to index, show,
     new, create, edit, update, and destroy.
@@ -29,7 +29,7 @@ Usage:
     
     Adding an "!" in the mix of arguments will invert the passed controller
     actions. This will include all 7 controller actitons except the ones
-    mentioned. This option doesn't effect model attributes.
+    mentioned. This option doesn't affect model attributes.
 
 Examples:
     script/generate nifty_scaffold post
