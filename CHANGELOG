@@ -1,3 +1,17 @@
+0.3.2 (February 16th, 2010)
+
+* Including all files in gem, was missing files in rails_generator directory
+
+
+0.3.1 (February 16th, 2010)
+
+* improving documentation
+
+* fixing name of generated session model for authlogic in nifty_authorization
+
+* use "username" instead of "login" for authlogic haml form template in nifty_authorization
+
+
 0.3.0 (August 15th, 2009)
 
 * adding attr_accessible to models in nifty_scaffold

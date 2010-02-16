@@ -1,15 +1,12 @@
 require 'rubygems'
 require 'rake'
-require 'echoe'
+require 'rake/testtask'
 
-Echoe.new('nifty-generators', '0.3.0') do |p|
-  p.project        = "niftygenerators"
-  p.description    = "A collection of useful generator scripts for Rails."
-  p.url            = "http://github.com/ryanb/nifty-generators"
-  p.author         = 'Ryan Bates'
-  p.email          = "ryan (at) railscasts (dot) com"
-  p.ignore_pattern = ["script/*"]
-  p.development_dependencies = []
+desc "Run tests."
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList['test/test*.rb']
+  t.verbose = true
 end
 
-Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }
+task :default => :test
