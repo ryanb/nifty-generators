@@ -157,7 +157,7 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
       should_generate_file "app/views/sessions/new.html.haml"
     end
 
-    context "generator with authlogic option and custom names" do
+    context "generator with authlogic option and custom account name" do
       rails_generator :nifty_authentication, "Account", :authlogic => true
       should_generate_file 'app/models/account.rb'
       should_generate_file 'app/controllers/accounts_controller.rb'
@@ -229,6 +229,44 @@ class TestNiftyAuthenticationGenerator < Test::Unit::TestCase
           assert_match "t.string :persistence_token", body
           assert_match "t.timestamps", body
           assert_no_match(/password_hash/, body)
+        end
+      end
+    end
+
+    context "generator with authlogic option and custom account and session name" do
+      rails_generator :nifty_authentication, "Account", "UserSession", :authlogic => true
+      should_generate_file 'app/controllers/user_sessions_controller.rb'
+      should_generate_file 'app/helpers/user_sessions_helper.rb'
+      should_generate_file 'app/views/user_sessions/new.html.erb'
+      should_generate_file 'test/functional/user_sessions_controller_test.rb'
+      
+      should "should generate authentication module with current_user_session method" do
+        assert_generated_file "lib/authentication.rb" do |body|
+          assert_match "def current_user_session", body
+        end
+      end
+      
+      should "should generate UserSession model" do
+        assert_generated_file "app/models/user_session.rb" do |body|
+          assert_match "class UserSession < Authlogic::Session::Base", body
+        end
+      end
+      
+      should "should generate restful style actions in sessions controller" do
+        assert_generated_file "app/controllers/user_sessions_controller.rb" do |body|
+          assert_match "UserSession.new", body
+        end
+      end
+      
+      should "should generate form for user session" do
+        assert_generated_file "app/views/user_sessions/new.html.erb" do |body|
+          assert_match "form_for @user_session", body
+        end
+      end
+      
+      should "should handle session controller tests differently" do
+        assert_generated_file "test/functional/user_sessions_controller_test.rb" do |body|
+          assert_match "UserSession.find", body
         end
       end
     end

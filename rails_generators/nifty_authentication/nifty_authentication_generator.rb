@@ -19,7 +19,7 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       
       m.directory "app/views/#{user_plural_name}"
       m.template "user.rb", "app/models/#{user_singular_name}.rb"
-      m.template "authlogic_session.rb", "app/models/#{user_singular_name}_session.rb" if options[:authlogic]
+      m.template "authlogic_session.rb", "app/models/#{session_singular_name}.rb" if options[:authlogic]
       m.template "users_controller.rb", "app/controllers/#{user_plural_name}_controller.rb"
       m.template "users_helper.rb", "app/helpers/#{user_plural_name}_helper.rb"
       m.template "views/#{view_language}/signup.html.#{view_language}", "app/views/#{user_plural_name}/new.html.#{view_language}"
