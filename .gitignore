@@ -2,3 +2,4 @@ Manifest
 pkg
 doc
 *.gem
+tmp/**/*
