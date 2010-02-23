@@ -10,14 +10,14 @@ module Nifty
         copy_file "config.yml", "config/#{file_name}_config.yml"
       end
     
-      no_tasks do
-        def file_name
-          config_name.underscore
-        end
-  
-        def constant_name
-          config_name.underscore.upcase
-        end
+      private
+      
+      def file_name
+        config_name.underscore
+      end
+
+      def constant_name
+        config_name.underscore.upcase
       end
     end
   end

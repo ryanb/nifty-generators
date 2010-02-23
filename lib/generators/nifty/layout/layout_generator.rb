@@ -18,10 +18,10 @@ module Nifty
         copy_file 'helper.rb', 'app/helpers/layout_helper.rb'
       end
     
-      no_tasks do
-        def file_name
-          layout_name.underscore
-        end
+      private
+      
+      def file_name
+        layout_name.underscore
       end
     end
   end
