@@ -1,0 +1,30 @@
+- title "Log in"
+
+%p== Don't have an account? #{link_to "Sign up!", signup_path}
+
+<%- if options[:authlogic] -%>
+- form_for @<%= session_singular_name %> do |f|
+  = f.error_messages
+  %p
+    = f.label :username
+    %br
+    = f.text_field :username
+  %p
+    = f.label :password
+    %br
+    = f.password_field :password
+  %p
+    = f.submit "Log in"
+<%- else -%>
+- form_tag <%= session_plural_name %>_path do
+  %p
+    = label_tag :login, "Username or Email Address"
+    %br
+    = text_field_tag :login, params[:login]
+  %p
+    = label_tag :password
+    %br
+    = password_field_tag :password
+  %p
+    = submit_tag "Log in"
+<%- end -%>

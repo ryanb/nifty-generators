@@ -1,6 +1,6 @@
 require 'cucumber'
 require 'spec'
 
-After do
+Before do
   FileUtils.rm_rf "tmp/rails_app"
 end
