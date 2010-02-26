@@ -21,37 +21,37 @@ class <%= user_class_name %>Test < ActiveSupport::TestCase
   end
   
   should "require username" do
-    assert new_<%= user_singular_name %>(:username => '').errors.on(:username)
+    assert new_<%= user_singular_name %>(:username => '').errors[:username]
   end
   
   should "require password" do
-    assert new_<%= user_singular_name %>(:password => '').errors.on(:password)
+    assert new_<%= user_singular_name %>(:password => '').errors[:password]
   end
   
   should "require well formed email" do
-    assert new_<%= user_singular_name %>(:email => 'foo@bar@example.com').errors.on(:email)
+    assert new_<%= user_singular_name %>(:email => 'foo@bar@example.com').errors[:email]
   end
   
   should "validate uniqueness of email" do
     new_<%= user_singular_name %>(:email => 'bar@example.com').save!
-    assert new_<%= user_singular_name %>(:email => 'bar@example.com').errors.on(:email)
+    assert new_<%= user_singular_name %>(:email => 'bar@example.com').errors[:email]
   end
   
   should "validate uniqueness of username" do
     new_<%= user_singular_name %>(:username => 'uniquename').save!
-    assert new_<%= user_singular_name %>(:username => 'uniquename').errors.on(:username)
+    assert new_<%= user_singular_name %>(:username => 'uniquename').errors[:username]
   end
   
   should "not allow odd characters in username" do
-    assert new_<%= user_singular_name %>(:username => 'odd ^&(@)').errors.on(:username)
+    assert new_<%= user_singular_name %>(:username => 'odd ^&(@)').errors[:username]
   end
   
   should "validate password is longer than 3 characters" do
-    assert new_<%= user_singular_name %>(:password => 'bad').errors.on(:password)
+    assert new_<%= user_singular_name %>(:password => 'bad').errors[:password]
   end
   
   should "require matching password confirmation" do
-    assert new_<%= user_singular_name %>(:password_confirmation => 'nonmatching').errors.on(:password)
+    assert new_<%= user_singular_name %>(:password_confirmation => 'nonmatching').errors[:password]
   end
   
   should "generate password hash and salt on create" do

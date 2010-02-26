@@ -18,7 +18,7 @@ describe <%= user_plural_class_name %>Controller do
   it "create action should redirect when model is valid" do
     <%= user_class_name %>.any_instance.stubs(:valid?).returns(true)
     post :create
-    response.should redirect_to(root_url)
+    response.should redirect_to("/")
   <%- unless options[:authlogic] -%>
     session['<%= user_singular_name %>_id'].should == assigns['<%= user_singular_name %>'].id
   <%- end -%>

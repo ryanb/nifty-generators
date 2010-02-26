@@ -53,7 +53,7 @@ module Nifty
       end
       
       def create_include_line
-        inject_into_class 'app/controllers/application_controller.rb', 'ApplicationController', '  include Authentication'
+        inject_into_class "app/controllers/application_controller.rb", "ApplicationController", "  include Authentication\n"
       end
 
       def create_test_files

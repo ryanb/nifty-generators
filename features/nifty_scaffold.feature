@@ -16,3 +16,7 @@ Feature: Nifty Scaffold Generator
       | app/views/projects/edit.html.erb       |
       | db/migrate                             |
     And I should see "resources :projects" in file "config/routes.rb"
+    When I run "rails g nifty:layout"
+    And I run "rake db:migrate"
+    And I add "gem 'mocha', :group => :test" to file "Gemfile"
+    Then I should successfully run "rake test"

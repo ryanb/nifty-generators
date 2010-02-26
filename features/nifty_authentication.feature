@@ -27,6 +27,10 @@ Feature: Nifty Authentication Generator
       | match 'logout' => 'sessions#destroy', :as => :logout |
       | match 'signup' => 'users#new', :as => :signup        |
     And I should see "include Authentication" in file "app/controllers/application_controller.rb"
+    When I run "rails g nifty:layout"
+    And I run "rake db:migrate"
+    And I add "gem 'mocha', :group => :test" to file "Gemfile"
+    Then I should successfully run "rake test"
   
   Scenario: Generate named authentication
     Given a new Rails app
@@ -49,3 +53,7 @@ Feature: Nifty Authentication Generator
       | match 'login' => 'current_sessions#new', :as => :login       |
       | match 'logout' => 'current_sessions#destroy', :as => :logout |
       | match 'signup' => 'accounts#new', :as => :signup             |
+    When I run "rails g nifty:layout"
+    And I run "rake db:migrate"
+    And I add "gem 'mocha', :group => :test" to file "Gemfile"
+    Then I should successfully run "rake test"

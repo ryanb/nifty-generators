@@ -10,7 +10,7 @@ class <%= user_plural_class_name %>Controller < ApplicationController
       session[:<%= user_singular_name %>_id] = @<%= user_singular_name %>.id
     <%- end -%>
       flash[:notice] = "Thank you for signing up! You are now logged in."
-      redirect_to root_url
+      redirect_to "/"
     else
       render :action => 'new'
     end

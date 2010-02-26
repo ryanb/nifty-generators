@@ -18,7 +18,7 @@ describe <%= session_plural_class_name %>Controller do
   
   it "create action should redirect when authentication is valid" do
     post :create, :<%= session_singular_name %> => { :username => "foo", :password => "secret" }
-    response.should redirect_to(root_url)
+    response.should redirect_to("/")
     <%= session_class_name %>.find.<%= user_singular_name %>.should == <%= user_plural_name %>(:foo)
   end
 <%- else -%>
@@ -32,7 +32,7 @@ describe <%= session_plural_class_name %>Controller do
   it "create action should redirect when authentication is valid" do
     <%= user_class_name %>.stubs(:authenticate).returns(<%= user_class_name %>.first)
     post :create
-    response.should redirect_to(root_url)
+    response.should redirect_to("/")
     session['<%= user_singular_name %>_id'].should == <%= user_class_name %>.first.id
   end
 <%- end -%>
