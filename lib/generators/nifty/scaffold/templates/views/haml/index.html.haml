@@ -1,0 +1,25 @@
+- title "<%= plural_name.titleize %>"
+
+%table
+  %tr
+    <%- for attribute in model_attributes -%>
+    %th <%= attribute.human_name %>
+    <%- end -%>
+  - for <%= singular_name %> in @<%= plural_name %>
+    %tr
+      <%- for attribute in model_attributes -%>
+      %td= <%= singular_name %>.<%= attribute.name %>
+      <%- end -%>
+      <%- if action? :show -%>
+      %td= link_to 'Show', <%= singular_name %>
+      <%- end -%>
+      <%- if action? :edit -%>
+      %td= link_to 'Edit', edit_<%= singular_name %>_path(<%= singular_name %>)
+      <%- end -%>
+      <%- if action? :destroy -%>
+      %td= link_to 'Destroy', <%= singular_name %>, :confirm => 'Are you sure?', :method => :delete
+      <%- end -%>
+
+<%- if actions? :new -%>
+%p= link_to "New <%= singular_name.titleize %>", new_<%= singular_name %>_path
+<%- end -%>
