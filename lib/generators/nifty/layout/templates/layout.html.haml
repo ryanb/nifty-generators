@@ -14,6 +14,6 @@
         = content_tag :div, msg, :id => "flash_#{name}"
       
       - if show_title?
-        %h1=h yield(:title)
+        %h1= yield(:title)
       
       = yield

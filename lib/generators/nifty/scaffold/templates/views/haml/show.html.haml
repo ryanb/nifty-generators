@@ -3,7 +3,7 @@
 <%- for attribute in model_attributes -%>
 %p
   %strong <%= attribute.human_name.titleize %>:
-  =h @<%= singular_name %>.<%= attribute.name %>
+  = @<%= singular_name %>.<%= attribute.name %>
 <%- end -%>
 
 %p
