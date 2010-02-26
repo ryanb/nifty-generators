@@ -1,0 +1,50 @@
+Description:
+    Generates a user model, users controller, and sessions controller. The 
+    users controller handles the registration and the sessions controller 
+    handles authentication. This is similar to restful_authentication, but 
+    simpler.
+    
+    IMPORTANT: This generator uses the "title" helper method which is generated
+    by the nifty_layout generator. You may want to run that generator first.
+
+Usage:
+    If you do not pass any arguments, the model name will default to "user", and
+    the authentication controller will default to "session". You can override
+    each of these respectively by passing one or two arguments. Either name can
+    be CamelCased or under_scored.
+    
+    Make sure to setup the authlogic gem if you are using that option.
+    
+      gem "authlogic" # in Gemfile
+
+Examples:
+    rails generate nifty:authentication
+        
+        Creates user model, users_controller, and sessions_controller.
+    
+    rails generate nifty:authentication account
+    
+        Creates account model, accounts_controller, and sessions_controller.
+    
+    rails generate nifty:authentication Account UserSession
+    
+        Creates account model, accounts_controller, and user_sessions_controller.
+
+Methods:
+    There are several methods generated which you can use in your application.
+    Here's a common example of what you might add to your layout.
+    
+      <% if logged_in? %>
+        Welcome <%= current_user.username %>! Not you?
+        <%= link_to "Log out", logout_path %>
+      <% else %>
+        <%= link_to "Sign up", signup_path %> or
+        <%= link_to "log in", login_path %>.
+      <% end %>
+    
+    You can also restrict unregistered users from accessing a controller using
+    a before filter. For example.
+    
+      before_filter :login_required, :except => [:index, :show]
+    
+    See the generated file lib/authentication.rb for details.

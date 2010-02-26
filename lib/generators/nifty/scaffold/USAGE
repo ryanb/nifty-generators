@@ -1,0 +1,51 @@
+Description:
+    Scaffolds an entire resource, from model and migration to controller and
+    views. The resource is ready to use as a starting point for your restful,
+    resource-oriented application. Tests or specs are also generated depending
+    on if you have a "spec" directory or not.
+    
+    IMPORTANT: This generator uses the "title" helper method which is generated
+    by the nifty_layout generator. You may want to run that generator first.
+
+Usage:
+    Pass the name of the model, either CamelCased or under_scored, as the first
+    argument along with an optional list of attribute pairs and controller actions.
+    
+    If no controller actions are specified, they will default to index, show,
+    new, create, edit, update, and destroy.
+    
+    IMPORTANT: If no attribute pairs are specified, no model will be generated.
+    It will try to determine the attributes from an existing model.
+
+    Attribute pairs are column_name:sql_type arguments specifying the
+    model's attributes. Timestamps are added by default, so you don't have to
+    specify them by hand as 'created_at:datetime updated_at:datetime'.
+
+    For example, `nifty_scaffold post name:string content:text hidden:boolean`
+    gives you a model with those three attributes, a controller that handles
+    the create/show/update/destroy, forms to create and edit your posts, and
+    an index that lists them all, as well as a map.resources :posts
+    declaration in config/routes.rb.
+    
+    Adding an "!" in the mix of arguments will invert the passed controller
+    actions. This will include all 7 controller actitons except the ones
+    mentioned. This option doesn't affect model attributes.
+
+Examples:
+    rails generate nifty:scaffold post
+        
+        Will create a controller called "posts" it will contain all seven
+        CRUD actions along with the views. A model will NOT be created,
+        instead it will look for an existing model and use those attributes.
+    
+    rails generate nifty:scaffold post name:string content:text index new edit
+        
+        Will create a Post model and migration file with the name and content
+        attributes. It will also create a controller with index, new, create,
+        edit, and update actions. Notice the create and update actions are
+        added automatically with new and edit.
+    
+    rails generate nifty:scaffold post ! show new
+        
+        Creates a posts controller (no model) with index, edit, update, and
+        destroy actions.
