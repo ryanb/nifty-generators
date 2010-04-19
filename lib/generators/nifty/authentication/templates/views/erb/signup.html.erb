@@ -2,8 +2,17 @@
 
 <p>Already have an account? <%%= link_to "Log in", login_path %>.</p>
 
-<%% form_for @<%= user_singular_name %> do |f| %>
-  <%%= f.error_messages %>
+<%%= form_for @<%= user_singular_name %> do |f| %>
+  <%% if @<%= user_singular_name %>.errors.any? %>
+    <div id="error_explanation">
+      <h2><%%= pluralize(@<%= user_singular_name %>.errors.count, "error") %> prohibited this <%= user_singular_name %> from being saved:</h2>
+      <ul>
+      <%% @<%= user_singular_name %>.errors.full_messages.each do |msg| %>
+        <li><%%= msg %></li>
+      <%% end %>
+      </ul>
+    </div>
+  <%% end %>
   <p>
     <%%= f.label :username %><br />
     <%%= f.text_field :username %>

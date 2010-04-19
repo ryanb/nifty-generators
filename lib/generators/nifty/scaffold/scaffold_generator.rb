@@ -1,5 +1,6 @@
 require 'generators/nifty'
 require 'rails/generators/migration'
+require 'rails/generators/generated_attribute'
 
 module Nifty
   module Generators
