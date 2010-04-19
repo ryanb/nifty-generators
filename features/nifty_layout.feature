@@ -6,7 +6,7 @@ Feature: Nifty Layout Generator
   Scenario: Generate normal application layout
     Given a new Rails app
     When I run "rails g nifty:layout -f"
-    Then I should see "stylesheet_link_tag 'application'" in file "app/views/layouts/application.html.erb"
+    Then I should see "stylesheet_link_tag "application"" in file "app/views/layouts/application.html.erb"
     And I should see file "app/helpers/layout_helper.rb"
     And I should see file "app/helpers/error_messages_helper.rb"
     And I should see file "public/stylesheets/application.css"
@@ -14,6 +14,6 @@ Feature: Nifty Layout Generator
   Scenario: Generate named layout with haml and sass
     Given a new Rails app
     When I run "rails g nifty:layout FooBar --haml -f"
-    Then I should see "stylesheet_link_tag 'foo_bar'" in file "app/views/layouts/foo_bar.html.haml"
+    Then I should see "stylesheet_link_tag "foo_bar"" in file "app/views/layouts/foo_bar.html.haml"
     And I should see file "public/stylesheets/sass/foo_bar.sass"
     And I should see file "app/helpers/layout_helper.rb"

@@ -27,7 +27,7 @@ a {
   margin-top: 20px;
 }
 
-#flash_notice, #flash_error {
+#flash_notice, #flash_error, #flash_alert {
   padding: 5px 8px;
   margin: 10px 0;
 }
@@ -37,7 +37,7 @@ a {
   border: solid 1px #6C6;
 }
 
-#flash_error {
+#flash_error, #flash_alert {
   background-color: #FCC;
   border: solid 1px #C66;
 }
@@ -53,12 +53,13 @@ a {
   padding-bottom: 12px;
   margin-bottom: 20px;
   background-color: #f0f0f0;
+  font-size: 12px;
 }
 
 .error_messages h2 {
   text-align: left;
   font-weight: bold;
-  padding: 5px 5px 5px 15px;
+  padding: 5px 10px;
   font-size: 12px;
   margin: 0;
   background-color: #c00;
@@ -66,16 +67,9 @@ a {
 }
 
 .error_messages p {
-  color: #333;
-  margin-bottom: 0;
-  padding: 8px;
+  margin: 8px 10px;
 }
 
 .error_messages ul {
-  margin: 2px 24px;
-}
-
-.error_messages ul li {
-  font-size: 12px;
-  list-style: disc;
+  margin: 0;
 }

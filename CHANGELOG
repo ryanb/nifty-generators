@@ -1,3 +1,12 @@
+0.4.0 (not released)
+
+* adding error_messages_for and f.error_messages helper for Rails 3 nifty:layout
+
+* adding initial Rails 3 support (thanks Henrik Hodne)
+
+* adding xmlns to <head> element in nifty_layout
+
+
 0.3.2 (February 16th, 2010)
 
 * Including all files in gem, was missing files in rails_generator directory
