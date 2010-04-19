@@ -24,9 +24,22 @@ To run the generator, go to your rails project directory and call it using the s
 * nifty_config: generates a config YAML file and loader.
 * nifty_authentication: generates user model with sign up and log in.
 
-To view the README for each generator, run it with the +--help+ option.
+To view the README for each generator, run it with the +help+ option.
 
   script/generate nifty_layout --help
+
+
+== Rails 3
+
+To use Nifty Generators with Rails 3 you will need to include it in your Gemfile.
+
+  gem "nifty-generators"
+
+The generators use a colon as the separator instead of an underscore.
+
+  rails g nifty:layout
+
+The Rails 3 support is still in early development, please {report any issues}[http://github.com/ryanb/nifty-generators/issues] you find.
 
 
 == Troubleshooting and FAQs
@@ -89,10 +102,3 @@ Also, make sure you're using Rails 2.1 or greater.
 If you are having a problem with Nifty Generators, first look at the FAQs above. If you still cannot resolve it, please submit an issue here.
 
 http://github.com/ryanb/nifty-generators/issues
-
-
-== Rails 3
-
-Nifty Generators does not yet officially work with Rails 3, but a fork is available here.
-
-http://github.com/dvyjones/nifty-generators
