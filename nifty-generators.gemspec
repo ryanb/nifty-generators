@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "nifty-generators"
-  s.version     = "0.3.2"
+  s.version     = "0.4.0"
   s.author      = "Ryan Bates"
   s.email       = "ryan@railscasts.com"
   s.homepage    = "http://github.com/ryanb/nifty-generators"

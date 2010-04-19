@@ -1,4 +1,4 @@
-0.4.0 (not released)
+0.4.0 (April 19th, 2010)
 
 * adding error_messages_for and f.error_messages helper for Rails 3 nifty:layout
 
