@@ -46,7 +46,7 @@ a {
   display: inline;
 }
 
-#errorExplanation {
+.error_messages {
   width: 400px;
   border: 2px solid #CF0000;
   padding: 0px;
@@ -55,7 +55,7 @@ a {
   background-color: #f0f0f0;
 }
 
-#errorExplanation h2 {
+.error_messages h2 {
   text-align: left;
   font-weight: bold;
   padding: 5px 5px 5px 15px;
@@ -65,17 +65,17 @@ a {
   color: #fff;
 }
 
-#errorExplanation p {
+.error_messages p {
   color: #333;
   margin-bottom: 0;
   padding: 8px;
 }
 
-#errorExplanation ul {
+.error_messages ul {
   margin: 2px 24px;
 }
 
-#errorExplanation ul li {
+.error_messages ul li {
   font-size: 12px;
   list-style: disc;
 }

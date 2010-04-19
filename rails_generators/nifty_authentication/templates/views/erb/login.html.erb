@@ -4,16 +4,7 @@
 
 <%- if options[:authlogic] -%>
 <%%= form_for @<%= session_singular_name %> do |f| %>
-  <%% if @<%= session_singular_name %>.errors.any? %>
-    <div id="error_explanation">
-      <h2><%%= pluralize(@<%= session_singular_name %>.errors.count, "error") %> prohibited this <%= session_singular_name %> from logging in:</h2>
-      <ul>
-      <%% @<%= session_singular_name %>.errors.full_messages.each do |msg| %>
-        <li><%%= msg %></li>
-      <%% end %>
-      </ul>
-    </div>
-  <%% end %>
+  <%%= f.error_messages %>
   <p>
     <%%= f.label :username %><br />
     <%%= f.text_field :username %>

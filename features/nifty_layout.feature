@@ -8,6 +8,7 @@ Feature: Nifty Layout Generator
     When I run "rails g nifty:layout -f"
     Then I should see "stylesheet_link_tag 'application'" in file "app/views/layouts/application.html.erb"
     And I should see file "app/helpers/layout_helper.rb"
+    And I should see file "app/helpers/error_messages_helper.rb"
     And I should see file "public/stylesheets/application.css"
 
   Scenario: Generate named layout with haml and sass

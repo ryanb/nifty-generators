@@ -15,9 +15,10 @@ module Nifty
           template 'layout.html.erb', "app/views/layouts/#{file_name}.html.erb"
           copy_file 'stylesheet.css', "public/stylesheets/#{file_name}.css"
         end
-        copy_file 'helper.rb', 'app/helpers/layout_helper.rb'
+        copy_file 'layout_helper.rb', 'app/helpers/layout_helper.rb'
+        copy_file 'error_messages_helper.rb', 'app/helpers/error_messages_helper.rb'
       end
-    
+      
       private
       
       def file_name
