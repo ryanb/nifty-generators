@@ -2,7 +2,7 @@
 
 <p>Already have an account? <%%= link_to "Log in", login_path %>.</p>
 
-<%%= form_for @<%= user_singular_name %> do |f| %>
+<%% form_for @<%= user_singular_name %> do |f| %>
   <%%= f.error_messages %>
   <p>
     <%%= f.label :username %><br />
