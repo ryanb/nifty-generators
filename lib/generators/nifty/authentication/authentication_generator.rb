@@ -26,7 +26,7 @@ module Nifty
         template 'sessions_controller.rb', "app/controllers/#{session_plural_name}_controller.rb"
       end
 
-      def crete_helper_files
+      def create_helper_files
         template 'users_helper.rb', "app/helpers/#{user_plural_name}_helper.rb"
         template 'sessions_helper.rb', "app/helpers/#{session_plural_name}_helper.rb"
       end
