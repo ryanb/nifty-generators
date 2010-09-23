@@ -51,8 +51,9 @@ module Nifty
       def create_migration
         migration_template 'migration.rb', "db/migrate/create_#{user_plural_name}.rb"
       end
-      
-      def create_include_line
+
+      def load_and_include_authentication
+        inject_into_class "config/application.rb", "Application", "    config.autoload_paths << \"\#{config.root}/lib\""
         inject_into_class "app/controllers/application_controller.rb", "ApplicationController", "  include Authentication\n"
       end
 
