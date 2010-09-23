@@ -1,3 +1,5 @@
+0.4.1 (September 23rd, 2010)
+
 * fixing frozen hash error when not passing additional arguments to nifty:scaffold - issue #35
 
 * fixing rendering of default title in nifty:layout - issue #36
