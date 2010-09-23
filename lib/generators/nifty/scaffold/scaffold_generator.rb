@@ -50,7 +50,7 @@ module Nifty
         end
 
         if @model_attributes.empty?
-          @skip_model = false # skip model if no attributes
+          @skip_model = true # skip model if no attributes
           if model_exists?
             model_columns_for_attributes.each do |column|
               @model_attributes << Rails::Generators::GeneratedAttribute.new(column.name.to_s, column.type.to_s)
