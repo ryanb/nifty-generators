@@ -4,7 +4,7 @@
       post :create
       assert_template 'new'
     end
-    
+
     should "redirect when model is valid" do
       <%= class_name %>.any_instance.stubs(:valid?).returns(true)
       post :create

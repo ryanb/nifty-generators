@@ -7,7 +7,7 @@ class <%= session_plural_class_name %>ControllerTest < ActionController::TestCas
       assert_template 'new'
     end
   end
-  
+
   context "create action" do
   <%- if options[:authlogic] -%>
     should "render new template when authentication is invalid" do
@@ -15,7 +15,7 @@ class <%= session_plural_class_name %>ControllerTest < ActionController::TestCas
       assert_template 'new'
       assert_nil <%= session_class_name %>.find
     end
-    
+
     should "redirect when authentication is valid" do
       post :create, :<%= session_singular_name %> => { :username => "foo", :password => "secret" }
       assert_redirected_to root_url
@@ -28,7 +28,7 @@ class <%= session_plural_class_name %>ControllerTest < ActionController::TestCas
       assert_template 'new'
       assert_nil session['<%= user_singular_name %>_id']
     end
-    
+
     should "redirect when authentication is valid" do
       <%= user_class_name %>.stubs(:authenticate).returns(<%= user_class_name %>.first)
       post :create

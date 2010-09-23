@@ -5,13 +5,13 @@ class <%= user_plural_class_name %>ControllerTest < ActionController::TestCase
     get :new
     assert_template 'new'
   end
-  
+
   def test_create_invalid
     <%= user_class_name %>.any_instance.stubs(:valid?).returns(false)
     post :create
     assert_template 'new'
   end
-  
+
   def test_create_valid
     <%= user_class_name %>.any_instance.stubs(:valid?).returns(true)
     post :create

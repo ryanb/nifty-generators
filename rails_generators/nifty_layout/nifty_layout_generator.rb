@@ -3,13 +3,13 @@ class NiftyLayoutGenerator < Rails::Generator::Base
     super
     @name = @args.first || 'application'
   end
-  
+
   def manifest
     record do |m|
       m.directory 'app/views/layouts'
       m.directory 'public/stylesheets'
       m.directory 'app/helpers'
-      
+
       if options[:haml]
         m.directory 'public/stylesheets/sass'
         m.template "layout.html.haml", "app/views/layouts/#{file_name}.html.haml"
@@ -21,7 +21,7 @@ class NiftyLayoutGenerator < Rails::Generator::Base
       m.file "helper.rb", "app/helpers/layout_helper.rb"
     end
   end
-  
+
   def file_name
     @name.underscore
   end

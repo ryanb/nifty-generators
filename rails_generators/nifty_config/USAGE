@@ -3,11 +3,11 @@ Description:
     directory and an initializer to load this config. The config has a
     separate section for each environment. This is a great place to put
     any config settings you don't want in your app.
-  
+
     The config is loaded into a constant called APP_CONFIG by default,
     this changes depending on the name you choose to pass the generator.
     Use this constant to access the config settings like this.
-  
+
     APP_CONFIG[:some_setting]
 
 

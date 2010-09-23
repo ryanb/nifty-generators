@@ -9,7 +9,7 @@ class Create<%= plural_class_name %> < ActiveRecord::Migration
     <%- end -%>
     end
   end
-  
+
   def self.down
     drop_table :<%= plural_name %>
   end

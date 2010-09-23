@@ -2,7 +2,7 @@ Feature: Nifty Authentication Generator
   In order to authenticate users
   As a rails developer
   I want to generate some user authentication
-  
+
   Scenario: Generate default authentication
     Given a new Rails app
     When I run "rails g nifty:authentication"
@@ -31,7 +31,7 @@ Feature: Nifty Authentication Generator
     And I run "rake db:migrate"
     And I add "gem 'mocha', :group => :test" to file "Gemfile"
     Then I should successfully run "rake test"
-  
+
   Scenario: Generate named authentication
     Given a new Rails app
     When I run "rails g nifty:authentication Account CurrentSession"

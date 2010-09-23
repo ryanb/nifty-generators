@@ -3,7 +3,6 @@ Feature: Nifty Scaffold Generator
   As a rails developer
   I want to generate a model, controller, and views for that resource
 
-  @focus
   Scenario: Generate scaffold for simple resource
     Given a new Rails app
     When I run "rails g nifty:scaffold Project name:string"

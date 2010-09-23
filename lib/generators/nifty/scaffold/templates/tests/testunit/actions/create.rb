@@ -3,7 +3,7 @@
     post :create
     assert_template 'new'
   end
-  
+
   def test_create_valid
     <%= class_name %>.any_instance.stubs(:valid?).returns(true)
     post :create

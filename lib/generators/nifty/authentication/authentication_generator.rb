@@ -5,17 +5,17 @@ module Nifty
   module Generators
     class AuthenticationGenerator < Base
       include Rails::Generators::Migration
-      
+
       argument :user_name, :type => :string, :default => 'user', :banner => 'user_name'
       argument :session_name, :type => :string, :default => '[[DEFAULT]]', :banner => 'sessions_controller_name'
-      
+
       class_option :testunit, :desc => 'Use test/unit for test files.', :group => 'Test framework', :type => :boolean
       class_option :rspec, :desc => 'Use RSpec for test files.', :group => 'Test framework', :type => :boolean
       class_option :shoulda, :desc => 'Use shoulda for test files.', :group => 'Test framework', :type => :boolean
-      
+
       class_option :haml, :desc => 'Generate HAML views instead of ERB.', :type => :boolean
       class_option :authlogic, :desc => 'Use Authlogic for authentication.', :type => :boolean
-      
+
       def create_model_files
         template 'user.rb', "app/models/#{user_singular_name}.rb"
         template 'authlogic_session.rb', "app/models/#{user_singular_name}_session.rb" if options.authlogic?
@@ -47,7 +47,7 @@ module Nifty
         route "match 'logout' => '#{session_plural_name}#destroy', :as => :logout"
         route "match 'signup' => '#{user_plural_name}#new', :as => :signup"
       end
-      
+
       def create_migration
         migration_template 'migration.rb', "db/migrate/create_#{user_plural_name}.rb"
       end
@@ -72,7 +72,7 @@ module Nifty
       end
 
       private
-      
+
       def session_name
         @_session_name ||= @session_name == '[[DEFAULT]]' ?
           (options.authlogic? ? user_name + '_session' : 'session') :

@@ -28,7 +28,7 @@ require 'mocha'
 module NiftyGenerators
   module TestHelper
     include RubiGen::GeneratorTestHelper
-  
+
     def setup
       bare_setup
     end
@@ -36,34 +36,34 @@ module NiftyGenerators
     def teardown
       bare_teardown
     end
-  
+
     protected
-  
+
     def run_rails_generator(generator, *args)
       options = args.pop if args.last.kind_of? Hash
       options ||= {}
       run_generator(generator.to_s, args, generator_sources, options.reverse_merge(:quiet => true))
     end
-  
+
     def generator_sources
       [RubiGen::PathSource.new(:test, File.join(File.dirname(__FILE__), "..", "rails_generators"))]
     end
   end
-  
+
   module ShouldaAdditions
     def rails_generator(*args)
       setup do
         run_rails_generator(*args)
       end
     end
-    
+
     def should_generate_file(file, &block)
       should "generate file #{file}" do
         yield("foo") if block_given?
         assert_generated_file(file)
       end
     end
-    
+
     def should_not_generate_file(file)
       should "not generate file #{file}" do
         assert !File.exists?("#{APP_ROOT}/#{file}"),"The file '#{file}' should not exist"

@@ -7,14 +7,14 @@ class <%= user_plural_class_name %>ControllerTest < ActionController::TestCase
       assert_template 'new'
     end
   end
-  
+
   context "create action" do
     should "render new template when model is invalid" do
       <%= user_class_name %>.any_instance.stubs(:valid?).returns(false)
       post :create
       assert_template 'new'
     end
-  
+
     should "redirect when model is valid" do
       <%= user_class_name %>.any_instance.stubs(:valid?).returns(true)
       post :create

@@ -3,7 +3,7 @@
     put :update, :id => <%= class_name %>.first
     assert_template 'edit'
   end
-  
+
   def test_update_valid
     <%= class_name %>.any_instance.stubs(:valid?).returns(true)
     put :update, :id => <%= class_name %>.first

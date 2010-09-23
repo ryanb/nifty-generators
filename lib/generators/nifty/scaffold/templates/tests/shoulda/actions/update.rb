@@ -4,7 +4,7 @@
       put :update, :id => <%= class_name %>.first
       assert_template 'edit'
     end
-  
+
     should "redirect when model is valid" do
       <%= class_name %>.any_instance.stubs(:valid?).returns(true)
       put :update, :id => <%= class_name %>.first

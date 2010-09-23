@@ -4,9 +4,9 @@ module Nifty
   module Generators
     class LayoutGenerator < Base
       argument :layout_name, :type => :string, :default => 'application', :banner => 'layout_name'
-    
+
       class_option :haml, :desc => 'Generate HAML for view, and SASS for stylesheet.', :type => :boolean
-    
+
       def create_layout
         if options.haml?
           template 'layout.html.haml', "app/views/layouts/#{file_name}.html.haml"
@@ -18,9 +18,9 @@ module Nifty
         copy_file 'layout_helper.rb', 'app/helpers/layout_helper.rb'
         copy_file 'error_messages_helper.rb', 'app/helpers/error_messages_helper.rb'
       end
-      
+
       private
-      
+
       def file_name
         layout_name.underscore
       end

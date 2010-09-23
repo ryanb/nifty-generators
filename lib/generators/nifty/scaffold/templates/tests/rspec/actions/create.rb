@@ -3,7 +3,7 @@
     post :create
     response.should render_template(:new)
   end
-  
+
   it "create action should redirect when model is valid" do
     <%= class_name %>.any_instance.stubs(:valid?).returns(true)
     post :create

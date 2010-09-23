@@ -13,7 +13,7 @@ class Create<%= user_plural_class_name %> < ActiveRecord::Migration
       t.timestamps
     end
   end
-  
+
   def self.down
     drop_table :<%= user_plural_name %>
   end

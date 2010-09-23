@@ -107,7 +107,7 @@ module Nifty
       end
 
       private
-      
+
       def form_partial?
         actions? :new, :edit
       end

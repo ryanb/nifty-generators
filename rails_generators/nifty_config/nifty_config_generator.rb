@@ -3,7 +3,7 @@ class NiftyConfigGenerator < Rails::Generator::Base
     super
     @name = @args.first || 'app'
   end
-  
+
   def manifest
     record do |m|
       m.directory 'config/initializers'
@@ -12,11 +12,11 @@ class NiftyConfigGenerator < Rails::Generator::Base
       m.file     "config.yml",  "config/#{file_name}_config.yml"
     end
   end
-  
+
   def file_name
     @name.underscore
   end
-  
+
   def constant_name
     @name.underscore.upcase
   end

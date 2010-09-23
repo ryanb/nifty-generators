@@ -3,7 +3,7 @@ class <%= session_plural_class_name %>Controller < ApplicationController
   def new
     @<%= session_singular_name %> = <%= session_class_name %>.new
   end
-  
+
   def create
     @<%= session_singular_name %> = <%= session_class_name %>.new(params[:<%= session_singular_name %>])
     if @<%= session_singular_name %>.save
@@ -13,7 +13,7 @@ class <%= session_plural_class_name %>Controller < ApplicationController
       render :action => 'new'
     end
   end
-  
+
   def destroy
     @<%= session_singular_name %> = <%= session_class_name %>.find
     @<%= session_singular_name %>.destroy
@@ -23,7 +23,7 @@ class <%= session_plural_class_name %>Controller < ApplicationController
 <%- else -%>
   def new
   end
-  
+
   def create
     <%= user_singular_name %> = <%= user_class_name %>.authenticate(params[:login], params[:password])
     if <%= user_singular_name %>
@@ -35,7 +35,7 @@ class <%= session_plural_class_name %>Controller < ApplicationController
       render :action => 'new'
     end
   end
-  
+
   def destroy
     session[:<%= user_singular_name %>_id] = nil
     flash[:notice] = "You have been logged out."
