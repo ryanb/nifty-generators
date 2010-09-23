@@ -3,6 +3,7 @@ Feature: Nifty Scaffold Generator
   As a rails developer
   I want to generate a model, controller, and views for that resource
 
+  @focus
   Scenario: Generate scaffold for simple resource
     Given a new Rails app
     When I run "rails g nifty:scaffold Project name:string"
@@ -18,6 +19,7 @@ Feature: Nifty Scaffold Generator
     And I should see "resources :projects" in file "config/routes.rb"
     When I run "rails g nifty:layout -f"
     And I run "rake db:migrate"
+    And I should successfully run "rails g nifty:scaffold Project -f"
     And I add "gem 'mocha', :group => :test" to file "Gemfile"
     Then I should successfully run "rake test"
 

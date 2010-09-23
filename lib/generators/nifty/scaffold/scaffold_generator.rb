@@ -27,10 +27,12 @@ module Nifty
 
         @controller_actions = []
         @model_attributes = []
+        @skip_model = options.skip_model?
+        @invert_actions = options.invert?
 
         args_for_c_m.each do |arg|
           if arg == '!'
-            options[:invert] = true
+            @invert_actions = true
           elsif arg.include?(':')
             @model_attributes << Rails::Generators::GeneratedAttribute.new(*arg.split(':'))
           else
@@ -43,12 +45,12 @@ module Nifty
         @controller_actions.uniq!
         @model_attributes.uniq!
 
-        if options.invert? || @controller_actions.empty?
+        if @invert_actions || @controller_actions.empty?
           @controller_actions = all_actions - @controller_actions
         end
 
         if @model_attributes.empty?
-          options[:skip_model] = true # default to skipping model if no attributes passed
+          @skip_model = false # skip model if no attributes
           if model_exists?
             model_columns_for_attributes.each do |column|
               @model_attributes << Rails::Generators::GeneratedAttribute.new(column.name.to_s, column.type.to_s)
@@ -60,7 +62,7 @@ module Nifty
       end
 
       def create_model
-        unless options.skip_model?
+        unless @skip_model
           template 'model.rb', "app/models/#{singular_name}.rb"
           if options.rspec?
             template "tests/rspec/model.rb", "spec/models/#{singular_name}_spec.rb"
@@ -73,7 +75,7 @@ module Nifty
       end
 
       def create_migration
-        unless options.skip_model? || options.skip_migration?
+        unless @skip_model || options.skip_migration?
           migration_template 'migration.rb', "db/migrate/create_#{plural_name}.rb"
         end
       end
