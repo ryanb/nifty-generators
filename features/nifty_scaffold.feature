@@ -21,7 +21,6 @@ Feature: Nifty Scaffold Generator
     And I add "gem 'mocha', :group => :test" to file "Gemfile"
     Then I should successfully run "rake test"
 
-  @focus
   Scenario: Generate scaffold with rspec tests
     Given a new Rails app
     When I run "rails g nifty:scaffold Project name:string --rspec"
