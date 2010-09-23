@@ -20,3 +20,18 @@ Feature: Nifty Scaffold Generator
     And I run "rake db:migrate"
     And I add "gem 'mocha', :group => :test" to file "Gemfile"
     Then I should successfully run "rake test"
+
+  @focus
+  Scenario: Generate scaffold with rspec tests
+    Given a new Rails app
+    When I run "rails g nifty:scaffold Project name:string --rspec"
+    Then I should see the following files
+      | spec/models/project_spec.rb                  |
+      | spec/controllers/projects_controller_spec.rb |
+    And I should see "resources :projects" in file "config/routes.rb"
+    When I run "rails g nifty:layout -f"
+    And I run "rake db:migrate"
+    And I add "gem 'mocha', :group => :test" to file "Gemfile"
+    And I add "gem 'rspec-rails', '>= 2.0.0.beta.19'" to file "Gemfile"
+    And I run "rails g rspec:install"
+    Then I should successfully run "rake spec"

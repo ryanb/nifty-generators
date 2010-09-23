@@ -5,7 +5,7 @@ end
 When /^I add "([^\"]*)" to file "([^\"]*)"$/ do |content, short_path|
   path = File.join(@current_directory, short_path)
   File.should exist(path)
-  File.open(path, 'a') { |f| f.write(content) }
+  File.open(path, 'a') { |f| f.write(content + "\n") }
 end
 
 Then /^I should see file "([^\"]*)"$/ do |path|

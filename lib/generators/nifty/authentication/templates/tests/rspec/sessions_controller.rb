@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
  
 describe <%= session_plural_class_name %>Controller do
   fixtures :all
-  integrate_views
+  render_views
   
   it "new action should render new template" do
     get :new
