@@ -16,6 +16,10 @@ module Nifty
       class_option :haml, :desc => 'Generate HAML views instead of ERB.', :type => :boolean
       class_option :authlogic, :desc => 'Use Authlogic for authentication.', :type => :boolean
 
+      def add_gems
+        append_file "Gemfile", "\ngem 'bcrypt-ruby', :require => 'bcrypt'\ngem 'mocha', :group => :test\n"
+      end
+
       def create_model_files
         template 'user.rb', "app/models/#{user_singular_name}.rb"
         template 'authlogic_session.rb', "app/models/#{user_singular_name}_session.rb" if options.authlogic?

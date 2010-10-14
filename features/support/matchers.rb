@@ -1,4 +1,4 @@
-Spec::Matchers.define :exist do |path|
+RSpec::Matchers.define :exist do |path|
   match do
     File.exist?(path)
   end

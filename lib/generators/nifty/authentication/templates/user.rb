@@ -30,13 +30,13 @@ class <%= user_class_name %> < ActiveRecord::Base
 
   def prepare_password
     unless password.blank?
-      self.password_salt = Digest::SHA1.hexdigest([Time.now, rand].join)
+      self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = encrypt_password(password)
     end
   end
 
   def encrypt_password(pass)
-    Digest::SHA1.hexdigest([pass, password_salt].join)
+    BCrypt::Engine.hash_secret(pass, password_salt)
   end
 <%- end -%>
 end
