@@ -1,3 +1,18 @@
+0.4.2 (October 15, 2010)
+
+* switching to BCrypt for user password encryption on nifty:authentication - issue #53
+
+* adding Gemfile, now just run "bunde" and "rake" to get cucumber features running - issue #56
+
+* renaming Authentication module to ControllerAuthentication to avoid conflicts in nifty:authentication - issue #57
+
+* automatically use RSpec when there's a spec directory - issue #50
+
+* escaping page title in layout helper (thanks cbmeeks) - issue #52
+
+* adding edit profile page to nifty:authentication - closes #54
+
+
 0.4.1 (September 23rd, 2010)
 
 * fixing frozen hash error when not passing additional arguments to nifty:scaffold - issue #35
