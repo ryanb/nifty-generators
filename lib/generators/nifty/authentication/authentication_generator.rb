@@ -41,7 +41,7 @@ module Nifty
       end
 
       def create_lib_files
-        template 'authentication.rb', 'lib/authentication.rb'
+        template 'controller_authentication.rb', 'lib/controller_authentication.rb'
       end
 
       def create_routes
@@ -58,7 +58,7 @@ module Nifty
 
       def load_and_include_authentication
         inject_into_class "config/application.rb", "Application", "    config.autoload_paths << \"\#{config.root}/lib\""
-        inject_into_class "app/controllers/application_controller.rb", "ApplicationController", "  include Authentication\n"
+        inject_into_class "app/controllers/application_controller.rb", "ApplicationController", "  include ControllerAuthentication\n"
       end
 
       def create_test_files

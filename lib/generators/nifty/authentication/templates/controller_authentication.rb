@@ -14,7 +14,7 @@
 # a before filter. For example.
 #
 #   before_filter :login_required, :except => [:index, :show]
-module Authentication
+module ControllerAuthentication
   def self.included(controller)
     controller.send :helper_method, :current_<%= user_singular_name %>, :logged_in?, :redirect_to_target_or_default
   end

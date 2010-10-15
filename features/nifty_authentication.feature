@@ -14,7 +14,7 @@ Feature: Nifty Authentication Generator
       | app/controllers/sessions_controller.rb      |
       | app/helpers/sessions_helper.rb              |
       | app/views/sessions/new.html.erb             |
-      | lib/authentication.rb                       |
+      | lib/controller_authentication.rb            |
       | test/fixtures/users.yml                     |
       | test/unit/user_test.rb                      |
       | test/functional/users_controller_test.rb    |
@@ -26,7 +26,7 @@ Feature: Nifty Authentication Generator
       | match 'login' => 'sessions#new', :as => :login       |
       | match 'logout' => 'sessions#destroy', :as => :logout |
       | match 'signup' => 'users#new', :as => :signup        |
-    And I should see "include Authentication" in file "app/controllers/application_controller.rb"
+    And I should see "include ControllerAuthentication" in file "app/controllers/application_controller.rb"
     And I should see "gem 'mocha', :group => :test" in file "Gemfile"
     And I should see "gem 'bcrypt-ruby', :require => 'bcrypt'" in file "Gemfile"
     When I run "rails g nifty:layout -f"
