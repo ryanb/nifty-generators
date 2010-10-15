@@ -32,9 +32,9 @@ Feature: Nifty Scaffold Generator
     Then I should see the following files
       | spec/models/task_spec.rb                  |
       | spec/controllers/tasks_controller_spec.rb |
-    And I should see "resources :projects" in file "config/routes.rb"
     When I run "rails g nifty:layout -f"
     And I run "rake db:migrate"
     And I add "gem 'rspec-rails', '>= 2.0.0.beta.19'" to file "Gemfile"
     And I run "rails g rspec:install"
+    And I replace "mock_with :rspec" with "mock_with :mocha" in file "spec/spec_helper.rb"
     Then I should successfully run "rake spec"

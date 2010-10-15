@@ -61,3 +61,17 @@ Feature: Nifty Authentication Generator
     When I run "rails g nifty:layout -f"
     And I run "rake db:migrate"
     Then I should successfully run "rake test"
+
+  Scenario: Generate named authentication with rspec
+    Given a new Rails app
+    When I run "rails g nifty:authentication Account CurrentSession --rspec"
+    Then I should see the following files
+      | spec/models/account_spec.rb                          |
+      | spec/controllers/accounts_controller_spec.rb         |
+      | spec/controllers/current_sessions_controller_spec.rb |
+    When I run "rails g nifty:layout -f"
+    And I run "rake db:migrate"
+    And I add "gem 'rspec-rails', '>= 2.0.1'" to file "Gemfile"
+    And I run "rails g rspec:install"
+    And I replace "mock_with :rspec" with "mock_with :mocha" in file "spec/spec_helper.rb"
+    Then I should successfully run "rake spec"

@@ -8,6 +8,13 @@ When /^I add "([^\"]*)" to file "([^\"]*)"$/ do |content, short_path|
   File.open(path, 'a') { |f| f.write(content + "\n") }
 end
 
+When /^I replace "([^\"]*)" with "([^\"]*)" in file "([^\"]*)"$/ do |old_content, new_content, short_path|
+  path = File.join(@current_directory, short_path)
+  File.should exist(path)
+  content = File.read(path).gsub(old_content, new_content)
+  File.open(path, 'w') { |f| f.write(content) }
+end
+
 Then /^I should see file "([^\"]*)"$/ do |path|
   File.should exist(File.join(@current_directory, path))
 end
