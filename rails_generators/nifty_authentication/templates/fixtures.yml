@@ -7,8 +7,8 @@ foo:
   crypted_password: 3d16c326648cccafe3d4b4cb024475c381dda92f430dfedf6f933e1f61203bacb6bae2437849bdb43b06be335e23790e4aa03902b3c28c3bbbbe27d501e521f3
   password_salt: n6z_wtpWoIsHgQb5IcFd
 <%- else -%>
-  password_hash: 3488f5f7efecab14b91eb96169e5e1ee518a569f
-  password_salt: bef65e058905c379436d80d1a32e7374b139e7b0
+  password_hash: "$2a$10$tUpEtZKDRfgosDmX2cUIFeCvHAHn9VT/0ZvmUhXiZCxSIrSdRiLhu"
+  password_salt: "$2a$10$tUpEtZKDRfgosDmX2cUIFe"
 <%- end -%>
 
 bar:
@@ -19,6 +19,6 @@ bar:
   crypted_password: 3bc9f4113ca645a186765df3d31a9352d0067bf2304ba0cdd6b08a7f3d58c6668ab1762fa3e76aef466ea2ff188399d8e6c40244fa59312bb4112292dac9f7f0
   password_salt: UiAh9ejabnKRxqsiK0xO
 <%- else -%>
-  password_hash: 3488f5f7efecab14b91eb96169e5e1ee518a569f
-  password_salt: bef65e058905c379436d80d1a32e7374b139e7b0
+  password_hash: "$2a$10$tUpEtZKDRfgosDmX2cUIFeCvHAHn9VT/0ZvmUhXiZCxSIrSdRiLhu"
+  password_salt: "$2a$10$tUpEtZKDRfgosDmX2cUIFe"
 <%- end -%>
