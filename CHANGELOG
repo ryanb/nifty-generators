@@ -1,5 +1,7 @@
 0.4.2 (October 15, 2010)
 
+* adding mocha to Gemfile automatically if it's not there already
+
 * switching to BCrypt for user password encryption on nifty:authentication - issue #53
 
 * adding Gemfile, now just run "bunde" and "rake" to get cucumber features running - issue #56

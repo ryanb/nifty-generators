@@ -17,7 +17,8 @@ module Nifty
       class_option :authlogic, :desc => 'Use Authlogic for authentication.', :type => :boolean
 
       def add_gems
-        append_file "Gemfile", "\ngem 'bcrypt-ruby', :require => 'bcrypt'\ngem 'mocha', :group => :test\n"
+        gem "bcrypt-ruby", :require => "bcrypt" unless File.read(destination_path("Gemfile")).include? "bcrypt"
+        gem "mocha", :group => :test unless File.read(destination_path("Gemfile")).include? "mocha"
       end
 
       def create_model_files

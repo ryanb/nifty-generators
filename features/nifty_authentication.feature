@@ -29,8 +29,8 @@ Feature: Nifty Authentication Generator
       | match 'signup' => 'users#new', :as => :signup        |
       | match 'user/edit' => 'users#edit', :as => :edit_user |
     And I should see "include ControllerAuthentication" in file "app/controllers/application_controller.rb"
-    And I should see "gem 'mocha', :group => :test" in file "Gemfile"
-    And I should see "gem 'bcrypt-ruby', :require => 'bcrypt'" in file "Gemfile"
+    And I should see "gem "mocha", :group => :test" in file "Gemfile"
+    And I should see "gem "bcrypt-ruby", :require => "bcrypt"" in file "Gemfile"
     When I run "rails g nifty:layout -f"
     And I run "rake db:migrate"
     Then I should successfully run "rake test"

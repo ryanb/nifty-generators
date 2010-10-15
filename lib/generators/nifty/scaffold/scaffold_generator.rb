@@ -61,6 +61,10 @@ module Nifty
         end
       end
 
+      def add_gems
+        gem "mocha", :group => :test unless File.read(destination_path("Gemfile")).include? "mocha"
+      end
+
       def create_model
         unless @skip_model
           template 'model.rb', "app/models/#{singular_name}.rb"
