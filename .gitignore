@@ -3,3 +3,5 @@ pkg
 doc
 *.gem
 tmp/**/*
+Gemfile.lock
+.bundle
