@@ -64,7 +64,7 @@ module Nifty
       def create_model
         unless @skip_model
           template 'model.rb', "app/models/#{singular_name}.rb"
-          if options.rspec?
+          if test_framework == :rspec
             template "tests/rspec/model.rb", "spec/models/#{singular_name}_spec.rb"
             template 'fixtures.yml', "spec/fixtures/#{plural_name}.yml"
           else
@@ -98,7 +98,7 @@ module Nifty
 
           route "resources #{plural_name.to_sym.inspect}"
 
-          if options.rspec?
+          if test_framework == :rspec
             template "tests/#{test_framework}/controller.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
           else
             template "tests/#{test_framework}/controller.rb", "test/functional/#{plural_name}_controller_test.rb"
