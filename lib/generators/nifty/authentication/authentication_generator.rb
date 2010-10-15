@@ -37,6 +37,8 @@ module Nifty
 
       def create_view_files
         template "views/#{view_language}/signup.html.#{view_language}", "app/views/#{user_plural_name}/new.html.#{view_language}"
+        template "views/#{view_language}/edit.html.#{view_language}", "app/views/#{user_plural_name}/edit.html.#{view_language}"
+        template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{user_plural_name}/_form.html.#{view_language}"
         template "views/#{view_language}/login.html.#{view_language}", "app/views/#{session_plural_name}/new.html.#{view_language}"
       end
 
@@ -50,6 +52,7 @@ module Nifty
         route "match 'login' => '#{session_plural_name}#new', :as => :login"
         route "match 'logout' => '#{session_plural_name}#destroy', :as => :logout"
         route "match 'signup' => '#{user_plural_name}#new', :as => :signup"
+        route "match '#{user_singular_name}/edit' => '#{user_plural_name}#edit', :as => :edit_#{user_singular_name}"
       end
 
       def create_migration

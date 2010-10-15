@@ -3,7 +3,8 @@
 # common example you might add to your application layout file.
 #
 #   <%% if logged_in? %>
-#     Welcome <%%= current_<%= user_singular_name %>.username %>! Not you?
+#     Welcome <%%= current_<%= user_singular_name %>.username %>.
+#     <%%= link_to "Edit profile", edit_<%= user_singular_name %>_path %> or
 #     <%%= link_to "Log out", logout_path %>
 #   <%% else %>
 #     <%%= link_to "Sign up", signup_path %> or
@@ -55,6 +56,6 @@ module ControllerAuthentication
   private
 
   def store_target_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = request.url
   end
 end
