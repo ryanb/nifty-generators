@@ -4,7 +4,7 @@ A collection of useful Rails generator scripts for scaffolding, layout files, au
 
 == Contribution
 Added option 
-	-- simple_form
+	--simple_form
 to nifty_scaffold
 
 == Install
