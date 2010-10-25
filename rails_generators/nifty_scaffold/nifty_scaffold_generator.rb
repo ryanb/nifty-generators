@@ -77,7 +77,11 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         end
 
         if form_partial?
-          m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
+          if options[:simple_form]
+            m.template "views/#{view_language}/_simple_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
+          else
+            m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
+          end
         end
 
         m.route_resources plural_name

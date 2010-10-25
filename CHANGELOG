@@ -1,3 +1,7 @@
+0.4.3 (October 25, 2010)
+
+* added simple_form option --simple_form
+
 0.4.2 (October 15, 2010)
 
 * adding mocha to Gemfile automatically if it's not there already

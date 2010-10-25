@@ -2,6 +2,10 @@
 
 A collection of useful Rails generator scripts for scaffolding, layout files, authentication, and more.
 
+== Contribution
+Added option 
+	-- simple_form
+to nifty_scaffold
 
 == Install
 
