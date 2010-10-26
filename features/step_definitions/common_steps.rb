@@ -42,3 +42,7 @@ end
 Then /^I should successfully run "([^\"]*)"$/ do |command|
   system("cd #{@current_directory} && #{command}").should be_true
 end
+
+When /^the following text is put into the file "([^\"]*)"$/ do |file_name, content|
+  File.open(File.join(@current_directory, file_name), 'w') { |f| f.write(content) }
+end
