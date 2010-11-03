@@ -38,3 +38,21 @@ Feature: Nifty Scaffold Generator
     And I run "rails g rspec:install"
     And I replace "mock_with :rspec" with "mock_with :mocha" in file "spec/spec_helper.rb"
     Then I should successfully run "rake spec"
+
+  Scenario: Generate scaffold for namespaced resource
+    Given a new Rails app
+    When I run "rails g nifty:scaffold Admin::User name:string"
+    Then I should see the following files
+      | app/models/admin/user.rb                  |
+      | app/controllers/admin/users_controller.rb |
+      | app/helpers/admin/users_helper.rb         |
+      | app/views/admin/users/index.html.erb      |
+      | app/views/admin/users/show.html.erb       |
+      | app/views/admin/users/new.html.erb        |
+      | app/views/admin/users/edit.html.erb       |
+      | db/migrate                                |
+    And I should see "namespace(:admin){ resources :users }" in file "config/routes.rb"
+    When I run "rails g nifty:layout -f"
+    And I run "rake db:migrate"
+    And I should successfully run "rails g nifty:scaffold Admin::User -f"
+    Then I should successfully run "rake test"

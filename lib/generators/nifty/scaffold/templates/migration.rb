@@ -1,6 +1,6 @@
-class Create<%= plural_class_name %> < ActiveRecord::Migration
+class Create<%= plural_class_name.delete('::') %> < ActiveRecord::Migration
   def self.up
-    create_table :<%= plural_name %> do |t|
+    create_table <%= table_name.to_sym.inspect %> do |t|
     <%- for attribute in model_attributes -%>
       t.<%= attribute.type %> :<%= attribute.name %>
     <%- end -%>
@@ -11,6 +11,6 @@ class Create<%= plural_class_name %> < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :<%= plural_name %>
+    drop_table :<%= table_name %>
   end
 end

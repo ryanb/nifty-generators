@@ -1,6 +1,6 @@
   def test_destroy
-    <%= singular_name %> = <%= class_name %>.first
-    delete :destroy, :id => <%= singular_name %>
+    <%= instance_name %> = <%= class_name %>.first
+    delete :destroy, :id => <%= instance_name %>
     assert_redirected_to <%= items_path('url') %>
-    assert !<%= class_name %>.exists?(<%= singular_name %>.id)
+    assert !<%= class_name %>.exists?(<%= instance_name %>.id)
   end

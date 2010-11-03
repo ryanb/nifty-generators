@@ -80,7 +80,7 @@ module Nifty
 
       def create_migration
         unless @skip_model || options.skip_migration?
-          migration_template 'migration.rb', "db/migrate/create_#{plural_name}.rb"
+          migration_template 'migration.rb', "db/migrate/create_#{instances_name}.rb"
         end
       end
 
@@ -100,7 +100,11 @@ module Nifty
             template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
           end
 
-          route "resources #{plural_name.to_sym.inspect}"
+          namespaces = plural_name.split('/')
+          resource = namespaces.pop
+          route namespaces.reverse.inject("resources :#{resource}") { |acc, namespace|
+            "namespace(:#{namespace}){ #{acc} }"
+          }
 
           if test_framework == :rspec
             template "tests/#{test_framework}/controller.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
@@ -136,12 +140,24 @@ module Nifty
         model_name.underscore.pluralize
       end
 
+      def table_name
+        plural_name.gsub('/', '_')
+      end
+
       def class_name
         model_name.camelize
       end
 
       def plural_class_name
         plural_name.camelize
+      end
+
+      def instance_name
+        singular_name.gsub('/','_')
+      end
+
+      def instances_name
+        instance_name.pluralize
       end
 
       def controller_methods(dir_name)
@@ -164,7 +180,7 @@ module Nifty
 
       def items_path(suffix = 'path')
         if action? :index
-          "#{plural_name}_#{suffix}"
+          "#{instances_name}_#{suffix}"
         else
           "root_#{suffix}"
         end
@@ -172,7 +188,7 @@ module Nifty
 
       def item_path(suffix = 'path')
         if action? :show
-          "@#{singular_name}"
+          "@#{instance_name}"
         else
           items_path(suffix)
         end
@@ -180,7 +196,7 @@ module Nifty
 
       def item_path_for_spec(suffix = 'path')
         if action? :show
-          "#{singular_name}_#{suffix}(assigns[:#{singular_name}])"
+          "#{instance_name}_#{suffix}(assigns[:#{instance_name}])"
         else
           items_path(suffix)
         end
@@ -188,7 +204,7 @@ module Nifty
 
       def item_path_for_test(suffix = 'path')
         if action? :show
-          "#{singular_name}_#{suffix}(assigns(:#{singular_name}))"
+          "#{instance_name}_#{suffix}(assigns(:#{instance_name}))"
         else
           items_path(suffix)
         end

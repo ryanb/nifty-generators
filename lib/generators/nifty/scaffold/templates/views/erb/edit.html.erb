@@ -5,10 +5,10 @@
 <%- if actions? :show, :index -%>
 <p>
 <%- if action? :show -%>
-  <%%= link_to "Show", @<%= singular_name %> %> |
+  <%%= link_to "Show", @<%= instance_name %> %> |
 <%- end -%>
 <%- if action? :index -%>
-  <%%= link_to "View All", <%= plural_name %>_path %>
+  <%%= link_to "View All", <%= instances_name %>_path %>
 <%- end -%>
 </p>
 <%- end -%>

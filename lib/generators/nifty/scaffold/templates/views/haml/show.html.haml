@@ -3,18 +3,18 @@
 <%- for attribute in model_attributes -%>
 %p
   %strong <%= attribute.human_name.titleize %>:
-  = @<%= singular_name %>.<%= attribute.name %>
+  = @<%= instance_name %>.<%= attribute.name %>
 <%- end -%>
 
 %p
   <%- if action? :edit -%>
-  = link_to "Edit", edit_<%= singular_name %>_path(@<%= singular_name %>)
+  = link_to "Edit", edit_<%= instance_name %>_path(@<%= instance_name %>)
   |
   <%- end -%>
   <%- if action? :destroy -%>
-  = link_to "Destroy", @<%= singular_name %>, :confirm => 'Are you sure?', :method => :delete
+  = link_to "Destroy", @<%= instance_name %>, :confirm => 'Are you sure?', :method => :delete
   |
   <%- end -%>
   <%- if action? :index -%>
-  = link_to "View All", <%= plural_name %>_path
+  = link_to "View All", <%= instances_name %>_path
   <%- end -%>
