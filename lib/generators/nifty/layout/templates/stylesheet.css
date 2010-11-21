@@ -27,7 +27,7 @@ a {
   margin-top: 20px;
 }
 
-#flash_notice, #flash_error, #flash_alert {
+#flash_notice, #flash_error {
   padding: 5px 8px;
   margin: 10px 0;
 }
@@ -37,39 +37,54 @@ a {
   border: solid 1px #6C6;
 }
 
-#flash_error, #flash_alert {
+#flash_error {
   background-color: #FCC;
   border: solid 1px #C66;
 }
 
-.fieldWithErrors {
+.fieldWithErrors, .field_with_errors {
   display: inline;
+  color: #f00;
 }
 
-.error_messages {
+#errorExplanation {
   width: 400px;
   border: 2px solid #CF0000;
   padding: 0px;
   padding-bottom: 12px;
   margin-bottom: 20px;
   background-color: #f0f0f0;
-  font-size: 12px;
 }
 
-.error_messages h2 {
+#error_explanation {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2, #error_explanation h2 {
   text-align: left;
   font-weight: bold;
-  padding: 5px 10px;
+  padding: 5px 5px 5px 15px;
   font-size: 12px;
   margin: 0;
   background-color: #c00;
   color: #fff;
 }
 
-.error_messages p {
-  margin: 8px 10px;
+#errorExplanation p, #error_explanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 8px;
 }
 
-.error_messages ul {
-  margin: 0;
+#errorExplanation ul, #error_explanation ul {
+  margin: 12px 2px;
+}
+
+#errorExplanation ul li, #error_explanation ul li {
+  font-size: 12px;
+  list-style: disc;
 }
