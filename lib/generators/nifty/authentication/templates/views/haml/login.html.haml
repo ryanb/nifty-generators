@@ -3,7 +3,7 @@
 %p== Don't have an account? #{link_to "Sign up!", signup_path}
 
 <%- if options[:authlogic] -%>
-- form_for @<%= session_singular_name %> do |f|
+= form_for @<%= session_singular_name %> do |f|
   = f.error_messages
   %p
     = f.label :username
