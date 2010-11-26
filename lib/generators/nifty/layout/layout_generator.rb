@@ -6,7 +6,7 @@ module Nifty
       argument :layout_name, :type => :string, :default => 'application', :banner => 'layout_name'
 
       class_option :haml, :desc => 'Generate HAML for view, and SASS for stylesheet.', :type => :boolean
-      class_option :jquery, :desc => 'Replace the Prototype JS library with jQuery 1.4.x', :type => :boolean, :default => true
+      class_option :jquery, :desc => 'Replace the Prototype JS library with jQuery 1.4.x', :type => :boolean, :default => false
 
       def create_layout
         if options.haml?
