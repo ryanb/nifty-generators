@@ -18,10 +18,13 @@ module Nifty
         end
         if options.jquery?
           copy_file 'rails.js', 'public/javascripts/rails.js'
-          remove_file 'public/javascripts/prototype.js'
-          remove_file 'public/javascripts/effects.js'
-          remove_file 'public/javascripts/dragdrop.js'
-          remove_file 'public/javascripts/controls.js'
+          if yes? "Clean up prototype files?"
+            remove_file 'public/javascripts/prototype.js'
+            remove_file 'public/javascripts/effects.js'
+            remove_file 'public/javascripts/dragdrop.js'
+            remove_file 'public/javascripts/controls.js'
+          else
+          end
         end
         copy_file 'layout_helper.rb', 'app/helpers/layout_helper.rb'
         copy_file 'error_messages_helper.rb', 'app/helpers/error_messages_helper.rb'
