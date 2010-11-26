@@ -3,7 +3,11 @@
   <head>
     <title><%%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
     <%%= stylesheet_link_tag "<%= file_name %>" %>
-    <%%= javascript_include_tag :defaults %>
+		<%- if options.jquery? -%>
+			<%%= javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js", "rails" %>
+		<%- else -%>
+    	<%%= javascript_include_tag :defaults %>
+		<%- end -%>
     <%%= csrf_meta_tag %>
     <%%= yield(:head) %>
   </head>
