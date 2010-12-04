@@ -77,7 +77,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         end
 
         if form_partial?
-          if options[:simple_form]
+          if simple_form?
             m.template "views/#{view_language}/_simple_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
           else
             m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
@@ -188,6 +188,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   def rspec?
     test_framework == :rspec
   end
+  
+  def simple_form?
+    options[:simple_form]
+  end
 
 protected
 
@@ -215,6 +219,7 @@ protected
     opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
     opt.on("--rspec", "Use RSpec for test files.") { options[:test_framework] = :rspec }
     opt.on("--shoulda", "Use Shoulda for test files.") { options[:test_framework] = :shoulda }
+    opt.on("--simple_form", "Use simple_form for forms in views.") { |v| options[:simple_form] = v }
   end
 
   # is there a better way to do this? Perhaps with const_defined?
