@@ -1,4 +1,4 @@
-- simple_form_for @<%= singular_name %> do |f|
+= simple_form_for @<%= singular_name %> do |f|
   <%- for attribute in attributes -%>
     = f.input :<%= attribute.name %>
   <%- end -%>

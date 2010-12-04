@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = "nifty-generators"
   s.version     = "0.4.3"
-  s.author      = "Ryan Bates, with tiny contribution from Jonas Nielsen"
+  s.author      = "Ryan Bates"
   s.email       = "ryan@railscasts.com"
   s.homepage    = "http://github.com/ryanb/nifty-generators"
   s.summary     = "A collection of useful Rails generator scripts."

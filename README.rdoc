@@ -2,10 +2,6 @@
 
 A collection of useful Rails generator scripts for scaffolding, layout files, authentication, and more.
 
-== Contribution
-Added option 
-	--simple_form
-to nifty_scaffold
 
 == Install
 
@@ -56,7 +52,7 @@ One of the primary differences is that nifty_scaffold allows you to choose which
 
 There are a few changes to the generated code as well, such as no XML format by default.
 
-It also offers support for HAML, Shoulda, and RSpec.
+It also offers support for HAML, simple_form, Shoulda, and RSpec.
 
 
 <b>I get "undefined method 'title'" error.</b>
