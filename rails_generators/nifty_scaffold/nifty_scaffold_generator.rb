@@ -77,7 +77,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         end
 
         if form_partial?
-          if simple_form?
+          if options[:simple_form]
             m.template "views/#{view_language}/_simple_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
           else
             m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
@@ -189,10 +189,6 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     test_framework == :rspec
   end
   
-  def simple_form?
-    options[:simple_form]
-  end
-
 protected
 
   def view_language

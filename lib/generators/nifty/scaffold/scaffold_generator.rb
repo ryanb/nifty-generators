@@ -163,7 +163,7 @@ module Nifty
             "<%= render 'form' %>"
           end
         else
-          if options[:simple_form]
+          if simple_form?
             read_template("views/#{view_language}/_simple_form.html.#{view_language}")
           else
             read_template("views/#{view_language}/_form.html.#{view_language}")
