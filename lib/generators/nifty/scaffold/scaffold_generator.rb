@@ -21,7 +21,7 @@ module Nifty
       class_option :testunit, :desc => 'Use test/unit for test files.', :group => 'Test framework', :type => :boolean
       class_option :rspec, :desc => 'Use RSpec for test files.', :group => 'Test framework', :type => :boolean
       class_option :shoulda, :desc => 'Use shoulda for test files.', :group => 'Test framework', :type => :boolean
-      class_option :simple_form, :desc => "Use simple_form in views", :type => :boolean
+      class_option :simple_form, :desc => 'Use simple_form for forms in views.', :type => :boolean
 
       def initialize(*args, &block)
         super
@@ -98,7 +98,7 @@ module Nifty
           end
 
           if form_partial?
-           if options[:simple_form]
+           if simple_form?
               template "views/#{view_language}/_simple_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
             else
               template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
