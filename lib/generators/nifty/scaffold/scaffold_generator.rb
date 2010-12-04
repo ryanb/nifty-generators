@@ -98,7 +98,7 @@ module Nifty
           end
 
           if form_partial?
-           if simple_form?
+           if options.simple_form?
               template "views/#{view_language}/_simple_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
             else
               template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
@@ -163,7 +163,7 @@ module Nifty
             "<%= render 'form' %>"
           end
         else
-          if simple_form?
+          if options.simple_form?
             read_template("views/#{view_language}/_simple_form.html.#{view_language}")
           else
             read_template("views/#{view_language}/_form.html.#{view_language}")
