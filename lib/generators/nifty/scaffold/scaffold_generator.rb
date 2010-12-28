@@ -62,7 +62,7 @@ module Nifty
       end
 
       def add_gems
-        gem "mocha", :group => :test unless File.read(destination_path("Gemfile")).include? "mocha"
+        add_gem "mocha", :group => :test
       end
 
       def create_model
