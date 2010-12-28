@@ -22,12 +22,12 @@ Feature: Nifty Authentication Generator
       | test/functional/sessions_controller_test.rb |
       | db/migrate                                  |
     And I should see the following in file "config/routes.rb"
-      | resources :sessions                                  |
-      | resources :users                                     |
-      | match 'login' => 'sessions#new', :as => :login       |
-      | match 'logout' => 'sessions#destroy', :as => :logout |
-      | match 'signup' => 'users#new', :as => :signup        |
-      | match 'user/edit' => 'users#edit', :as => :edit_user |
+      | resources :sessions                                          |
+      | resources :users                                             |
+      | match 'login' => 'sessions#new', :as => :login               |
+      | match 'logout' => 'sessions#destroy', :as => :logout         |
+      | match 'signup' => 'users#new', :as => :signup                |
+      | match 'user/edit' => 'users#edit', :as => :edit_current_user |
     And I should see "include ControllerAuthentication" in file "app/controllers/application_controller.rb"
     And I should see "gem "mocha", :group => :test" in file "Gemfile"
     And I should see "gem "bcrypt-ruby", :require => "bcrypt"" in file "Gemfile"
@@ -57,7 +57,7 @@ Feature: Nifty Authentication Generator
       | match 'login' => 'current_sessions#new', :as => :login        |
       | match 'logout' => 'current_sessions#destroy', :as => :logout  |
       | match 'signup' => 'accounts#new', :as => :signup              |
-      | match 'account/edit' => 'accounts#edit', :as => :edit_account |
+      | match 'account/edit' => 'accounts#edit', :as => :edit_current_account |
     When I run "rails g nifty:layout -f"
     And I run "rake db:migrate"
     Then I should successfully run "rake test"

@@ -4,7 +4,7 @@
 #
 #   <%% if logged_in? %>
 #     Welcome <%%= current_<%= user_singular_name %>.username %>.
-#     <%%= link_to "Edit profile", edit_<%= user_singular_name %>_path %> or
+#     <%%= link_to "Edit profile", edit_current_<%= user_singular_name %>_path %> or
 #     <%%= link_to "Log out", logout_path %>
 #   <%% else %>
 #     <%%= link_to "Sign up", signup_path %> or
