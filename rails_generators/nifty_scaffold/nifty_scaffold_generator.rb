@@ -128,7 +128,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   def controller_methods(dir_name)
     controller_actions.map do |action|
       read_template("#{dir_name}/#{action}.rb")
-    end.join("  \n").strip
+    end.join("\n").strip
   end
 
   def render_form
