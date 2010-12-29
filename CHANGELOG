@@ -1,3 +1,16 @@
+0.4.3 (December 28, 2010)
+
+* display usage documentation when given an invalid model name with nifty:scaffold - issue #76
+
+* add newline when necessary to Gemfile before adding gem - issue #64
+
+* remove extra whitespace between controller methods in nifty:scaffold - issue #62
+
+* renaming edit_user route to edit_current_user - issue #59
+
+* HAML template improvements (thanks IamNaN) - issue #71
+
+
 0.4.2 (October 15, 2010)
 
 * adding mocha to Gemfile automatically if it's not there already
