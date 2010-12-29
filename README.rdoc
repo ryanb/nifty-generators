@@ -42,11 +42,11 @@ To view the README for each generator, run it with the +help+ option.
 
 == Troubleshooting and FAQs
 
-<b>What is the difference between nifty_scaffold and built-in scaffold?</b>
+<b>What is the difference between nifty:scaffold and built-in scaffold?</b>
 
-One of the primary differences is that nifty_scaffold allows you to choose which controller actions to generate.
+One of the primary differences is that nifty:scaffold allows you to choose which controller actions to generate.
 
-  script/generate nifty_scaffold post name:string index new edit
+  rails g nifty:scaffold post name:string index new edit
 
 There are a few changes to the generated code as well, such as no XML format by default.
 
@@ -55,7 +55,7 @@ It also offers support for HAML, Shoulda, and RSpec.
 
 <b>I get "undefined method 'title'" error.</b>
 
-Try running nifty_layout, that will generate this helper method. Or you can just change the templates to whatever approach you prefer for setting the title.
+Try running nifty:layout, that will generate this helper method. Or you can just change the templates to whatever approach you prefer for setting the title.
 
 
 <b>I can't set new attributes in my model.</b>
@@ -67,7 +67,7 @@ Add the attribute to the attr_accessible line in the model.
 
 Some generators default redirecting to the root_url. Set this in your routes.rb file like this (substituting your controller name).
 
-  map.root :controller => 'foo'
+  root :to => "home#index"
 
 
 <b>I get a missing database error.</b>
