@@ -3,43 +3,41 @@
 A collection of useful Rails generator scripts for scaffolding, layout files, authentication, and more.
 
 
-== Install
+== Setup
+
+=== Rails 3
+
+Add the gem to your Gemfile.
+
+  gem "nifty-generators", :group => :development
+
+Then you can run any of the included generators.
+
+  rails g nifty:scaffold Recipe name:string index new
+
+=== Rails 2
+
+First install the gem.
 
   gem install nifty-generators
 
-
-== Usage
-
-Once you install the gem, the generators will be available to all Rails applications on your system. If you run script/generate without any additional arguments you should see the available generators listed.
-
-To run the generator, go to your rails project directory and call it using the script/generate or script/destroy command.
+The generators will be available in all Rails applications. To run the generator, go to your rails project directory and call it using the script/generate or script/destroy command.
 
   script/generate nifty_scaffold Recipe name:string index new
+
+Note an underscore is used instead of a colon for the Rails 2 generators.
 
 
 == Included Generators
 
-* nifty_layout: generates generic layout, stylesheet, and helper files.
-* nifty_scaffold: generates a controller and optional model/migration.
-* nifty_config: generates a config YAML file and loader.
-* nifty_authentication: generates user model with sign up and log in.
+* nifty:layout: generates generic layout, stylesheet, and helper files.
+* nifty:scaffold: generates a controller and optional model/migration.
+* nifty:config: generates a config YAML file and loader.
+* nifty:authentication: generates user model with sign up and log in.
 
 To view the README for each generator, run it with the +help+ option.
 
-  script/generate nifty_layout --help
-
-
-== Rails 3
-
-To use Nifty Generators with Rails 3 you will need to include it in your Gemfile.
-
-  gem "nifty-generators"
-
-The generators use a colon as the separator instead of an underscore.
-
-  rails g nifty:layout
-
-The Rails 3 support is still in early development, please {report any issues}[http://github.com/ryanb/nifty-generators/issues] you find.
+  rails g nifty:layout --help
 
 
 == Troubleshooting and FAQs
