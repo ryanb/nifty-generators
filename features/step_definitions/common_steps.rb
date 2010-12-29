@@ -42,3 +42,7 @@ end
 Then /^I should successfully run "([^\"]*)"$/ do |command|
   system("cd #{@current_directory} && #{command}").should be_true
 end
+
+Then /^I should see "([^\"]*)" when running "([^\"]*)"$/ do |expected_response, command|
+  `cd #{@current_directory} && #{command}`.should include(expected_response)
+end

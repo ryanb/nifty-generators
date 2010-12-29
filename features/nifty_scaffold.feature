@@ -38,3 +38,7 @@ Feature: Nifty Scaffold Generator
     And I run "rails g rspec:install"
     And I replace "mock_with :rspec" with "mock_with :mocha" in file "spec/spec_helper.rb"
     Then I should successfully run "rake spec"
+
+  Scenario: Report error when invalid model name
+    Given a new Rails app
+    Then I should see "Usage:" when running "rails g nifty:scaffold name:string parent_id:integer"
