@@ -1,6 +1,6 @@
-class Create<%= plural_class_name.delete('::') %> < ActiveRecord::Migration
+class Create<%= class_name.pluralize.delete('::') %> < ActiveRecord::Migration
   def self.up
-    create_table <%= table_name.to_sym.inspect %> do |t|
+    create_table :<%= table_name || plural_name.split('/').last %> do |t|
     <%- for attribute in model_attributes -%>
       t.<%= attribute.type %> :<%= attribute.name %>
     <%- end -%>
@@ -11,6 +11,6 @@ class Create<%= plural_class_name.delete('::') %> < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :<%= table_name %>
+    drop_table :<%= table_name || plural_name.split('/').last %>
   end
 end

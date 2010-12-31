@@ -43,7 +43,7 @@ Feature: Nifty Scaffold Generator
     Given a new Rails app
     When I run "rails g nifty:scaffold Admin::User name:string"
     Then I should see the following files
-      | app/models/admin/user.rb                  |
+      | app/models/user.rb                        |
       | app/controllers/admin/users_controller.rb |
       | app/helpers/admin/users_helper.rb         |
       | app/views/admin/users/index.html.erb      |
@@ -51,8 +51,20 @@ Feature: Nifty Scaffold Generator
       | app/views/admin/users/new.html.erb        |
       | app/views/admin/users/edit.html.erb       |
       | db/migrate                                |
+    And I should see "class User" in file "app/models/user.rb"
+    And I should not see "set_table_name :" in file "app/models/user.rb"
     And I should see "namespace(:admin){ resources :users }" in file "config/routes.rb"
     When I run "rails g nifty:layout -f"
     And I run "rake db:migrate"
     And I should successfully run "rails g nifty:scaffold Admin::User -f"
+    Then I should successfully run "rake test"
+
+  Scenario: Generate scaffold with a namespaced model
+    Given a new Rails app
+    When I run "rails g nifty:scaffold Admin::User name:string --namespace_model"
+    Then I should see "class Admin::User" in file "app/models/admin/user.rb"
+    And I should see "set_table_name :admin_users" in file "app/models/admin/user.rb"
+    When I run "rails g nifty:layout -f"
+    And I run "rake db:migrate"
+    And I should successfully run "rails g nifty:scaffold Admin::User -f --namespace_model"
     Then I should successfully run "rake test"

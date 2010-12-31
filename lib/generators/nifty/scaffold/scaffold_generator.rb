@@ -6,9 +6,9 @@ module Nifty
   module Generators
     class ScaffoldGenerator < Base
       include Rails::Generators::Migration
-      no_tasks { attr_accessor :model_name, :model_attributes, :controller_actions }
+      no_tasks { attr_accessor :scaffold_name, :model_attributes, :controller_actions }
 
-      argument :model_name, :type => :string, :required => true, :banner => 'ModelName'
+      argument :scaffold_name, :type => :string, :required => true, :banner => 'ModelName'
       argument :args_for_c_m, :type => :array, :default => [], :banner => 'controller_actions and model:attributes'
 
       class_option :skip_model, :desc => 'Don\'t generate a model or migration file.', :type => :boolean
@@ -16,6 +16,7 @@ module Nifty
       class_option :skip_timestamps, :desc => 'Don\'t add timestamps to migration file.', :type => :boolean
       class_option :skip_controller, :desc => 'Don\'t generate controller, helper, or views.', :type => :boolean
       class_option :invert, :desc => 'Generate all controller actions except these mentioned.', :type => :boolean
+      class_option :namespace_model, :desc => 'If the resource is namespaced, include the model in the namespace.', :type => :boolean
       class_option :haml, :desc => 'Generate HAML views instead of ERB.', :type => :boolean
 
       class_option :testunit, :desc => 'Use test/unit for test files.', :group => 'Test framework', :type => :boolean
@@ -28,6 +29,7 @@ module Nifty
         @controller_actions = []
         @model_attributes = []
         @skip_model = options.skip_model?
+        @namespace_model = options.namespace_model?
         @invert_actions = options.invert?
 
         args_for_c_m.each do |arg|
@@ -67,20 +69,20 @@ module Nifty
 
       def create_model
         unless @skip_model
-          template 'model.rb', "app/models/#{singular_name}.rb"
+          template 'model.rb', "app/models/#{model_path}.rb"
           if test_framework == :rspec
-            template "tests/rspec/model.rb", "spec/models/#{singular_name}_spec.rb"
-            template 'fixtures.yml', "spec/fixtures/#{plural_name}.yml"
+            template "tests/rspec/model.rb", "spec/models/#{model_path}_spec.rb"
+            template 'fixtures.yml', "spec/fixtures/#{model_path.pluralize}.yml"
           else
-            template "tests/#{test_framework}/model.rb", "test/unit/#{singular_name}_test.rb"
-            template 'fixtures.yml', "test/fixtures/#{plural_name}.yml"
+            template "tests/#{test_framework}/model.rb", "test/unit/#{model_path}_test.rb"
+            template 'fixtures.yml', "test/fixtures/#{model_path.pluralize}.yml"
           end
         end
       end
 
       def create_migration
         unless @skip_model || options.skip_migration?
-          migration_template 'migration.rb', "db/migrate/create_#{instances_name}.rb"
+          migration_template 'migration.rb', "db/migrate/create_#{model_path.pluralize.gsub('/', '_')}.rb"
         end
       end
 
@@ -133,19 +135,29 @@ module Nifty
       end
 
       def singular_name
-        model_name.underscore
+        scaffold_name.underscore
       end
 
       def plural_name
-        model_name.underscore.pluralize
+        scaffold_name.underscore.pluralize
       end
 
       def table_name
-        plural_name.gsub('/', '_')
+        if scaffold_name.include?('::') && @namespace_model
+          plural_name.gsub('/', '_')
+        end
       end
 
       def class_name
-        model_name.camelize
+        if @namespace_model
+          scaffold_name.camelize
+        else
+          scaffold_name.split('::').last.camelize
+        end
+      end
+
+      def model_path
+        class_name.underscore
       end
 
       def plural_class_name
@@ -153,7 +165,11 @@ module Nifty
       end
 
       def instance_name
-        singular_name.gsub('/','_')
+        if @namespace_model
+          singular_name.gsub('/','_')
+        else
+          singular_name.split('/').last
+        end
       end
 
       def instances_name
@@ -178,35 +194,73 @@ module Nifty
         end
       end
 
-      def items_path(suffix = 'path')
+      def item_resource
+        scaffold_name.underscore.gsub('/','_')
+      end
+
+      def items_path
         if action? :index
-          "#{instances_name}_#{suffix}"
+          "#{item_resource.pluralize}_path"
         else
-          "root_#{suffix}"
+          "root_path"
         end
       end
 
-      def item_path(suffix = 'path')
+      def item_path(options = {})
         if action? :show
-          "@#{instance_name}"
+          name = options[:instance_variable] ? "@#{instance_name}" : instance_name
+          if %w(new edit).include? options[:action].to_s
+            "#{options[:action].to_s}_#{item_resource}_path(#{name})"
+          else
+            if scaffold_name.include?('::') && !@namespace_model
+              namespace = singular_name.split('/')[0..-2]
+              "[ :#{namespace.join(', :')}, #{name} ]"
+            else
+              name
+            end
+          end
         else
-          items_path(suffix)
+          items_path
+        end
+      end
+
+      def item_url
+        if action? :show
+          item_resource + '_url'
+        else
+          items_url
+        end
+      end
+
+      def items_url
+        if action? :index
+          item_resource.pluralize + '_url'
+        else
+          "root_url"
         end
       end
 
       def item_path_for_spec(suffix = 'path')
         if action? :show
-          "#{instance_name}_#{suffix}(assigns[:#{instance_name}])"
+          "#{item_resource}_#{suffix}(assigns[:#{instance_name}])"
         else
-          items_path(suffix)
+          if suffix == 'path'
+            items_path
+          else
+            items_url
+          end
         end
       end
 
       def item_path_for_test(suffix = 'path')
         if action? :show
-          "#{instance_name}_#{suffix}(assigns(:#{instance_name}))"
+          "#{item_resource}_#{suffix}(assigns(:#{instance_name}))"
         else
-          items_path(suffix)
+          if suffix == 'path'
+            items_path
+          else
+            items_url
+          end
         end
       end
 

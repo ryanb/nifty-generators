@@ -11,15 +11,15 @@
       %td= <%= instance_name %>.<%= attribute.name %>
       <%- end -%>
       <%- if action? :show -%>
-      %td= link_to 'Show', @<%= instance_name %>
+      %td= link_to 'Show', <%= item_path %>
       <%- end -%>
       <%- if action? :edit -%>
-      %td= link_to 'Edit', edit_<%= instance_name %>_path(@<%= instance_name %>)
+      %td= link_to 'Edit', <%= item_path :action => :edit %>
       <%- end -%>
       <%- if action? :destroy -%>
-      %td= link_to 'Destroy', @<%= instance_name %>, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Destroy', <%= item_path %>, :confirm => 'Are you sure?', :method => :delete
       <%- end -%>
 
 <%- if actions? :new -%>
-%p= link_to "New <%= singular_name.titleize %>", new_<%= instance_name %>_path
+%p= link_to "New <%= singular_name.titleize %>", <%= item_path :action => :new %>
 <%- end -%>
