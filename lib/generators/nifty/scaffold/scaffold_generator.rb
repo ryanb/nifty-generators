@@ -25,7 +25,7 @@ module Nifty
       def initialize(*args, &block)
         super
 
-        print_usage unless model_name =~ /^[a-zA-Z_]+$/
+        print_usage unless model_name =~ /^[a-zA-Z0-9_]+$/ and model_name =~ /^[a-zA-Z]/
 
         @controller_actions = []
         @model_attributes = []
