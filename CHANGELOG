@@ -1,3 +1,10 @@
+0.4.4 (January 17, 2011)
+
+* adding namespaces to nifty:scaffold (thanks DouglasMeyer) - issue #63
+
+* adding .rvmrc file
+
+
 0.4.3 (December 28, 2010)
 
 * display usage documentation when given an invalid model name with nifty:scaffold - issue #76
