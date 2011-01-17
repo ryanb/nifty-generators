@@ -26,7 +26,7 @@ module Nifty
       def initialize(*args, &block)
         super
 
-        print_usage unless model_name =~ /^[a-zA-Z0-9_]+$/ and model_name =~ /^[a-zA-Z]/
+        print_usage unless scaffold_name.underscore =~ /^[a-z][a-z0-9_\/]+$/
 
         @controller_actions = []
         @model_attributes = []
