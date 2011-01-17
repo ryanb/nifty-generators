@@ -100,3 +100,10 @@ Also, make sure you're using Rails 2.1 or greater.
 If you are having a problem with Nifty Generators, first look at the FAQs above. If you still cannot resolve it, please submit an issue here.
 
 http://github.com/ryanb/nifty-generators/issues
+
+
+== Development
+
+If you want to contribute to this project, you can download the Git repository and get the Cucumber features running by calling +bundle+ then +rake+. I normally develop this using Ruby 1.9.2 however it should work with 1.8.7 as well.
+
+The Rails 3 generators are located under <tt>lib/generators</tt> and are tested with Cucumber. The older Rails 2 generators are under <tt>rails_generators</tt> and are tested with Shoulda under the <tt>test</tt> directory.
