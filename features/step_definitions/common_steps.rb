@@ -15,6 +15,14 @@ When /^I replace "([^\"]*)" with "([^\"]*)" in file "([^\"]*)"$/ do |old_content
   File.open(path, 'w') { |f| f.write(content) }
 end
 
+When /^I insert "([^\"]*)" into "([^\"]*)" after line (\d+)$/ do |content, short_path, after_line|
+  path = File.join(@current_directory, short_path)
+  File.should exist(path)
+  lines = File.read(path).split("\n")
+  lines[after_line.to_i, 0] = content
+  File.open(path, 'w') { |f| f.write(lines.join("\n")) }
+end
+
 Then /^I should see file "([^\"]*)"$/ do |path|
   File.should exist(File.join(@current_directory, path))
 end

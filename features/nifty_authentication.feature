@@ -5,7 +5,8 @@ Feature: Nifty Authentication Generator
 
   Scenario: Generate default authentication
     Given a new Rails app
-    When I run "rails g nifty:authentication"
+    When I insert "root :to => 'users#new'" into "config/routes.rb" after line 1
+    And I run "rails g nifty:authentication"
     Then I should see the following files
       | app/models/user.rb                          |
       | app/controllers/users_controller.rb         |
@@ -37,7 +38,8 @@ Feature: Nifty Authentication Generator
 
   Scenario: Generate named authentication
     Given a new Rails app
-    When I run "rails g nifty:authentication Account CurrentSession"
+    When I insert "root :to => 'accounts#new'" into "config/routes.rb" after line 1
+    And I run "rails g nifty:authentication Account CurrentSession"
     Then I should see the following files
       | app/models/account.rb                               |
       | app/controllers/accounts_controller.rb              |
@@ -64,7 +66,8 @@ Feature: Nifty Authentication Generator
 
   Scenario: Generate named authentication with rspec
     Given a new Rails app
-    When I run "rails g nifty:authentication Account CurrentSession --rspec"
+    When I insert "root :to => 'accounts#new'" into "config/routes.rb" after line 1
+    And I run "rails g nifty:authentication Account CurrentSession --rspec"
     Then I should see the following files
       | spec/models/account_spec.rb                          |
       | spec/controllers/accounts_controller_spec.rb         |

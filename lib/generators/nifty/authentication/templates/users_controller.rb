@@ -11,8 +11,7 @@ class <%= user_plural_class_name %>Controller < ApplicationController
     <%- unless options[:authlogic] -%>
       session[:<%= user_singular_name %>_id] = @<%= user_singular_name %>.id
     <%- end -%>
-      flash[:notice] = "Thank you for signing up! You are now logged in."
-      redirect_to "/"
+      redirect_to root_url, :notice => "Thank you for signing up! You are now logged in."
     else
       render :action => 'new'
     end
@@ -25,8 +24,7 @@ class <%= user_plural_class_name %>Controller < ApplicationController
   def update
     @<%= user_singular_name %> = current_<%= user_singular_name %>
     if @<%= user_singular_name %>.update_attributes(params[:<%= user_singular_name %>])
-      flash[:notice] = "Your profile has been updated."
-      redirect_to "/"
+      redirect_to root_url, :notice => "Your profile has been updated."
     else
       render :action => 'edit'
     end
