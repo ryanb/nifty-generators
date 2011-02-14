@@ -209,28 +209,25 @@ module Nifty
       end
 
       def item_path(options = {})
-        if action? :show
-          name = options[:instance_variable] ? "@#{instance_name}" : instance_name
-          if options[:action].to_s == "new"
-            "new_#{item_resource}_path"
-          elsif options[:action].to_s == "edit"
-            "edit_#{item_resource}_path(#{name})"
-          else
-            if scaffold_name.include?('::') && !@namespace_model
-              namespace = singular_name.split('/')[0..-2]
-              "[ :#{namespace.join(', :')}, #{name} ]"
-            else
-              name
-            end
-          end
+        name = options[:instance_variable] ? "@#{instance_name}" : instance_name
+        suffix = options[:full_url] ? "url" : "path"
+        if options[:action].to_s == "new"
+          "new_#{item_resource}_#{suffix}"
+        elsif options[:action].to_s == "edit"
+          "edit_#{item_resource}_#{suffix}(#{name})"
         else
-          items_path
+          if scaffold_name.include?('::') && !@namespace_model
+            namespace = singular_name.split('/')[0..-2]
+            "[:#{namespace.join(', :')}, #{name}]"
+          else
+            name
+          end
         end
       end
 
       def item_url
         if action? :show
-          item_resource + '_url'
+          item_path(:full_url => true, :instance_variable => true)
         else
           items_url
         end

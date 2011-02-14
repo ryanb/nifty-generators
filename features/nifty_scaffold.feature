@@ -72,3 +72,9 @@ Feature: Nifty Scaffold Generator
     And I run "rake db:migrate"
     And I should successfully run "rails g nifty:scaffold Admin::User -f --namespace_model"
     Then I should successfully run "rake test"
+
+  Scenario: Given scaffold with a new and index action
+    Given a new Rails app
+    When I run "rails g nifty:scaffold Project name:string index new"
+    Then I should see "class Project" in file "app/models/project.rb"
+    And I should see "<%= form_for @project do |f| %>" in file "app/views/projects/new.html.erb"
