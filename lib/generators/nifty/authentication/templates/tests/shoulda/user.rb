@@ -21,37 +21,37 @@ class <%= user_class_name %>Test < ActiveSupport::TestCase
   end
 
   should "require username" do
-    assert new_<%= user_singular_name %>(:username => '').errors[:username]
+    assert_equal ["can't be blank"], new_<%= user_singular_name %>(:username => '').errors[:username]
   end
 
   should "require password" do
-    assert new_<%= user_singular_name %>(:password => '').errors[:password]
+    assert_equal ["can't be blank"], new_<%= user_singular_name %>(:password => '').errors[:password]
   end
 
   should "require well formed email" do
-    assert new_<%= user_singular_name %>(:email => 'foo@bar@example.com').errors[:email]
+    assert_equal ["is invalid"], new_<%= user_singular_name %>(:email => 'foo@bar@example.com').errors[:email]
   end
 
   should "validate uniqueness of email" do
     new_<%= user_singular_name %>(:email => 'bar@example.com').save!
-    assert new_<%= user_singular_name %>(:email => 'bar@example.com').errors[:email]
+    assert_equal ["has already been taken"], new_<%= user_singular_name %>(:email => 'bar@example.com').errors[:email]
   end
 
   should "validate uniqueness of username" do
     new_<%= user_singular_name %>(:username => 'uniquename').save!
-    assert new_<%= user_singular_name %>(:username => 'uniquename').errors[:username]
+    assert_equal ["has already been taken"], new_<%= user_singular_name %>(:username => 'uniquename').errors[:username]
   end
 
   should "not allow odd characters in username" do
-    assert new_<%= user_singular_name %>(:username => 'odd ^&(@)').errors[:username]
+    assert_equal ["should only contain letters, numbers, or .-_@"], new_<%= user_singular_name %>(:username => 'odd ^&(@)').errors[:username]
   end
 
   should "validate password is longer than 3 characters" do
-    assert new_<%= user_singular_name %>(:password => 'bad').errors[:password]
+    assert_equal ["is too short (minimum is 4 characters)"], new_<%= user_singular_name %>(:password => 'bad').errors[:password]
   end
 
   should "require matching password confirmation" do
-    assert new_<%= user_singular_name %>(:password_confirmation => 'nonmatching').errors[:password]
+    assert_equal ["doesn't match confirmation"], new_<%= user_singular_name %>(:password_confirmation => 'nonmatching').errors[:password]
   end
 
   should "generate password hash and salt on create" do

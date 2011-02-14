@@ -3,6 +3,7 @@ Feature: Nifty Authentication Generator
   As a rails developer
   I want to generate some user authentication
 
+  @focus
   Scenario: Generate default authentication
     Given a new Rails app
     When I insert "root :to => 'users#new'" into "config/routes.rb" after line 1
