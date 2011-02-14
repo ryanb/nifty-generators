@@ -211,8 +211,10 @@ module Nifty
       def item_path(options = {})
         if action? :show
           name = options[:instance_variable] ? "@#{instance_name}" : instance_name
-          if %w(new edit).include? options[:action].to_s
-            "#{options[:action].to_s}_#{item_resource}_path(#{name})"
+          if options[:action].to_s == "new"
+            "new_#{item_resource}_path"
+          elsif options[:action].to_s == "edit"
+            "edit_#{item_resource}_path(#{name})"
           else
             if scaffold_name.include?('::') && !@namespace_model
               namespace = singular_name.split('/')[0..-2]
