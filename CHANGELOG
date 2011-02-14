@@ -1,3 +1,18 @@
+0.4.5 (February 14, 2011)
+
+* fixing user validation tests in nifty:authentication (thanks apocalyptiq) - issue #87
+
+* fixing form generation when only new action exists for nifty scaffold (thanks gouravtiwari) - issue #83
+
+* fixing spacing issue in nifty:scaffold model
+
+* fixing instance instance variable in haml form for nifty:scaffold - issue #81
+
+* improving redirect implementation in nifty authentication
+
+* adding i18n to error_messages_for in nifty:layout (thanks nhocki)
+
+
 0.4.4 (January 17, 2011)
 
 * adding namespaces to nifty:scaffold (thanks DouglasMeyer) - issue #63
