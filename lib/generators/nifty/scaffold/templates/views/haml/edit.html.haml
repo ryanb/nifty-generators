@@ -5,7 +5,7 @@
 <%- if actions? :show, :index -%>
 %p
   <%- if action? :show -%>
-  = link_to "Show", <%= item_path %>
+  = link_to "Show", <%= item_path :instance_variable => true %>
   |
   <%- end -%>
   <%- if action? :index -%>
