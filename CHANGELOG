@@ -1,3 +1,10 @@
+0.4.6 (March 26, 2011)
+
+* fixing form block in HAML (thanks apocalyptiq)
+
+* fixing instance variable setting in HAML (thanks nhocki)
+
+
 0.4.5 (February 14, 2011)
 
 * fixing user validation tests in nifty:authentication (thanks apocalyptiq) - issue #87
