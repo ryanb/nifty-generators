@@ -1,3 +1,3 @@
   def new
-    @<%= singular_name %> = <%= class_name %>.new
+    @<%= singular_model_name %> = <%= model_name %>.new
   end

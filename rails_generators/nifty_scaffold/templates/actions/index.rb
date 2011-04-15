@@ -1,3 +1,3 @@
   def index
-    @<%= plural_name %> = <%= class_name %>.all
+    @<%= plural_model_name %> = <%= model_name %>.all
   end

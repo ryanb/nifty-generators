@@ -1,20 +1,20 @@
-<%% title "<%= singular_name.titleize %>" %>
+<%% title "<%= singular_model_name.titleize %>" %>
 
 <%- for attribute in attributes -%>
 <p>
   <strong><%= attribute.column.human_name.titleize %>:</strong>
-  <%%=h @<%= singular_name %>.<%= attribute.name %> %>
+  <%%=h @<%= singular_model_name %>.<%= attribute.name %> %>
 </p>
 <%- end -%>
 
 <p>
 <%- if action? :edit -%>
-  <%%= link_to "Edit", edit_<%= singular_name %>_path(@<%= singular_name %>) %> |
+  <%%= link_to "Edit", <%= item_path :action => :edit, :instance_variable => true %> %> |
 <%- end -%>
 <%- if action? :destroy -%>
-  <%%= link_to "Destroy", @<%= singular_name %>, :confirm => 'Are you sure?', :method => :delete %> |
+  <%%= link_to "Destroy", <%= item_path :instance_variable => true %>, :confirm => 'Are you sure?', :method => :delete %> |
 <%- end -%>
 <%- if action? :index -%>
-  <%%= link_to "View All", <%= plural_name %>_path %>
+  <%%= link_to "View All", <%= items_path %> %>
 <%- end -%>
 </p>

@@ -43,51 +43,71 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   def manifest
     record do |m|
       unless options[:skip_model]
-        m.directory "app/models"
-        m.template "model.rb", "app/models/#{singular_name}.rb"
+        destination = "app/models/#{model_name.underscore}.rb"
+        m.directory File.dirname(destination)
+        m.template "model.rb", destination
         unless options[:skip_migration]
-          m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{plural_name}"
+          m.migration_template "migration.rb", "db/migrate", :migration_file_name => "create_#{model_name.underscore.pluralize.gsub('/','_')}"
         end
 
         if rspec?
-          m.directory "spec/models"
-          m.template "tests/#{test_framework}/model.rb", "spec/models/#{singular_name}_spec.rb"
-          m.directory "spec/fixtures"
-          m.template "fixtures.yml", "spec/fixtures/#{plural_name}.yml"
+          destination = "spec/models/#{model_name.underscore}_spec.rb"
+          m.directory File.dirname(destination)
+          m.template "tests/#{test_framework}/model.rb", destination
+          destination = "spec/fixtures/#{model_name.underscore.pluralize}.yml"
+          m.directory File.dirname(destination)
+          m.template "fixtures.yml", destination
         else
-          m.directory "test/unit"
-          m.template "tests/#{test_framework}/model.rb", "test/unit/#{singular_name}_test.rb"
-          m.directory "test/fixtures"
-          m.template "fixtures.yml", "test/fixtures/#{plural_name}.yml"
+          destination = "test/unit/#{model_name.underscore}_test.rb"
+          m.directory File.dirname(destination)
+          m.template "tests/#{test_framework}/model.rb", destination
+          destination = "test/fixtures/#{model_name.underscore.pluralize}.yml"
+          m.directory File.dirname(destination)
+          m.template "fixtures.yml", destination
         end
       end
 
       unless options[:skip_controller]
-        m.directory "app/controllers"
-        m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
+        destination = "app/controllers/#{resource_path.pluralize}_controller.rb"
+        m.directory File.dirname(destination)
+        m.template "controller.rb", destination
 
-        m.directory "app/helpers"
-        m.template "helper.rb", "app/helpers/#{plural_name}_helper.rb"
+        destination = "app/helpers/#{resource_path.pluralize}_helper.rb"
+        m.directory File.dirname(destination)
+        m.template "helper.rb", destination
 
-        m.directory "app/views/#{plural_name}"
+        m.directory "app/views/#{resource_path.pluralize}"
         controller_actions.each do |action|
           if File.exist? source_path("views/#{view_language}/#{action}.html.#{view_language}")
-            m.template "views/#{view_language}/#{action}.html.#{view_language}", "app/views/#{plural_name}/#{action}.html.#{view_language}"
+            m.template "views/#{view_language}/#{action}.html.#{view_language}", "app/views/#{resource_path.pluralize}/#{action}.html.#{view_language}"
           end
         end
 
         if form_partial?
-          m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
+          m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{resource_path.pluralize}/_form.html.#{view_language}"
         end
 
-        m.route_resources plural_name
+        sentinel = 'ActionController::Routing::Routes.draw do |map|'
+        namespaces = resource_path.pluralize.split('/')
+        resource = namespaces.pop
+        route = namespaces.reverse.inject("map.resources :#{resource}") { |acc, namespace|
+          "map.namespace(:#{namespace}){|map| #{acc} }"
+        }
+        logger.route route
+        unless options[:pretend]
+          m.gsub_file 'config/routes.rb', /(#{Regexp.escape(sentinel)})/mi do |match|
+            "#{match}\n  #{route}\n"
+          end
+        end
 
         if rspec?
-          m.directory "spec/controllers"
-          m.template "tests/#{test_framework}/controller.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
+          destination = "spec/controllers/#{resource_path.pluralize}_controller_spec.rb"
+          m.directory File.dirname(destination)
+          m.template "tests/#{test_framework}/controller.rb", destination
         else
-          m.directory "test/functional"
-          m.template "tests/#{test_framework}/controller.rb", "test/functional/#{plural_name}_controller_test.rb"
+          destination = "test/functional/#{resource_path.pluralize}_controller_test.rb"
+          m.directory File.dirname(destination)
+          m.template "tests/#{test_framework}/controller.rb", destination
         end
       end
     end
@@ -109,20 +129,58 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     names.all? { |n| action? n.to_s }
   end
 
-  def singular_name
+  def resource_path
     name.underscore
   end
 
-  def plural_name
-    name.underscore.pluralize
+  def singular_model_name
+    model_name.underscore
   end
 
-  def class_name
-    name.camelize
+  def plural_model_name
+    singular_model_name.pluralize
   end
 
-  def plural_class_name
-    plural_name.camelize
+  def model_name
+    if options[:namespace_model]
+      name.camelize
+    else
+      name.split('::').last.camelize
+    end
+  end
+
+  def items_path
+    if action? :index
+      "#{resource_path.pluralize.gsub('/', '_')}_path"
+    else
+      "root_path"
+    end
+  end
+
+  def items_url
+    if action? :index
+      "#{resource_path.pluralize.gsub('/', '_')}_url"
+    else
+      "root_url"
+    end
+  end
+
+  def item_path(options = {})
+    if action?(:show) || options[:action]
+      name = options[:instance_variable] ? "@#{singular_model_name}" : singular_model_name
+      if %w(new edit).include? options[:action].to_s
+        "#{options[:action].to_s}_#{resource_path.gsub('/', '_')}_path(#{name})"
+      else
+        if resource_path.include?('/') && !options[:namespace_model]
+          namespace = resource_path.split('/')[0..-2]
+          "[ :#{namespace.join(', :')}, #{name} ]"
+        else
+          name
+        end
+      end
+    else
+      items_path
+    end
   end
 
   def controller_methods(dir_name)
@@ -143,40 +201,32 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     end
   end
 
-  def items_path(suffix = 'path')
-    if action? :index
-      "#{plural_name}_#{suffix}"
-    else
-      "root_#{suffix}"
-    end
-  end
-
-  def item_path(suffix = 'path')
-    if action? :show
-      "@#{singular_name}"
-    else
-      items_path(suffix)
-    end
-  end
-
   def item_path_for_spec(suffix = 'path')
     if action? :show
-      "#{singular_name}_#{suffix}(assigns[:#{singular_name}])"
+      "#{resource_path.gsub('/', '_')}_#{suffix}(assigns[:#{singular_model_name}])"
     else
-      items_path(suffix)
+      if suffix == 'path'
+        items_path
+      else
+        items_url
+      end
     end
   end
 
   def item_path_for_test(suffix = 'path')
     if action? :show
-      "#{singular_name}_#{suffix}(assigns(:#{singular_name}))"
+      "#{resource_path.gsub('/', '_')}_#{suffix}(assigns(:#{singular_model_name}))"
     else
-      items_path(suffix)
+      if suffix == 'path'
+        items_path
+      else
+        items_url
+      end
     end
   end
 
   def model_columns_for_attributes
-    class_name.constantize.columns.reject do |column|
+    model_name.constantize.columns.reject do |column|
       column.name.to_s =~ /^(id|created_at|updated_at)$/
     end
   end
@@ -206,6 +256,7 @@ protected
     opt.on("--skip-migration", "Don't generate migration file for model.") { |v| options[:skip_migration] = v }
     opt.on("--skip-timestamps", "Don't add timestamps to migration file.") { |v| options[:skip_timestamps] = v }
     opt.on("--skip-controller", "Don't generate controller, helper, or views.") { |v| options[:skip_controller] = v }
+    opt.on("--namespace-model", "If the resource is namespaced, include the model in the namespace.") { |v| options[:namespace_model] = v }
     opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
     opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = v }
     opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
@@ -215,7 +266,7 @@ protected
 
   # is there a better way to do this? Perhaps with const_defined?
   def model_exists?
-    File.exist? destination_path("app/models/#{singular_name}.rb")
+    File.exist? destination_path("app/models/#{model_name.underscore}.rb")
   end
 
   def read_template(relative_path)

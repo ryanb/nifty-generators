@@ -1,3 +1,3 @@
   def show
-    @<%= singular_name %> = <%= class_name %>.find(params[:id])
+    @<%= singular_model_name %> = <%= model_name %>.find(params[:id])
   end
