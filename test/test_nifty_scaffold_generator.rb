@@ -140,7 +140,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           assert_match "@line_item = LineItem.new(params[:line_item])", body
           assert_match "if @line_item.save", body
           assert_match "flash[:notice] = \"Successfully created line item.\"", body
-          assert_match "redirect_to root_url", body
+          assert_match "redirect_to root_path", body
           assert_match "render :action => 'new'", body
         end
       end
@@ -165,7 +165,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           assert_match "def update", body
           assert_match "if @line_item.update_attributes(params[:line_item])", body
           assert_match "flash[:notice] = \"Successfully updated line item.\"", body
-          assert_match "redirect_to root_url", body
+          assert_match "redirect_to root_path", body
           assert_match "render :action => 'edit'", body
         end
       end
@@ -257,7 +257,7 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
         assert_generated_file "app/controllers/line_items_controller.rb" do |body|
           assert_match "def create", body
           assert_match "def update", body
-          assert_match "root_url", body
+          assert_match "root_path", body
         end
       end
     end
