@@ -54,14 +54,14 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
           destination = "spec/models/#{model_name.underscore}_spec.rb"
           m.directory File.dirname(destination)
           m.template "tests/#{test_framework}/model.rb", destination
-          destination = "spec/fixtures/#{model_name.underscore.pluralize}.yml"
+          destination = "spec/fixtures/#{plural_model_name}.yml"
           m.directory File.dirname(destination)
           m.template "fixtures.yml", destination
         else
           destination = "test/unit/#{model_name.underscore}_test.rb"
           m.directory File.dirname(destination)
           m.template "tests/#{test_framework}/model.rb", destination
-          destination = "test/fixtures/#{model_name.underscore.pluralize}.yml"
+          destination = "test/fixtures/#{plural_model_name}.yml"
           m.directory File.dirname(destination)
           m.template "fixtures.yml", destination
         end
@@ -134,7 +134,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
 
   def singular_model_name
-    model_name.underscore
+    model_name.underscore.gsub('/', '_')
   end
 
   def plural_model_name
@@ -171,7 +171,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       if %w(new edit).include? options[:action].to_s
         "#{options[:action].to_s}_#{resource_path.singularize.gsub('/', '_')}_path(#{name})"
       else
-        if resource_path.include?('/') && !options[:namespace_model]
+        if resource_path.include?('/') && !self.options[:namespace_model]
           namespace = resource_path.split('/')[0..-2]
           "[ :#{namespace.join(', :')}, #{name} ]"
         else

@@ -535,14 +535,17 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       should_generate_file "app/views/admin/users/show.html.erb"
       should_generate_file "app/views/admin/users/new.html.erb"
       should_generate_file "app/views/admin/users/edit.html.erb"
+      should_generate_file "test/fixtures/users.yml"
     end
 
     context "generator with namespaced model" do
       rails_generator :nifty_scaffold, "Admin::User", "name:string", :namespace_model => true
 
+      should_generate_file "test/fixtures/admin_users.yml"
       should "generate file 'app/models/admin/user.rb'" do
         assert_generated_file "app/models/admin/user.rb" do |body|
           assert_match "class Admin::User <", body
+          assert_match "set_table_name :admin_user", body
         end
       end
     end
