@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '<%= resource_path.gsub(/[^\/]+/, '/..') %>/spec_helper'
 
 describe <%= resource_path.camelize %>Controller do
   fixtures :all

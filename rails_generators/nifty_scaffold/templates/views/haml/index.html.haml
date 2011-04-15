@@ -14,7 +14,7 @@
       %td= link_to 'Show', <%= item_path %>
       <%- end -%>
       <%- if action? :edit -%>
-      %td= link_to 'Edit', <%= item_path :action => :edit %>)
+      %td= link_to 'Edit', <%= item_path :action => :edit %>
       <%- end -%>
       <%- if action? :destroy -%>
       %td= link_to 'Destroy', <%= item_path %>, :confirm => 'Are you sure?', :method => :delete
