@@ -68,27 +68,27 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       end
 
       unless options[:skip_controller]
-        destination = "app/controllers/#{resource_path.pluralize}_controller.rb"
+        destination = "app/controllers/#{resource_path}_controller.rb"
         m.directory File.dirname(destination)
         m.template "controller.rb", destination
 
-        destination = "app/helpers/#{resource_path.pluralize}_helper.rb"
+        destination = "app/helpers/#{resource_path}_helper.rb"
         m.directory File.dirname(destination)
         m.template "helper.rb", destination
 
-        m.directory "app/views/#{resource_path.pluralize}"
+        m.directory "app/views/#{resource_path}"
         controller_actions.each do |action|
           if File.exist? source_path("views/#{view_language}/#{action}.html.#{view_language}")
-            m.template "views/#{view_language}/#{action}.html.#{view_language}", "app/views/#{resource_path.pluralize}/#{action}.html.#{view_language}"
+            m.template "views/#{view_language}/#{action}.html.#{view_language}", "app/views/#{resource_path}/#{action}.html.#{view_language}"
           end
         end
 
         if form_partial?
-          m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{resource_path.pluralize}/_form.html.#{view_language}"
+          m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{resource_path}/_form.html.#{view_language}"
         end
 
         sentinel = 'ActionController::Routing::Routes.draw do |map|'
-        namespaces = resource_path.pluralize.split('/')
+        namespaces = resource_path.split('/')
         resource = namespaces.pop
         route = namespaces.reverse.inject("map.resources :#{resource}") { |acc, namespace|
           "map.namespace(:#{namespace}){|map| #{acc} }"
@@ -101,11 +101,11 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         end
 
         if rspec?
-          destination = "spec/controllers/#{resource_path.pluralize}_controller_spec.rb"
+          destination = "spec/controllers/#{resource_path}_controller_spec.rb"
           m.directory File.dirname(destination)
           m.template "tests/#{test_framework}/controller.rb", destination
         else
-          destination = "test/functional/#{resource_path.pluralize}_controller_test.rb"
+          destination = "test/functional/#{resource_path}_controller_test.rb"
           m.directory File.dirname(destination)
           m.template "tests/#{test_framework}/controller.rb", destination
         end
@@ -130,7 +130,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
 
   def resource_path
-    name.underscore
+    name.underscore.pluralize
   end
 
   def singular_model_name
@@ -151,7 +151,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
 
   def items_path
     if action? :index
-      "#{resource_path.pluralize.gsub('/', '_')}_path"
+      "#{resource_path.gsub('/', '_')}_path"
     else
       "root_path"
     end
@@ -159,7 +159,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
 
   def items_url
     if action? :index
-      "#{resource_path.pluralize.gsub('/', '_')}_url"
+      "#{resource_path.gsub('/', '_')}_url"
     else
       "root_url"
     end
@@ -169,7 +169,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     if action?(:show) || options[:action]
       name = options[:instance_variable] ? "@#{singular_model_name}" : singular_model_name
       if %w(new edit).include? options[:action].to_s
-        "#{options[:action].to_s}_#{resource_path.gsub('/', '_')}_path(#{name})"
+        "#{options[:action].to_s}_#{resource_path.singularize.gsub('/', '_')}_path(#{name})"
       else
         if resource_path.include?('/') && !options[:namespace_model]
           namespace = resource_path.split('/')[0..-2]
@@ -203,7 +203,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
 
   def item_path_for_spec(suffix = 'path')
     if action? :show
-      "#{resource_path.gsub('/', '_')}_#{suffix}(assigns[:#{singular_model_name}])"
+      "#{resource_path.singularize.gsub('/', '_')}_#{suffix}(assigns[:#{singular_model_name}])"
     else
       if suffix == 'path'
         items_path
@@ -215,7 +215,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
 
   def item_path_for_test(suffix = 'path')
     if action? :show
-      "#{resource_path.gsub('/', '_')}_#{suffix}(assigns(:#{singular_model_name}))"
+      "#{resource_path.singularize.gsub('/', '_')}_#{suffix}(assigns(:#{singular_model_name}))"
     else
       if suffix == 'path'
         items_path

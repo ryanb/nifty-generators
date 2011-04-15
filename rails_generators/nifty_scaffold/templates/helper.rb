@@ -1,2 +1,2 @@
-module <%= resource_path.pluralize.camelize %>Helper
+module <%= resource_path.camelize %>Helper
 end
