@@ -42,10 +42,6 @@ a {
   border: solid 1px #C66;
 }
 
-.fieldWithErrors {
-  display: inline;
-}
-
 .error_messages {
   width: 400px;
   border: 2px solid #CF0000;
@@ -72,4 +68,8 @@ a {
 
 .error_messages ul {
   margin: 0;
+}
+
+.field_with_errors {
+  display: inline;
 }
