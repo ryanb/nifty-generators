@@ -1,10 +1,10 @@
 = form_for <%= item_path :instance_variable => true %> do |f|
   = f.error_messages
   <%- for attribute in model_attributes -%>
-  %p
+  .field
     = f.label :<%= attribute.name %>
     %br
     = f.<%= attribute.field_type %> :<%= attribute.name %>
   <%- end -%>
-  %p
+  .actions
     = f.submit

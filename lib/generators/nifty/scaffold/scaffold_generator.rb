@@ -187,9 +187,9 @@ module Nifty
       def render_form
         if form_partial?
           if options.haml?
-            "= render 'form'"
+            "= render \"form\""
           else
-            "<%= render 'form' %>"
+            "<%= render \"form\" %>"
           end
         else
           read_template("views/#{view_language}/_form.html.#{view_language}")

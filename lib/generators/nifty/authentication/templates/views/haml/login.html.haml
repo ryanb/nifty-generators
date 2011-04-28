@@ -5,26 +5,26 @@
 <%- if options[:authlogic] -%>
 = form_for @<%= session_singular_name %> do |f|
   = f.error_messages
-  %p
+  .field
     = f.label :username
     %br
     = f.text_field :username
-  %p
+  .field
     = f.label :password
     %br
     = f.password_field :password
-  %p
+  .actions
     = f.submit "Log in"
 <%- else -%>
 - form_tag <%= session_plural_name %>_path do
-  %p
+  .field
     = label_tag :login, "Username or Email Address"
     %br
     = text_field_tag :login, params[:login]
-  %p
+  .field
     = label_tag :password
     %br
     = password_field_tag :password
-  %p
+  .actions
     = submit_tag "Log in"
 <%- end -%>

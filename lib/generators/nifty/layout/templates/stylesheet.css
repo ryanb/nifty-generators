@@ -73,3 +73,7 @@ a {
 .field_with_errors {
   display: inline;
 }
+
+form .field, form .actions {
+  margin: 10px 0;
+}

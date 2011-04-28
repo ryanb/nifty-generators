@@ -1,20 +1,20 @@
 <%%= form_for @<%= user_singular_name %> do |f| %>
   <%%= f.error_messages %>
-  <p>
+  <div class="field">
     <%%= f.label :username %><br />
     <%%= f.text_field :username %>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%%= f.label :email, "Email Address" %><br />
     <%%= f.text_field :email %>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%%= f.label :password %><br />
     <%%= f.password_field :password %>
-  </p>
-  <p>
+  </div>
+  <div class="field">
     <%%= f.label :password_confirmation, "Confirm Password" %><br />
     <%%= f.password_field :password_confirmation %>
-  </p>
-  <p><%%= f.submit (@<%= user_singular_name %>.new_record? ? "Sign up" : "Update") %></p>
+  </div>
+  <div class="actions"><%%= f.submit (@<%= user_singular_name %>.new_record? ? "Sign up" : "Update") %></div>
 <%% end %>
