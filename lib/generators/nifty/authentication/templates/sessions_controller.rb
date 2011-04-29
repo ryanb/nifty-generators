@@ -9,7 +9,7 @@ class <%= session_plural_class_name %>Controller < ApplicationController
     if @<%= session_singular_name %>.save
       redirect_to_target_or_default root_url, :notice => "Logged in successfully."
     else
-      render :action => 'new'
+      render :new
     end
   end
 
@@ -29,7 +29,7 @@ class <%= session_plural_class_name %>Controller < ApplicationController
       redirect_to_target_or_default root_url, :notice => "Logged in successfully."
     else
       flash.now[:alert] = "Invalid login or password."
-      render :action => 'new'
+      render :new
     end
   end
 

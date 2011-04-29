@@ -3,6 +3,6 @@
     if @<%= instance_name %>.save
       redirect_to <%= item_url %>, :notice => "Successfully created <%= class_name.underscore.humanize.downcase %>."
     else
-      render :action => 'new'
+      render :new
     end
   end

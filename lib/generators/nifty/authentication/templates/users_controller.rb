@@ -13,7 +13,7 @@ class <%= user_plural_class_name %>Controller < ApplicationController
     <%- end -%>
       redirect_to root_url, :notice => "Thank you for signing up! You are now logged in."
     else
-      render :action => 'new'
+      render :new
     end
   end
 
@@ -26,7 +26,7 @@ class <%= user_plural_class_name %>Controller < ApplicationController
     if @<%= user_singular_name %>.update_attributes(params[:<%= user_singular_name %>])
       redirect_to root_url, :notice => "Your profile has been updated."
     else
-      render :action => 'edit'
+      render :edit
     end
   end
 end
