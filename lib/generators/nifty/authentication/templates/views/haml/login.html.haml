@@ -7,11 +7,9 @@
   = f.error_messages
   .field
     = f.label :username
-    %br
     = f.text_field :username
   .field
     = f.label :password
-    %br
     = f.password_field :password
   .actions
     = f.submit "Log in"
@@ -19,11 +17,9 @@
 - form_tag <%= session_plural_name %>_path do
   .field
     = label_tag :login, "Username or Email Address"
-    %br
     = text_field_tag :login, params[:login]
   .field
     = label_tag :password
-    %br
     = password_field_tag :password
   .actions
     = submit_tag "Log in"

@@ -3,7 +3,6 @@
   <%- for attribute in model_attributes -%>
   .field
     = f.label :<%= attribute.name %>
-    %br
     = f.<%= attribute.field_type %> :<%= attribute.name %>
   <%- end -%>
   .actions

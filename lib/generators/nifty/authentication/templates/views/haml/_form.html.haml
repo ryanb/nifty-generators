@@ -2,19 +2,15 @@
   = f.error_messages
   .field
     = f.label :username
-    %br
     = f.text_field :username
   .field
     = f.label :email, "Email Address"
-    %br
     = f.text_field :email
   .field
     = f.label :password
-    %br
     = f.password_field :password
   .field
     = f.label :password_confirmation, "Confirm Password"
-    %br
     = f.password_field :password_confirmation
   .actions
     = f.submit (@<%= user_singular_name %>.new_record? ? "Sign up" : "Update")

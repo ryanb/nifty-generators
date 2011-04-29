@@ -1,19 +1,19 @@
 <%%= form_for @<%= user_singular_name %> do |f| %>
   <%%= f.error_messages %>
   <div class="field">
-    <%%= f.label :username %><br />
+    <%%= f.label :username %>
     <%%= f.text_field :username %>
   </div>
   <div class="field">
-    <%%= f.label :email, "Email Address" %><br />
+    <%%= f.label :email, "Email Address" %>
     <%%= f.text_field :email %>
   </div>
   <div class="field">
-    <%%= f.label :password %><br />
+    <%%= f.label :password %>
     <%%= f.password_field :password %>
   </div>
   <div class="field">
-    <%%= f.label :password_confirmation, "Confirm Password" %><br />
+    <%%= f.label :password_confirmation, "Confirm Password" %>
     <%%= f.password_field :password_confirmation %>
   </div>
   <div class="actions"><%%= f.submit (@<%= user_singular_name %>.new_record? ? "Sign up" : "Update") %></div>

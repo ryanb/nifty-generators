@@ -6,11 +6,11 @@
 <%%= form_for @<%= session_singular_name %> do |f| %>
   <%%= f.error_messages %>
   <div class="field">
-    <%%= f.label :username %><br />
+    <%%= f.label :username %>
     <%%= f.text_field :username %>
   </div>
   <div class="field">
-    <%%= f.label :password %><br />
+    <%%= f.label :password %>
     <%%= f.password_field :password %>
   </div>
   <div class="actions"><%%= f.submit "Log in" %></div>
@@ -18,11 +18,11 @@
 <%- else -%>
 <%%= form_tag <%= session_plural_name %>_path do %>
   <div class="field">
-    <%%= label_tag :login, "Username or Email Address" %><br />
+    <%%= label_tag :login, "Username or Email Address" %>
     <%%= text_field_tag :login, params[:login] %>
   </div>
   <div class="field">
-    <%%= label_tag :password %><br />
+    <%%= label_tag :password %>
     <%%= password_field_tag :password %>
   </div>
   <div class="actions"><%%= submit_tag "Log in" %></div>
