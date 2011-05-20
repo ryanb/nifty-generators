@@ -3,7 +3,7 @@
 
   %head
     %title
-      = yield(:title) || "Untitled"
+      = yield(:title).presence || "Untitled"
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     = stylesheet_link_tag "<%= file_name %>"
     = javascript_include_tag :defaults
