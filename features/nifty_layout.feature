@@ -10,11 +10,19 @@ Feature: Nifty Layout Generator
     Then I should see "h(page_title" in file "app/helpers/layout_helper.rb"
     And I should see file "app/helpers/layout_helper.rb"
     And I should see file "app/helpers/error_messages_helper.rb"
-    And I should see file "public/stylesheets/application.css"
+    And I should see file "app/assets/stylesheets/application.css"
 
-  Scenario: Generate named layout with haml and sass
+  Scenario Outline: Generate named layout with haml
     Given a new Rails app
-    When I run "rails g nifty:layout FooBar --haml -f"
-    Then I should see "stylesheet_link_tag "foo_bar"" in file "app/views/layouts/foo_bar.html.haml"
-    And I should see file "public/stylesheets/sass/foo_bar.sass"
+    When I run "rails g nifty:layout FooBar --<option> -f"
+    Then I should see "stylesheet_link_tag "foo_bar" in file "app/views/layouts/foo_bar.html.haml"
+    And I should see file "app/assets/stylesheets/foo_bar.<sass_version>"
     And I should see file "app/helpers/layout_helper.rb"
+
+    Scenarios: and sass
+      | option | sass_version |
+      | haml   | sass         |
+
+    Scenarios: and scss
+      | option | sass_version |
+      | scss   | css.scss     |
