@@ -6,11 +6,15 @@ module Nifty
       argument :layout_name, :type => :string, :default => 'application', :banner => 'layout_name'
 
       class_option :haml, :desc => 'Generate HAML for view, and SASS for stylesheet.', :type => :boolean
+      class_option :scss, :desc => 'Generate HAML for view, and SCSS for stylesheet.', :type => :boolean
 
       def create_layout
         if options.haml?
           template 'layout.html.haml', "app/views/layouts/#{file_name}.html.haml"
           copy_file 'stylesheet.sass', "app/assets/stylesheets/#{file_name}.sass"
+        elsif options.scss?
+          template 'layout.html.haml', "app/views/layouts/#{file_name}.html.haml"
+          copy_file 'stylesheet.css.scss', "app/assets/stylesheets/#{file_name}.css.scss"
         else
           template 'layout.html.erb', "app/views/layouts/#{file_name}.html.erb"
           copy_file 'stylesheet.css', "app/assets/stylesheets/#{file_name}.css"
