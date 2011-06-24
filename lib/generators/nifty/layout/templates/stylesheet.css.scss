@@ -4,17 +4,22 @@ body {
   background-color: $primary_color;
   font: {
     family: Verdana, Helvetica, Arial;
-    size: 14px; }; }
+    size: 14px; 
+  }; 
+}
 
 a {
   color: blue;
   img {
-    border: none; } }
+    border: none; 
+  } 
+}
 
 .clear {
   clear: both;
   height: 0;
-  overflow: hidden; }
+  overflow: hidden; 
+}
 
 #container {
   width: 75%;
@@ -22,23 +27,28 @@ a {
   background: white;
   padding: 20px 40px;
   border: solid 1px black;
-  margin-top: 20px; }
+  margin-top: 20px; 
+}
 
 #flash_notice,
 #flash_error {
   padding: 5px 8px;
-  margin: 10px 0; }
+  margin: 10px 0; 
+}
 
 #flash_notice {
   background-color: #ccffcc;
-  border: solid 1px #66cc66; }
+  border: solid 1px #66cc66; 
+}
 
 #flash_error {
   background-color: #ffcccc;
-  border: solid 1px #cc6666; }
+  border: solid 1px #cc6666; 
+}
 
 .fieldWithErrors {
-  display: inline; }
+  display: inline; 
+}
 
 #errorExplanation {
   width: 400px;
@@ -53,15 +63,21 @@ a {
     margin: 0;
     font: {
       weight: bold;
-      size: 12px; };
+      size: 12px; 
+    };
     background-color: #cc0000;
-    color: white; }
+    color: white; 
+  }
   p {
     color: #333333;
     margin-bottom: 0;
-    padding: 8px; }
+    padding: 8px; 
+  }
   ul {
     margin: 2px 24px;
     li {
       font-size: 12px;
-      list-style: disc; } } }
+      list-style: disc; 
+    }
+  } 
+}
