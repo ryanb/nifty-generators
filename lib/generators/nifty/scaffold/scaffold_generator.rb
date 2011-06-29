@@ -12,7 +12,7 @@ module Nifty
       argument :args_for_c_m, :type => :array, :default => [], :banner => 'controller_actions and model:attributes'
 
       class_option :skip_model, :desc => 'Don\'t generate a model or migration file.', :type => :boolean
-      class_option :skip_migration, :desc => 'Dont generate migration file for model.', :type => :boolean
+      class_option :skip_migration, :desc => 'Don\'t generate migration file for model.', :type => :boolean
       class_option :skip_timestamps, :desc => 'Don\'t add timestamps to migration file.', :type => :boolean
       class_option :skip_controller, :desc => 'Don\'t generate controller, helper, or views.', :type => :boolean
       class_option :invert, :desc => 'Generate all controller actions except these mentioned.', :type => :boolean
