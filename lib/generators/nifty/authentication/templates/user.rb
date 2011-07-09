@@ -19,18 +19,17 @@ class <%= user_class_name %> < ActiveRecord::Base
   # login can be either username or email address
   def self.authenticate(login, pass)
     <%= user_singular_name %> = find_by_username(login) || find_by_email(login)
-    return <%= user_singular_name %> if <%= user_singular_name %> && <%= user_singular_name %>.password_hash == <%= user_singular_name %>.encrypt_password(pass)
+    return <%= user_singular_name %> if <%= user_singular_name %> && BCrypt::Password.new(<%= user_singular_name %>.password_hash) == pass
   end
 
   def encrypt_password(pass)
-    BCrypt::Engine.hash_secret(pass, password_salt)
+    BCrypt::Password.create(pass)
   end
 
   private
 
   def prepare_password
     unless password.blank?
-      self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = encrypt_password(password)
     end
   end
