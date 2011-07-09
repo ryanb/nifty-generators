@@ -9,7 +9,6 @@ class Create<%= user_plural_class_name %> < ActiveRecord::Migration
     <%- else -%>
       t.string :password_hash
     <%- end -%>
-      t.string :password_salt
       t.timestamps
     end
   end
