@@ -54,11 +54,10 @@ class <%= user_class_name %>Test < ActiveSupport::TestCase
     assert_equal ["doesn't match confirmation"], new_<%= user_singular_name %>(:password_confirmation => 'nonmatching').errors[:password]
   end
 
-  should "generate password hash and salt on create" do
+  should "generate password hash on create" do
     <%= user_singular_name %> = new_<%= user_singular_name %>
     <%= user_singular_name %>.save!
     assert <%= user_singular_name %>.password_hash
-    assert <%= user_singular_name %>.password_salt
   end
 
   should "authenticate by username" do
