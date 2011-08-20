@@ -3,7 +3,12 @@
 %p== Already have an account? #{link_to "Log in", login_path}.
 
 - form_for @<%= user_singular_name %> do |f|
-  = f.error_messages
+  - if @<%= user_singular_name %>.errors.any?
+    #error_explanation
+      %h2 = "#{pluralize(@<%= user_singular_name %>.errors.count, "error") } prohibited this <%= user_singular_name %> from being saved:"
+      %ul
+        - @<%= user_singular_name %>.errors.full_messages.each do |msg|
+          %li = msg
   %p
     = f.label :username
     %br
