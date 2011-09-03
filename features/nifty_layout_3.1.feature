@@ -4,7 +4,7 @@ Feature: Nifty Layout Generator
   I want to generate a simple layout
 
   Background: Create a new rails app
-    Given a new Rails 3.0.x app
+    Given a new Rails 3.1.x app
 
   Scenario: Generate normal application layout
     When I run "rails g nifty:layout -f"
@@ -13,12 +13,12 @@ Feature: Nifty Layout Generator
     And I should see the following files
       | app/helpers/layout_helper.rb            |
       | app/helpers/error_messages_helper.rb    |
-      | public/stylesheets/application.css      |
+      | app/assets/stylesheets/application.css  |
 
   Scenario Outline: Generate named layout with haml...
     When I run "rails g nifty:layout FooBar --<option> -f"
     Then I should see "stylesheet_link_tag "foo_bar" in file "app/views/layouts/foo_bar.html.haml"
-    And I should see file "public/stylesheets/foo_bar.<sass_version>"
+    And I should see file "app/assets/stylesheets/foo_bar.<sass_version>"
     And I should see file "app/helpers/layout_helper.rb"
 
     Scenarios: ...and sass
