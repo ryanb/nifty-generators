@@ -23,6 +23,8 @@ module Nifty
       class_option :rspec, :desc => 'Use RSpec for test files.', :group => 'Test framework', :type => :boolean
       class_option :shoulda, :desc => 'Use shoulda for test files.', :group => 'Test framework', :type => :boolean
 
+      class_option :locales, :desc => 'Generate locale files for the given locales (e.g. en,de)', :type => :string
+
       def initialize(*args, &block)
         super
 
@@ -63,6 +65,8 @@ module Nifty
             @model_attributes << Rails::Generators::GeneratedAttribute.new('name', 'string')
           end
         end
+
+        @skip_locale_files = !(options.locales? && options.locales.present?)
       end
 
       def add_gems
@@ -94,14 +98,16 @@ module Nifty
 
           template 'helper.rb', "app/helpers/#{plural_name}_helper.rb"
 
+          view_base_path = @skip_locale_files ? "views" : "views/i18n"
+
           controller_actions.each do |action|
             if %w[index show new edit].include?(action) # Actions with templates
-              template "views/#{view_language}/#{action}.html.#{view_language}", "app/views/#{plural_name}/#{action}.html.#{view_language}"
+              template "#{view_base_path}/#{view_language}/#{action}.html.#{view_language}", "app/views/#{plural_name}/#{action}.html.#{view_language}"
             end
           end
 
           if form_partial?
-            template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
+            template "#{view_base_path}/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
           end
 
           namespaces = plural_name.split('/')
@@ -115,6 +121,19 @@ module Nifty
           else
             template "tests/#{test_framework}/controller.rb", "test/functional/#{plural_name}_controller_test.rb"
           end
+        end
+      end
+
+      def handle_locale_files
+        unless @skip_locale_files
+          locales = options.locales.split(',')
+          locales.each do |locale|
+            template("locale.yml", "config/locales/#{locale}/#{plural_name}.yml") do |content|
+              content.gsub!('REPLACE_LOCALE', locale)
+            end
+          end
+
+          inject_into_class "config/application.rb", "Application", "    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}').to_s]"
         end
       end
 
@@ -302,6 +321,10 @@ module Nifty
 
       def destination_path(path)
         File.join(destination_root, path)
+      end
+
+      def model_attribute_names
+        @model_attribute_names ||= @model_attributes.map(&:name)
       end
 
       # FIXME: Should be proxied to ActiveRecord::Generators::Base

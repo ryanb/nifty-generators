@@ -78,3 +78,27 @@ Feature: Nifty Scaffold Generator
     When I run "rails g nifty:scaffold Project name:string index new"
     Then I should see "class Project" in file "app/models/project.rb"
     And I should see "<%= form_for @project do |f| %>" in file "app/views/projects/new.html.erb"
+
+  Scenario: Generate scaffold with locales
+    Given a new Rails app
+    When I run "rails g nifty:scaffold Project name:string --locales=en,de"
+    Then I should see the following files
+      | config/locales/de/projects.yml |
+      | config/locales/en/projects.yml |
+    And I should see "config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}').to_s]" in file "config/application.rb"
+    And I should have the following translations in locales "en, de":
+      | key                                  | translation  |
+      | projects.titles.project              | Project      |
+      | projects.titles.projects             | Projects     |
+      | projects.titles.new                  | New Project  |
+      | projects.titles.edit                 | Edit Project |
+      | projects.actions.view_all            | View All     |
+      | projects.actions.back_to_list        | Back to List |
+      | projects.actions.show                | Show         |
+      | projects.actions.new                 | New Project  |
+      | projects.actions.edit                | Edit         |
+      | projects.actions.destroy             | Destroy      |
+      | activerecord.attributes.project.name | Name         |
+    When I run "rails g nifty:layout -f"
+    And I run "rake db:migrate"
+    Then I should successfully run "rake test"

@@ -1,0 +1,32 @@
+REPLACE_LOCALE:
+  <%= plural_name %>:
+    titles:
+      <%= plural_name %>: <%= plural_name.titleize %>
+      <%= singular_name %>: <%= singular_name.titleize %>
+      new: New <%= singular_name.titleize %>
+      edit: Edit <%= singular_name.titleize %>
+
+    actions:
+      view_all: View All
+      back_to_list: Back to List
+      show: Show
+      new: New <%= singular_name.titleize %>
+      edit: Edit
+      destroy: Destroy
+
+  # Uncomment these if you want/need your labels to be different from the
+  # column names given in error messages.
+  #  helpers:
+  #    label:
+  #      <%= singular_name %>:
+        <%- model_attribute_names.each do |attribute| -%>
+  #        <%= attribute %>: <%= attribute.humanize %>
+        <%- end -%>
+        
+
+  activerecord:
+    attributes:
+      <%= singular_name %>:
+      <%- model_attribute_names.each do |attribute| -%>
+        <%= attribute %>: <%= attribute.humanize %>
+      <%- end -%>

@@ -1,0 +1,14 @@
+<%% title t(:'titles.edit', :scope => :<%= plural_name %>) %>
+
+<%= render_form %>
+
+<%- if actions? :show, :index -%>
+<p>
+<%- if action? :show -%>
+  <%%= link_to t(:'actions.show', :scope => :<%= plural_name %>), <%= item_path :instance_variable => true %> %> |
+<%- end -%>
+<%- if action? :index -%>
+  <%%= link_to t(:'actions.view_all', :scope => :<%= plural_name %>), <%= items_path %> %>
+<%- end -%>
+</p>
+<%- end -%>

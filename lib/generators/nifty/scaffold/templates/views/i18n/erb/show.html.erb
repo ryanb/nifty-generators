@@ -1,0 +1,20 @@
+<%% title t(:'titles.<%= singular_name %>', :scope => :<%= plural_name %>) %>
+
+<%- for attribute in model_attributes -%>
+<p>
+  <strong><%%= t(:<%= attribute.name %>, :scope => :'activerecord.attributes.<%= singular_name %>') %>:</strong>
+  <%%= @<%= instance_name %>.<%= attribute.name %> %>
+</p>
+<%- end -%>
+
+<p>
+<%- if action? :edit -%>
+  <%%= link_to t(:'actions.edit', :scope => :<%= plural_name %>), <%= item_path :action => :edit, :instance_variable => true %> %> |
+<%- end -%>
+<%- if action? :destroy -%>
+  <%%= link_to t(:'actions.destroy', :scope => :<%= plural_name %>), <%= item_path :instance_variable => true %>, :confirm => 'Are you sure?', :method => :delete %> |
+<%- end -%>
+<%- if action? :index -%>
+  <%%= link_to t(:'actions.view_all', :scope => :<%= plural_name %>), <%= items_path %> %>
+<%- end -%>
+</p>

@@ -60,3 +60,15 @@ end
 Then /^I should see "([^\"]*)" when running "([^\"]*)"$/ do |expected_response, command|
   `cd #{@current_directory} && #{command}`.should include(expected_response)
 end
+
+require 'i18n'
+Then /^I should have the following translations in locales "([^\"]*)":$/ do |locales, table|
+  I18n.load_path += Dir[File.join(@current_directory, 'config/locales/**/*.{rb,yml}').to_s]
+
+  locales = locales.split(',').map(&:strip)
+  locales.each do |locale|
+    table.hashes.each do |translations|
+      I18n.t(translations['key'], :locale => locale).should == translations['translation']
+    end
+  end
+end
