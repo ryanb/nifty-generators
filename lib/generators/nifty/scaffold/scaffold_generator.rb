@@ -133,7 +133,11 @@ module Nifty
             end
           end
 
-          inject_into_class "config/application.rb", "Application", "    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}').to_s]"
+          application_config = "config/application.rb"
+          application_config_content = File.read(destination_path(application_config))
+          load_path_fix = "config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}').to_s]"
+
+          inject_into_class application_config, "Application", "    #{load_path_fix}" unless application_config_content.include?(load_path_fix)
         end
       end
 
