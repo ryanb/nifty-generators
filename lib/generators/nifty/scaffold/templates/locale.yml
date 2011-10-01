@@ -22,12 +22,19 @@ REPLACE_LOCALE:
         <%- model_attribute_names.each do |attribute| -%>
   #        <%= attribute %>: <%= attribute.humanize %>
         <%- end -%>
-        
 
   activerecord:
+    models:
+    <%- name_parts_for_model.each_with_index do |part, i| -%>
+      <%= ("  " * i) + part %>:
+    <%- end -%>
+      <%- model_attribute_names.each do |attribute| -%>
+        <%= ("  " * (name_parts_for_model.size - 1)) %>one: <%= instance_name.titleize %>
+        <%= ("  " * (name_parts_for_model.size - 1)) %>other: <%= instances_name.titleize %>
+      <%- end -%>
     attributes:
-    <%- name_parts_for_model.each_with_index do |namespace, i| -%>
-      <%= ("  " * i) + namespace %>:
+    <%- name_parts_for_model.each_with_index do |part, i| -%>
+      <%= ("  " * i) + part %>:
     <%- end -%>
       <%- model_attribute_names.each do |attribute| -%>
         <%= ("  " * (name_parts_for_model.size - 1)) + attribute %>: <%= attribute.humanize %>

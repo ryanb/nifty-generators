@@ -98,6 +98,8 @@ Feature: Nifty Scaffold Generator
       | projects.actions.new                 | New Project  |
       | projects.actions.edit                | Edit         |
       | projects.actions.destroy             | Destroy      |
+      | activerecord.models.project.one      | Project      |
+      | activerecord.models.project.other    | Projects     |
       | activerecord.attributes.project.name | Name         |
     When I run "rails g nifty:layout -f"
     And I run "rake db:migrate"
@@ -122,6 +124,8 @@ Feature: Nifty Scaffold Generator
       | admin_users.actions.new                 | New Admin User  |
       | admin_users.actions.edit                | Edit            |
       | admin_users.actions.destroy             | Destroy         |
+      | activerecord.models.admin.user.one      | Admin User      |
+      | activerecord.models.admin.user.other    | Admin Users     |
       | activerecord.attributes.admin.user.name | Name            |
     When I run "rails g nifty:layout -f"
     And I run "rake db:migrate"
