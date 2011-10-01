@@ -102,3 +102,27 @@ Feature: Nifty Scaffold Generator
     When I run "rails g nifty:layout -f"
     And I run "rake db:migrate"
     Then I should successfully run "rake test"
+
+  Scenario: Generate scaffold with a namespaced model with locales
+    Given a new Rails app
+    When I run "rails g nifty:scaffold Admin::User name:string --namespace_model --locales=en,de"
+    Then I should see the following files
+      | config/locales/de/admin_users.yml |
+      | config/locales/en/admin_users.yml |
+    And I should see "config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}').to_s]" in file "config/application.rb"
+    And I should have the following translations in locales "en, de":
+      | key                                     | translation     |
+      | admin_users.titles.admin_user           | Admin User      |
+      | admin_users.titles.admin_users          | Admin Users     |
+      | admin_users.titles.new                  | New Admin User  |
+      | admin_users.titles.edit                 | Edit Admin User |
+      | admin_users.actions.view_all            | View All        |
+      | admin_users.actions.back_to_list        | Back to List    |
+      | admin_users.actions.show                | Show            |
+      | admin_users.actions.new                 | New Admin User  |
+      | admin_users.actions.edit                | Edit            |
+      | admin_users.actions.destroy             | Destroy         |
+      | activerecord.attributes.admin.user.name | Name            |
+    When I run "rails g nifty:layout -f"
+    And I run "rake db:migrate"
+    Then I should successfully run "rake test"

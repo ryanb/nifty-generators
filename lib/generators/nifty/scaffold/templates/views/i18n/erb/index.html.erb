@@ -1,4 +1,4 @@
-<%% title t(:'titles.<%= plural_name %>', :scope => :<%= plural_name %>) %>
+<%% title t(:'titles.<%= instances_name %>', :scope => :<%= instances_name %>) %>
 
 <table>
   <tr>
@@ -12,18 +12,18 @@
       <td><%%= <%= instance_name %>.<%= attribute.name %> %></td>
     <%- end -%>
     <%- if action? :show -%>
-      <td><%%= link_to t(:'actions.show', :scope => :<%= plural_name %>), <%= item_path %> %></td>
+      <td><%%= link_to t(:'actions.show', :scope => :<%= instances_name %>), <%= item_path %> %></td>
     <%- end -%>
     <%- if action? :edit -%>
-      <td><%%= link_to t(:'actions.edit', :scope => :<%= plural_name %>), <%= item_path :action => :edit %> %></td>
+      <td><%%= link_to t(:'actions.edit', :scope => :<%= instances_name %>), <%= item_path :action => :edit %> %></td>
     <%- end -%>
     <%- if action? :destroy -%>
-      <td><%%= link_to t(:'actions.destroy', :scope => :<%= plural_name %>), <%= item_path %>, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%%= link_to t(:'actions.destroy', :scope => :<%= instances_name %>), <%= item_path %>, :confirm => 'Are you sure?', :method => :delete %></td>
     <%- end -%>
     </tr>
   <%% end %>
 </table>
 
 <%- if action? :new -%>
-<p><%%= link_to t(:'actions.new', :scope => :<%= plural_name %>), <%= item_path :action => :new %> %></p>
+<p><%%= link_to t(:'actions.new', :scope => :<%= instances_name %>), <%= item_path :action => :new %> %></p>
 <%- end -%>

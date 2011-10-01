@@ -1,16 +1,16 @@
 REPLACE_LOCALE:
-  <%= plural_name %>:
+  <%= instances_name %>:
     titles:
-      <%= plural_name %>: <%= plural_name.titleize %>
-      <%= singular_name %>: <%= singular_name.titleize %>
-      new: New <%= singular_name.titleize %>
-      edit: Edit <%= singular_name.titleize %>
+      <%= instances_name %>: <%= instances_name.titleize %>
+      <%= instance_name %>: <%= instance_name.titleize %>
+      new: New <%= instance_name.titleize %>
+      edit: Edit <%= instance_name.titleize %>
 
     actions:
       view_all: View All
       back_to_list: Back to List
       show: Show
-      new: New <%= singular_name.titleize %>
+      new: New <%= instance_name.titleize %>
       edit: Edit
       destroy: Destroy
 
@@ -18,7 +18,7 @@ REPLACE_LOCALE:
   # column names given in error messages.
   #  helpers:
   #    label:
-  #      <%= singular_name %>:
+  #      <%= instance_name %>:
         <%- model_attribute_names.each do |attribute| -%>
   #        <%= attribute %>: <%= attribute.humanize %>
         <%- end -%>
@@ -26,7 +26,9 @@ REPLACE_LOCALE:
 
   activerecord:
     attributes:
-      <%= singular_name %>:
+    <%- name_parts_for_model.each_with_index do |namespace, i| -%>
+      <%= ("  " * i) + namespace %>:
+    <%- end -%>
       <%- model_attribute_names.each do |attribute| -%>
-        <%= attribute %>: <%= attribute.humanize %>
+        <%= ("  " * (name_parts_for_model.size - 1)) + attribute %>: <%= attribute.humanize %>
       <%- end -%>

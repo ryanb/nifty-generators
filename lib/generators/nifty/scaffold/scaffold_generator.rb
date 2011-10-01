@@ -128,7 +128,7 @@ module Nifty
         unless @skip_locale_files
           locales = options.locales.split(',')
           locales.each do |locale|
-            template("locale.yml", "config/locales/#{locale}/#{plural_name}.yml") do |content|
+            template("locale.yml", "config/locales/#{locale}/#{instances_name.pluralize}.yml") do |content|
               content.gsub!('REPLACE_LOCALE', locale)
             end
           end
@@ -325,6 +325,10 @@ module Nifty
 
       def model_attribute_names
         @model_attribute_names ||= @model_attributes.map(&:name)
+      end
+
+      def name_parts_for_model
+        @name_parts_for_model ||= singular_name.split('/')
       end
 
       # FIXME: Should be proxied to ActiveRecord::Generators::Base

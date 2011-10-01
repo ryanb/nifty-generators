@@ -63,7 +63,8 @@ end
 
 require 'i18n'
 Then /^I should have the following translations in locales "([^\"]*)":$/ do |locales, table|
-  I18n.load_path += Dir[File.join(@current_directory, 'config/locales/**/*.{rb,yml}').to_s]
+  I18n.load_path = Dir[File.join(@current_directory, 'config/locales/**/*.{rb,yml}').to_s]
+  I18n.backend.reload!
 
   locales = locales.split(',').map(&:strip)
   locales.each do |locale|

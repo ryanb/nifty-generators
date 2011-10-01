@@ -1,7 +1,7 @@
-<%% title t(:'titles.new', :scope => :<%= plural_name %>) %>
+<%% title t(:'titles.new', :scope => :<%= instances_name %>) %>
 
 <%= render_form %>
 
 <%- if action? :index -%>
-<p><%%= link_to t(:'actions.back_to_list', :scope => :<%= plural_name %>), <%= items_path %> %></p>
+<p><%%= link_to t(:'actions.back_to_list', :scope => :<%= instances_name %>), <%= items_path %> %></p>
 <%- end -%>
