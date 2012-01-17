@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.require_path = "lib"
 
   s.add_development_dependency 'rspec-rails', '~> 2.0.1'
-  s.add_development_dependency 'cucumber', '~> 0.9.2'
+  s.add_development_dependency 'cucumber', '~> 1.1.4'
   s.add_development_dependency 'rails', '~> 3.0.0'
   s.add_development_dependency 'mocha', '~> 0.9.8'
   s.add_development_dependency 'bcrypt-ruby', '~> 2.1.2'
