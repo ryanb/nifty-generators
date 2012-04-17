@@ -95,6 +95,11 @@ Make sure you have mocha installed and require it in your spec/test helper.
 Also, make sure you're using Rails 2.1 or greater.
 
 
+== Project Status
+
+Unfortunately I have not had time to actively work on this project recently. If you find a critical issue where it does not work as documented please {ping me on Twitter}[http://twitter.com/rbates] and I'll take a look.
+
+
 == Found a bug?
 
 If you are having a problem with Nifty Generators, first look at the FAQs above. If you still cannot resolve it, please submit an issue here.
