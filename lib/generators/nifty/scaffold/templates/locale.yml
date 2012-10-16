@@ -1,0 +1,41 @@
+REPLACE_LOCALE:
+  <%= instances_name %>:
+    titles:
+      <%= instances_name %>: <%= instances_name.titleize %>
+      <%= instance_name %>: <%= instance_name.titleize %>
+      new: New <%= instance_name.titleize %>
+      edit: Edit <%= instance_name.titleize %>
+
+    actions:
+      view_all: View All
+      back_to_list: Back to List
+      show: Show
+      new: New <%= instance_name.titleize %>
+      edit: Edit
+      destroy: Destroy
+
+  # Uncomment these if you want/need your labels to be different from the
+  # column names given in error messages.
+  #  helpers:
+  #    label:
+  #      <%= instance_name %>:
+        <%- model_attribute_names.each do |attribute| -%>
+  #        <%= attribute %>: <%= attribute.humanize %>
+        <%- end -%>
+
+  activerecord:
+    models:
+    <%- name_parts_for_model.each_with_index do |part, i| -%>
+      <%= ("  " * i) + part %>:
+    <%- end -%>
+      <%- model_attribute_names.each do |attribute| -%>
+        <%= ("  " * (name_parts_for_model.size - 1)) %>one: <%= instance_name.titleize %>
+        <%= ("  " * (name_parts_for_model.size - 1)) %>other: <%= instances_name.titleize %>
+      <%- end -%>
+    attributes:
+    <%- name_parts_for_model.each_with_index do |part, i| -%>
+      <%= ("  " * i) + part %>:
+    <%- end -%>
+      <%- model_attribute_names.each do |attribute| -%>
+        <%= ("  " * (name_parts_for_model.size - 1)) + attribute %>: <%= attribute.humanize %>
+      <%- end -%>

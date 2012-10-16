@@ -1,0 +1,25 @@
+- title t(:'titles.<%= instances_name %>', :scope => :<%= instances_name %>)
+
+%table
+  %tr
+    <%- for attribute in model_attributes -%>
+    %th <%= attribute.human_name %>
+    <%- end -%>
+  - for <%= instance_name %> in @<%= instances_name %>
+    %tr
+      <%- for attribute in model_attributes -%>
+      %td= <%= instance_name %>.<%= attribute.name %>
+      <%- end -%>
+      <%- if action? :show -%>
+      %td= link_to t(:'actions.show', :scope => :<%= instances_name %>), <%= item_path %>
+      <%- end -%>
+      <%- if action? :edit -%>
+      %td= link_to t(:'actions.edit', :scope => :<%= instances_name %>), <%= item_path :action => :edit %>
+      <%- end -%>
+      <%- if action? :destroy -%>
+      %td= link_to t(:'actions.destroy', :scope => :<%= instances_name %>), <%= item_path %>, :confirm => 'Are you sure?', :method => :delete
+      <%- end -%>
+
+<%- if actions? :new -%>
+%p= link_to t(:'actions.new', :scope => :<%= instances_name %>), <%= item_path :action => :new %>
+<%- end -%>
