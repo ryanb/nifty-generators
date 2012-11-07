@@ -14,7 +14,7 @@
   .actions
     = f.submit "Log in"
 <%- else -%>
-- form_tag <%= session_plural_name %>_path do
+= form_tag <%= session_plural_name %>_path do
   .field
     = label_tag :login, "Username or Email Address"
     = text_field_tag :login, params[:login]
