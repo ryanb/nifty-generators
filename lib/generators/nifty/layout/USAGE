@@ -14,12 +14,12 @@ Examples:
     rails generate nifty:layout
 
         Layout:     app/views/layouts/application.html.erb
-        Stylesheet: public/stylesheets/application.css
+        Stylesheet: app/assets/stylesheets/application.css
         Helper:     app/helpers/layout_helper.rb
 
 
     rails generate nifty:layout admin
 
         Layout:     app/views/layouts/admin.html.erb
-        Stylesheet: public/stylesheets/admin.css
+        Stylesheet: app/assets/stylesheets/admin.css
         Helper:     app/helpers/layout_helper.rb
