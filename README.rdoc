@@ -1,3 +1,8 @@
+= Unmaintained
+
+The Nifty Generators project is <b>no longer maintained</b>. Feel free to fork the project.
+
+
 = Nifty Generators
 
 A collection of useful Rails generator scripts for scaffolding, layout files, authentication, and more.
