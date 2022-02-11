@@ -1,5 +1,6 @@
 When /^I run "([^\"]*)"$/ do |command|
-  system("cd #{@current_directory} && #{command}").should be_true
+  env_vars = command =~ /^rake/ ? "BUNDLE_GEMFILE=#{@current_directory}/Gemfile" : ''
+  system("cd #{@current_directory} && #{env_vars} #{command}").should be_true
 end
 
 When /^I add "([^\"]*)" to file "([^\"]*)"$/ do |content, short_path|
@@ -54,7 +55,8 @@ Then /^I should see the following in file "([^\"]*)"$/ do |short_path, table|
 end
 
 Then /^I should successfully run "([^\"]*)"$/ do |command|
-  system("cd #{@current_directory} && #{command}").should be_true
+  env_vars = command =~ /^rake/ ? "BUNDLE_GEMFILE=#{@current_directory}/Gemfile" : ''
+  system("cd #{@current_directory} && #{env_vars} #{command}").should be_true
 end
 
 Then /^I should see "([^\"]*)" when running "([^\"]*)"$/ do |expected_response, command|
