@@ -10,10 +10,10 @@ module Nifty
       def create_layout
         if options.haml?
           template 'layout.html.haml', "app/views/layouts/#{file_name}.html.haml"
-          copy_file 'stylesheet.sass', "public/stylesheets/sass/#{file_name}.sass"
+          copy_file 'stylesheet.sass', "app/assets/stylesheets/sass/#{file_name}.sass"
         else
           template 'layout.html.erb', "app/views/layouts/#{file_name}.html.erb"
-          copy_file 'stylesheet.css', "public/stylesheets/#{file_name}.css"
+          copy_file 'stylesheet.css', "app/assets/stylesheets/#{file_name}.css"
         end
         copy_file 'layout_helper.rb', 'app/helpers/layout_helper.rb'
         copy_file 'error_messages_helper.rb', 'app/helpers/error_messages_helper.rb'
