@@ -52,11 +52,10 @@ describe <%= user_class_name %> do
     new_<%= user_singular_name %>(:password_confirmation => 'nonmatching').should have(1).error_on(:password)
   end
 
-  it "should generate password hash and salt on create" do
+  it "should generate password hash on create" do
     <%= user_singular_name %> = new_<%= user_singular_name %>
     <%= user_singular_name %>.save!
     <%= user_singular_name %>.password_hash.should_not be_nil
-    <%= user_singular_name %>.password_salt.should_not be_nil
   end
 
   it "should authenticate by username" do
